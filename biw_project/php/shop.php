@@ -208,7 +208,7 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
             });
         });
     });
-    hello;
+    
 </script>
 
 </html>
