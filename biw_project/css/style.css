@@ -1,0 +1,142 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:95vh;
+    background-color: #69A4B5;
+}
+
+*{
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 30px;
+    font-family:'Times New Roman', Times, serif;
+    text-transform:uppercase;
+}
+
+form{
+    background: white;
+    padding:30px;
+    width:500px;
+    border-radius: 20px 80px ;
+}
+
+.form-grp{
+    margin-bottom: 30px;
+    
+}
+
+label{
+    color:#888;
+    padding:10px;
+}
+
+input{
+    display: block;
+    border:2px solid #ccc;
+    width:95%;
+    padding:10px;
+    margin:10px auto;
+    border-radius:5px;
+}
+
+.btn1{
+    float: right;
+    background: #555;
+    color: #fff;
+    padding:10px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    border: none;
+    cursor:pointer;
+    width:100px;
+    margin-bottom: 0;
+}
+
+.btn1:hover{
+    opacity: .6;
+    box-shadow: 0 0 20px blue;
+}
+
+.btn2{
+    float: right;
+    background: #555;
+    color: #fff;
+    padding:10px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    border: none;
+    cursor:pointer;
+    width:100px;
+    margin-bottom: 0;
+}
+
+.btn2:hover{
+    opacity: .6;
+    box-shadow: 0 0 20px blue;
+}
+
+.connect_register{
+    color:black;
+    text-decoration: none;
+}
+
+.connect_login{
+    color:black;
+    text-decoration: none;
+}
+
+.register{
+    display:none;
+}
+
+img{
+    max-width: 50px;;
+}
+
+.error-container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.alert-danger {
+    background: #F2DEDE;
+    color: #8B0000; /* Adjust text color for better readability */
+}
+.alert-success {
+    background: #DFF0D8;
+    color: #468847; /* Adjust text color for better readability */
+}
+
+.alert .form-grp{
+    margin:1px;
+}
+
+.input-container {
+    position: relative;
+    padding:10px;
+}
+
+input[type="password"] {
+     /* Adjust as needed to accommodate the icon */
+    width:100%;
+}
+
+#eye-icon {
+    width: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 30px; /* Adjust as needed */
+    cursor: pointer;
+}
