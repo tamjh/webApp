@@ -20,7 +20,7 @@ require_once "database.php";
 require_once "books_function.php";
 require_once "cart_function.php";
 
-$cart = cartFunction($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -124,8 +124,10 @@ $cart = cartFunction($conn);
             <h2>Subtotal (<?=$no?>): </h2>
             <h2>RM <?= number_format($final, 2) ?></h2>
             <h2>Shipping fee: </h2>
-            <form action="cart_function.php" method="post"></form>
-            <button name="payment" class="btn btn-checkout">Checkout</button>
+            <form action="cart_function.php" method="POST">
+                <button type="submit" name="payment" class="btn btn-checkout">Checkout</button>
+            </form>
+           
         </div>
     </div>
 

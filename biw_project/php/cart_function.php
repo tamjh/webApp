@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "database.php";
 
 // Initialize the cart session variable if not set
 if (!isset($_SESSION['cart'])) {
@@ -39,7 +40,7 @@ if (isset($_POST['remove'])) {
                 unset($_SESSION['cart'][$key]);
                 $_SESSION['cart'] = array_values($_SESSION['cart']); // Re-index the array
                 header("Location: cart.php");
-                exit(); 
+                exit();
             }
         }
     }
@@ -56,36 +57,34 @@ if (isset($_POST['update'])) {
     }
 }
 
-
-function cartFunction($conn){
-    if(isset($_POST['payment'])){
+if (isset($_POST['payment'])) {
     $orderNumber = 'ORD' . str_pad(rand(1, 999999), 6, '0', STR_PAD_LEFT);
-    $customerId = isset($_SESSION['uid'])? $_SESSION['uid'] : null;
+    $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
 
     // Calculate the total grand total
     $final = 0;
-    foreach ($_SESSION['cart'] as $cartItem) {
-        $final += $cartItem['productquantity'] * $cartItem['productprice'];
-    }
 
     // Insert the order into the orders table with the grand total
     $insertOrderQuery = "INSERT INTO orders (order_number, customer_id, grand_total) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($insertOrderQuery);
     $stmt->bind_param("sid", $orderNumber, $customerId, $final);
     $stmt->execute();
-    $orderId = $stmt->insert_id;
     $stmt->close();
 
-    $insertItemQuery = "INSERT INTO order_items (order_number, product_name, product_price, quantity) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($insertItemQuery);
-    $stmt->bind_param("ssdi", $orderNumber, $productName, $productPrice, $quantity);
-    $stmt->execute();
-    $stmt->close();
+    // Get the generated order ID
+    $orderId = $conn->insert_id;
+
+    // Insert items into the order_items table with the obtained order ID
+    foreach ($_SESSION['cart'] as $cartItem) {
+        $insertItemQuery = "INSERT INTO order_items (order_id, product_name, product_price, quantity) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertItemQuery);
+        $stmt->bind_param("dddd", $orderId, $cartItem['productname'], $cartItem['productprice'], $cartItem['productquantity']);
+        $stmt->execute();
+        $stmt->close();
+    }
 
     // Clear the cart after successful checkout
     $_SESSION['cart'] = array();
-}
-}
 
-
-?>
+    header("location:success.php");
+}
