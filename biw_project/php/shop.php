@@ -178,7 +178,7 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
 
                         // Your code for displaying book details goes here
                         echo "<form action='cart_function.php' method='post'>";
-                        echo "<input type='hidden' name='Pimage' value='/project/biw_project/image/coverpage/{$book['cover']}'>";
+                        echo "<input type='hidden' name='Pimage' value='{$book['cover']}'>";
                         echo "<input type='number' name='quantity' value='1' min='1'>";
                         echo "<input type='hidden'name='Pname' value='{$book['name']}'>";
                         echo "<input type='hidden' name='Pprice' value='{$book['price']}'>";
@@ -209,6 +209,8 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
         });
     });
     
+    
+
 </script>
 
 </html>

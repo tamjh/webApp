@@ -18,7 +18,9 @@ if (isset($_POST['logout'])) {
 
 require_once "database.php";
 require_once "books_function.php";
-require_once "books_function.php";
+require_once "cart_function.php";
+
+$cart = cartFunction($conn);
 ?>
 
 <!DOCTYPE html>
@@ -79,11 +81,11 @@ require_once "books_function.php";
                     $total = 0;
                     $final = 0;
                     if (isset($_SESSION['cart'])) {
-                        echo '<pre>';
-                        print_r($_SESSION['cart']);
-                        echo '</pre>';
-                        $imagePath = '/project/biw_project/image/coverpage/sheclock.jpg';
-                        echo "<img src='$imagePath' alt='Test Image'>";
+                        // echo '<pre>';
+                        // print_r($_SESSION['cart']);
+                        // echo '</pre>';
+                        // $imagePath = '/project/biw_project/image/coverpage/sheclock.jpg';
+                        // echo "<img src='$imagePath' alt='Test Image'>";
                         foreach ($_SESSION['cart'] as $key => $value) {
                             // Check if the key exists before trying to access it
                             $productImage = isset($value['productimage']) ? $value['productimage'] : '';
@@ -94,13 +96,15 @@ require_once "books_function.php";
                                     <form action='cart_function.php' method='POST'>
                                     <tr>
 
-                                    <td><img src='{$value['productimage']}'></td>
+                                    <td><img src='{$value['productimage']}' class='pimg'></td>
 
 
                                     <td>{$value['productname']}</td>
                                     
                                     <td>{$value['productprice']}</td>
+                                    
                                     <td><input type='number' name='Pquantity' value='{$value['productquantity']}'></input></td>
+                                    
                                     <td><button name='update'>Update</button></td>
                                     <td><button name='remove'>Remove</button></td>
                                     <td><input type='hidden' name='item' value='{$value['productname']}'></td>
@@ -120,10 +124,16 @@ require_once "books_function.php";
             <h2>Subtotal (<?=$no?>): </h2>
             <h2>RM <?= number_format($final, 2) ?></h2>
             <h2>Shipping fee: </h2>
-
+            <form action="cart_function.php" method="post"></form>
+            <button name="payment" class="btn btn-checkout">Checkout</button>
         </div>
     </div>
 
 </body>
-
+<script src="numberkey.js"></script>
+<script>
+            function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+</script>
 </html>
