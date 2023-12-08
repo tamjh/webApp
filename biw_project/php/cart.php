@@ -72,26 +72,27 @@ require_once "cart_function.php";
 
     <div class="page">
         <div class="cart">
-            <table>
+            <div class="card">
+                <table>
 
 
-                <tbody>
-                    <?php
-                    $no = 1; // Initialize the $no variable
-                    $total = 0;
-                    $final = 0;
-                    if (isset($_SESSION['cart'])) {
-                        // echo '<pre>';
-                        // print_r($_SESSION['cart']);
-                        // echo '</pre>';
-                        // $imagePath = '/project/biw_project/image/coverpage/sheclock.jpg';
-                        // echo "<img src='$imagePath' alt='Test Image'>";
-                        foreach ($_SESSION['cart'] as $key => $value) {
-                            // Check if the key exists before trying to access it
-                            $productImage = isset($value['productimage']) ? $value['productimage'] : '';
-                            $total = $value['productquantity'] * $value['productprice'];
-                            $final += $total;
-                            echo "
+                    <tbody>
+                        <?php
+                        $no = 1; // Initialize the $no variable
+                        $total = 0;
+                        $final = 0;
+                        if (isset($_SESSION['cart'])) {
+                            // echo '<pre>';
+                            // print_r($_SESSION['cart']);
+                            // echo '</pre>';
+                            // $imagePath = '/project/biw_project/image/coverpage/sheclock.jpg';
+                            // echo "<img src='$imagePath' alt='Test Image'>";
+                            foreach ($_SESSION['cart'] as $key => $value) {
+                                // Check if the key exists before trying to access it
+                                $productImage = isset($value['productimage']) ? $value['productimage'] : '';
+                                $total = $value['productquantity'] * $value['productprice'];
+                                $final += $total;
+                                echo "
                             
                                     <form action='cart_function.php' method='POST'>
                                     <tr>
@@ -114,35 +115,37 @@ require_once "cart_function.php";
                                     </tr>
                                     </form>
                                     ";
-                            $no++;
+                                $no++;
+                            }
                         }
-                    }
-                    ?>
+                        ?>
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="total">
             <div class="sum">
 
-            
-            <h1>Order Details</h1><br>
-            <h2>Subtotal (<?=$no?>): </h2>
-            <h2>RM <?= number_format($final, 2) ?></h2>
-            <h2>Shipping fee: </h2>
-            <form action="cart_function.php" method="POST">
-                <button type="submit" name="payment" class="btn btn-checkout">Checkout</button>
-            </form>
-            <a href="shop.php"><button>Continue shopping</button></a>
-        </div>
+
+                <h1>Order Details</h1><br>
+                <h2>Subtotal (<?= $no ?>): </h2>
+                <h2>RM <?= number_format($final, 2) ?></h2>
+                <h2>Shipping fee: </h2>
+                <form action="cart_function.php" method="POST">
+                    <button type="submit" name="payment" class="btn btn-checkout">Checkout</button>
+                </form>
+                <a href="shop.php"><button>Continue shopping</button></a>
+            </div>
         </div>
     </div>
 
 </body>
 <script src="numberkey.js"></script>
 <script>
-            function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 </script>
+
 </html>

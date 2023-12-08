@@ -106,27 +106,32 @@ header .icons a:last-child {
     justify-content: center;
     max-width: 90%;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 50x;
+    margin-bottom:50px;
 }
 
 .cart {
     display: flex;
     width: 100%;
-    min-width: 800px;
+ 
     height: 100%;
     min-height: 650px;
     float: left;
     border: 1px solid rgb(19, 19, 210);
     margin: 0 auto;
     padding: 20px;
+    justify-content: space-around; /* Adjust the spacing between items */
 }
+
+
+
 
 .total {
     display: block;
     width: 30%;
     max-width: 400px;
     height: auto;
-    min-height: 400px;
+   
     float: left;
     border: 1px solid rosybrown;
     margin: 0 auto;
@@ -136,18 +141,18 @@ header .icons a:last-child {
     padding: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
 
 table, th, td {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #cfc5c5;
     font-size: 20px;
 }
-
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 10px; /* Adjust the bottom margin */
+}
 th, td {
     padding: 15px;
     text-align: left;
@@ -171,9 +176,13 @@ th {
 }
 
 .pimg {
-    width: 60%;
+    width: 150px;
     height: 200px;
-  
+    object-fit: cover;
+}
+
+.cart table tr:first-child .pimg {
+    object-fit: contain; /* Maintain aspect ratio without cropping */
 }
 
 input[type="number"] {
@@ -213,8 +222,7 @@ input[type=number]::-webkit-outer-spin-button {
     background: white;
     color: black;
     cursor: pointer;
-    border-radius: 50%;
-    transition: 0.3s;
+
 }
 
 
@@ -247,7 +255,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 80%;
     max-width: 400px;
     height: auto;
-    min-height: 300px;
+ 
     float: left;
     border: 1px solid rosybrown;
     margin: 0 auto;
