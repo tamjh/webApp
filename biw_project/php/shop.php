@@ -178,6 +178,7 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
 
                         // Your code for displaying book details goes here
                         echo "<form action='cart_function.php' method='post'>";
+                        echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
                         echo "<input type='hidden' name='Pimage' value='{$book['cover']}'>";
                         echo "<input type='number' name='quantity' value='1' min='1'>";
                         echo "<input type='hidden'name='Pname' value='{$book['name']}'>";

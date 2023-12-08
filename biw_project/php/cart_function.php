@@ -8,6 +8,7 @@ if (!isset($_SESSION['cart'])) {
 }
 
 if (isset($_POST['add_to_cart'])) {
+    $productId = $_POST['book_id'];
     $productName = $_POST['Pname'];
     $productPrice = $_POST['Pprice'];
     $quantity = $_POST['quantity'];
@@ -23,6 +24,7 @@ if (isset($_POST['add_to_cart'])) {
             </script>";
     } else {
         $_SESSION['cart'][] = array(
+            'productid' => $productId,
             'productname' => $productName,
             'productprice' => $productPrice,
             'productquantity' => $quantity,
@@ -64,10 +66,14 @@ if (isset($_POST['payment'])) {
     // Calculate the total grand total
     $final = 0;
 
-    // Insert the order into the orders table with the grand total
-    $insertOrderQuery = "INSERT INTO orders (order_number, customer_id, grand_total) VALUES (?, ?, ?)";
+    foreach ($_SESSION['cart'] as $cartItem) {
+        $final += $cartItem['productquantity'] * $cartItem['productprice'];
+    }
+
+    // Insert the order into the orders table with the correct grand total
+    $insertOrderQuery = "INSERT INTO orders (order_number, customer_id, grand_total, created) VALUES (?, ?, ?, NOW())";
     $stmt = $conn->prepare($insertOrderQuery);
-    $stmt->bind_param("sid", $orderNumber, $customerId, $final);
+    $stmt->bind_param("sdd", $orderNumber, $customerId, $final);
     $stmt->execute();
     $stmt->close();
 
@@ -76,9 +82,9 @@ if (isset($_POST['payment'])) {
 
     // Insert items into the order_items table with the obtained order ID
     foreach ($_SESSION['cart'] as $cartItem) {
-        $insertItemQuery = "INSERT INTO order_items (order_id, product_name, product_price, quantity) VALUES (?, ?, ?, ?)";
+        $insertItemQuery = "INSERT INTO order_items (order_id, order_number, product_id, product_name, product_price, quantity) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertItemQuery);
-        $stmt->bind_param("dddd", $orderId, $cartItem['productname'], $cartItem['productprice'], $cartItem['productquantity']);
+        $stmt->bind_param("dsdsdd", $orderId, $orderNumber, $cartItem['productid'], $cartItem['productname'], $cartItem['productprice'], $cartItem['productquantity']);
         $stmt->execute();
         $stmt->close();
     }

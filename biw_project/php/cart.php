@@ -103,7 +103,10 @@ require_once "cart_function.php";
                                     
                                     <td>{$value['productprice']}</td>
                                     
-                                    <td><input type='number' name='Pquantity' value='{$value['productquantity']}'></input></td>
+                                    <td>
+                                    <span class='decre'><button type='button' class='q1'>-</button></span>
+                                    <input type='number' id='quantity' name='Pquantity' class='inputQuantity' value='{$value['productquantity']}'></input>
+                                    <span class='incre'><button type='button' class='q2'>+</button></span></td>
                                     
                                     <td><button name='update'>Update</button></td>
                                     <td><button name='remove'>Remove</button></td>
@@ -120,6 +123,9 @@ require_once "cart_function.php";
             </table>
         </div>
         <div class="total">
+            <div class="sum">
+
+            
             <h1>Order Details</h1><br>
             <h2>Subtotal (<?=$no?>): </h2>
             <h2>RM <?= number_format($final, 2) ?></h2>
@@ -127,7 +133,8 @@ require_once "cart_function.php";
             <form action="cart_function.php" method="POST">
                 <button type="submit" name="payment" class="btn btn-checkout">Checkout</button>
             </form>
-           
+            <a href="shop.php"><button>Continue shopping</button></a>
+        </div>
         </div>
     </div>
 
