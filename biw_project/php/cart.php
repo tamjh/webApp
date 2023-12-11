@@ -90,7 +90,8 @@ require_once "cart_function.php";
                             foreach ($_SESSION['cart'] as $key => $value) {
                                 // Check if the key exists before trying to access it
                                 $productImage = isset($value['productimage']) ? $value['productimage'] : '';
-                                $total = $value['productquantity'] * $value['productprice'];
+                                $total = (float)$value['productquantity'] * (float)$value['productprice'];
+
                                 $final += $total;
                                 echo "
                             
@@ -100,18 +101,18 @@ require_once "cart_function.php";
                                     <td><img src='{$value['productimage']}' class='pimg'></td>
 
 
-                                    <td>{$value['productname']}</td>
+                                    <td class='ctr-name'>{$value['productname']}</td>
                                     
-                                    <td>{$value['productprice']}</td>
+                                    <td>RM {$value['productprice']}</td>
                                     
-                                    <td>
+                                    <td class='btn-q'>
                                     <span class='decre'><button type='button' class='q1'>-</button></span>
                                     <input type='number' id='quantity' name='Pquantity' class='inputQuantity' value='{$value['productquantity']}'></input>
                                     <span class='incre'><button type='button' class='q2'>+</button></span></td>
                                     
                                     <td><button name='update'>Update</button></td>
                                     <td><button name='remove'>Remove</button></td>
-                                    <td><input type='hidden' name='item' value='{$value['productname']}'></td>
+                                    <input type='hidden' name='item' value='{$value['productname']}'>
                                     </tr>
                                     </form>
                                     ";
@@ -129,7 +130,7 @@ require_once "cart_function.php";
 
 
                 <h1>Order Details</h1><br>
-                <h2>Subtotal (<?= $no ?>): </h2>
+                <h2>Subtotal (<?= (int)$no ?>): </h2>
                 <h2>RM <?= number_format($final, 2) ?></h2>
                 <h2>Shipping fee: </h2>
                 <form action="cart_function.php" method="POST">

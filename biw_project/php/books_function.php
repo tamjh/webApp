@@ -56,6 +56,20 @@ function get_all_publisher($conn){
     return $publishers;
 }
 
+function get_all_status($conn){
+    $sql = "SELECT * FROM status";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows > 0){
+        $statuses = $result->fetch_all(MYSQLI_ASSOC);
+    }else{
+        $statuses = [];
+    }
+
+    return $statuses;
+
+}
 
 function delete_book($conn) {
     if (isset($_POST['delete'])) {

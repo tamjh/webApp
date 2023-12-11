@@ -3,7 +3,7 @@
 $hostName = "localhost";
 $dbUser = "root";
 $dbPassword = "";
-$dbName = "biw_project";
+$dbName = "sem3_biw";
 $conn = mysqli_connect($hostName, $dbUser, $dbPassword, $dbName);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());

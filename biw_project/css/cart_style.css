@@ -123,9 +123,6 @@ header .icons a:last-child {
     justify-content: space-around; /* Adjust the spacing between items */
 }
 
-
-
-
 .total {
     display: block;
     width: 30%;
@@ -146,6 +143,7 @@ table, th, td {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #cfc5c5;
     font-size: 20px;
+    
 }
 table {
     width: 100%;
@@ -156,6 +154,7 @@ table {
 th, td {
     padding: 15px;
     text-align: left;
+    border:1px red solid;
 }
 
 th {
@@ -189,6 +188,10 @@ input[type="number"] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
+    width:40px;
+    text-align: center;
+  
+    
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -199,21 +202,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 .incre,
 .decre {
-    vertical-align: middle;
     height: 33px;
-    font-size: 30px;
-    font-weight: bold;
-    
+    font-size: 20px; /* Adjust the font size as needed */
+    margin: 0;
 }
 
 .q1,
 .q2 {
-    margin: 0;
-    border: 1px solid black; /* Add border for better visibility */
     background-color: black;
-    font-size: large;
-    padding: 6px 12px; /* Increase padding for better clickability */
     color: white;
+    border: 1px solid black;
+    font-size: 18px; /* Adjust the font size as needed */
+    padding: 5px 10px; /* Adjust the padding as needed */
+    cursor: pointer;
     transition: 0.3s;
 }
 
@@ -221,15 +222,10 @@ input[type=number]::-webkit-outer-spin-button {
 .q2:hover {
     background: white;
     color: black;
-    cursor: pointer;
-
 }
 
-
 .incre {
-
-    left: 66px;
-    top: -4px;
+    margin-left: auto; /* Push the + button to the right */
 }
 
 .decre {
@@ -290,4 +286,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 .sum button:hover{
     background: rgba(245, 245, 300);
+}
+
+.btn-q{
+    border: 1px black solid;
+    width:120px;
+    justify-content: center;
+}
+
+.ctr-name{
+    width:250px;
 }
