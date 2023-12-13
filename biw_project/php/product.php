@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 if (!isset($_SESSION["user"]) || $_SESSION["usertype"] !== "admin") {
     header("Location: login.php");
@@ -80,7 +83,7 @@ $edit_function = edit_book($conn);
 
 
 
-    <h4>All Books</h4>
+    <h4 class="p_title">All Product</h4>
     <table class="details">
         <tr>
             <th>No.</th>

@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $formSubmitted = isset($_GET['search']);
 
 if (!isset($_SESSION["user"])) {
@@ -80,7 +83,7 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
         </div>
 
     </header>
-    <h1>All products</h1>
+    <h1 class="s_title">All products</h1>
 
     <div class="page">
         <div class="filter">
@@ -151,7 +154,7 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
                         echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
                         echo "</div>";
                         echo "<p>{$book['name']}</p>";
-                        echo "<p>{$book['price']}</p>";
+                        echo "<p>RM {$book['price']}</p>";
 
                         // Your code for displaying book details goes here
 

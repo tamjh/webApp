@@ -232,3 +232,9 @@ td {
 .btn-cancel:hover {
     background: #000;
 }
+
+.p_title{
+    font-size: 40px;
+    margin:10px auto 20px auto;
+    font-family:Kalnia;
+}
