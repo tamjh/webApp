@@ -4,32 +4,40 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 
+if (!isset($_SESSION["user"]) || $_SESSION["usertype"] !== "admin") {
+    header("Location: login.php");
+    exit();
+}
+
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
-    exit(); // Make sure to exit after a header redirect
+    exit();
 }
 
 if (isset($_POST['logout'])) {
     // Unset and destroy the session
     session_unset();
     session_destroy();
-
-    // Redirect to the login page after logout
-    header("Location: login.php");
-    exit(); // Make sure to exit after a header redirect
+    header("Location: login.php"); // Redirect to the login page after logout
+    exit();
 }
 
+//connect others php file
 require_once "database.php";
 require_once "books_function.php";
+require_once "update_info.php";
 
+//call function for books_function.php
 $books = get_all_books($conn);
-
 if (!is_array($books)) {
     $books = array();
 }
-
 $categories = get_all_categories($conn);
 $publishers = get_all_publisher($conn);
+$delete_function = delete_inventory($conn);
+$update_info = update_info($conn);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +46,9 @@ $publishers = get_all_publisher($conn);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/project/biw_project/css/view_order_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/project/biw_project/css/homepage_style.css">
-    <title>Product Page</title>
+    <title>Orders</title>
 </head>
 
 <body>
@@ -93,16 +100,17 @@ $publishers = get_all_publisher($conn);
     </div>
 </header>
 
+    <section>
+        <h1>Customer order</h1>
 
-
-    <h1>Homepage</h1>
+        
+    </section>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
 <script>
-            function myFunction() {
+        function myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
-</script>
+    </script>
+
 </html>
