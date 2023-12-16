@@ -34,7 +34,7 @@ if (isset($_POST['add_to_cart'])) {
             'productimage' => "/project/biw_project/image/coverpage/" . $figure
         );
 
-        header("Location: cart.php");
+        header("Location: shop.php");
     }
 }
 

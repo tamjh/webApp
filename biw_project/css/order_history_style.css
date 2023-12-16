@@ -110,7 +110,8 @@ body {
     max-width: 90%;
     margin: 0 auto;
     margin-top: 100px;
-    height: auto;
+    margin-bottom: 100px;
+ 
 }
 
 .side {
@@ -118,7 +119,6 @@ body {
     width: 30%;
     max-width: 400px;
     height: auto;
-    min-height: 400px;
     float: left;
     border: 1px rosybrown solid;
     margin: 0 auto;
@@ -126,6 +126,27 @@ body {
     margin-right: 20px;
    
 }
+
+.side-bar{
+    margin-top: 0;
+    height:auto;
+    border:1px orange solid;
+}
+
+.side-btn{
+    background: #9b9595;
+    font-size:25px;
+    margin: 20px;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.side-btn:hover{
+background: #706969;
+}
+
+
 
 .box-container{
     display: flex;
@@ -150,6 +171,7 @@ body {
 }
 
 .box-container {
+    flex-wrap: wrap;
     display: flex;
     width: 100%;
     min-width: 800px;
@@ -157,6 +179,7 @@ body {
     min-height: 650px;
     border: 1px rgb(19, 19, 210) solid;
     margin: 0 auto;
+    
 }
 
 /* Box styling */
@@ -164,7 +187,7 @@ body {
     border: 1px red solid;
     border-radius: 5px;
     width: calc(50% - 55px);
-    height: 300px;
+    height: 320px;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -173,17 +196,6 @@ body {
 }
 
 /* Info styling */
-.info {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    gap: 10px;
-    border: 1px purple solid;
-    height: 60%;
-    width: 100%;
-    overflow: auto;
-    font-size: 15px;
-}
 
 .info p {
     margin: 0;
@@ -193,19 +205,12 @@ body {
 .img-container {
     height: 70%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
+    overflow-x: auto;
     margin-top: 10px;
-    font-size: 15px; 
-    vertical-align: top;
-    display: inline-block;
 }
 
-.img-container p {
-    margin-top: 5px; 
-    display: block;
-}
+/* Adjust the width of .box to accommodate images */
+
 
 .btn{
     flex:1;
@@ -235,3 +240,60 @@ body {
     background: yellow;
     
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+/* ... (your existing styles remain unchanged) ... */
+
+.box {
+    border: 1px red solid;
+    border-radius: 5px;
+    width: calc(50% - 55px);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    border: 1px purple solid;
+    height: 100px; /* Set a fixed height for the info box */
+    width: 100%;
+    overflow-y: auto; /* Add a vertical scrollbar if content exceeds the height */
+    font-size: 15px;
+}
+
+.img-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 10px;
+}
+
+.img1 {
+    margin-right: 10px;
+    white-space: normal;
+    text-align: center;
+}
+
+.img {
+    width: 120px;
+    height: 120px;
+}
+

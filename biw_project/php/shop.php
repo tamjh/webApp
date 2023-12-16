@@ -84,7 +84,8 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
 
             <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
                 <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
-                <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+                <a href="cart.php" class="fas fa-cart-plus count" style="text-decoration: none;"><p>(<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : '0' ?>)</p></a>
+                
                 <div class="dropdown">
                     <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
                     <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
@@ -102,122 +103,133 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
     </div>
 </header>
 
-    <h1 class="s_title">All products</h1>
+<h1 class="s_title">All products</h1>
 
-    <div class="page">
-        <div class="filter">
-            <div class="fbox">
-                <form action="" method="get">
-                    <div class="search-box">
-                        <input type="text" name="search" class="searching" placeholder="Search..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>" autocomplete="off">
-                        <button type="submit" class="icon"><i class="fa fa-search"></i></button>
-                    </div>
-                    <div class="filter-checkbox">
-                        <h4>Category: </h4>
-                        <hr>
-                        <?php
-                        foreach ($categories as $category) {
-                            $checked = (isset($_GET['category_filter']) && is_array($_GET['category_filter']) && in_array($category['id'], $_GET['category_filter'])) ? 'checked' : '';
-                        ?>
-                            <input type="checkbox" name="category_filter[]" value="<?= $category['id'] ?>" <?= $checked ?> />
-                            <?= $category['category_name'] ?>
-                            <br>
-                        <?php
-                        }
-                        ?>
-                    </div>
-
-                    <div class="filter-checkbox">
-                        <h4>Publisher: </h4>
-                        <hr>
-                        <?php
-                        foreach ($publishers as $publisher) {
-                            $checked = (isset($_GET['publisher_filter']) && is_array($_GET['publisher_filter']) && in_array($publisher['id'], $_GET['publisher_filter'])) ? 'checked' : '';
-                        ?>
-                            <input type="checkbox" name="publisher_filter[]" value="<?= $publisher['id'] ?>" <?= $checked ?> />
-                            <?= $publisher['publisher_name'] ?>
-                            <br>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="product">
-            <div class="product-container">
-                <?php
-
-                if (isset($_GET['category_filter']) || isset($_GET['publisher_filter']) || $formSubmitted) {
-                    $filteredBooks = array(); // Create an array to store filtered books
-
-                    // Loop through all books
-                    foreach ($books as $book) {
-                        // Check if the book matches the selected category filters
-                        $categoryMatches = empty($_GET['category_filter']) || in_array($book['category'], $_GET['category_filter']);
-
-                        // Check if the book matches the selected publisher filters
-                        $publisherMatches = empty($_GET['publisher_filter']) || in_array($book['publisher'], $_GET['publisher_filter']);
-
-                        // If both category and publisher match, add the book to the filtered array
-                        if ($categoryMatches && $publisherMatches) {
-                            $filteredBooks[] = $book;
-                        }
+<div class="page">
+    <div class="filter">
+        <div class="fbox">
+            <form action="" method="get">
+            <div class="search-box">
+    <div class="search-container">
+        <input type="text" name="search" class="searching" placeholder="Search..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>" autocomplete="off">
+        <button type="submit" class="icon"><i class="fa fa-search"></i></button>
+    </div>
+</div>
+                <div class="filter-checkbox">
+                    <h4>Category: </h4>
+                    <hr>
+                    <?php
+                    foreach ($categories as $category) {
+                        $checked = (isset($_GET['category_filter']) && is_array($_GET['category_filter']) && in_array($category['id'], $_GET['category_filter'])) ? 'checked' : '';
+                    ?>
+                        <input type="checkbox" name="category_filter[]" value="<?= $category['id'] ?>" <?= $checked ?> />
+                        <?= $category['category_name'] ?>
+                        <br>
+                    <?php
                     }
+                    ?>
+                </div>
 
-                    // Loop through the filtered books and display them
-                    foreach ($filteredBooks as $book) {
-                        echo "<div class='product-card'>";
-                        echo "<div class='product-image'>";
-                        echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
-                        echo "</div>";
-                        echo "<p>{$book['name']}</p>";
-                        echo "<p>RM {$book['price']}</p>";
-
-                        // Your code for displaying book details goes here
-
-                        echo "<form action='cart_function.php' method='post'>";
-                        echo "<input type='number' name='quantity' value='1' min='1' class='invisible-input'>";
-                        echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
-                        echo "<input type='hidden' name='Pimage' value='{$book['cover']}'>";
-                        echo "<input type='hidden'name='Pname' value='{$book['name']}'>";
-                        echo "<input type='hidden' name='Pprice' value='{$book['price']}'>";
-                        echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
-                        echo "<input type='submit' class='btn btn-buy addToCartBtn' name='add_to_cart' value='Add to cart'>";
-                        echo "</form>";
-                        echo "<a href='details.php?book_id={$book['id']}' class='btn btn-buy'><button class='btn btn-buy'>View details</button></a>";
-                        echo "</div>";
+                <div class="filter-checkbox">
+                    <h4>Publisher: </h4>
+                    <hr>
+                    <?php
+                    foreach ($publishers as $publisher) {
+                        $checked = (isset($_GET['publisher_filter']) && is_array($_GET['publisher_filter']) && in_array($publisher['id'], $_GET['publisher_filter'])) ? 'checked' : '';
+                    ?>
+                        <input type="checkbox" name="publisher_filter[]" value="<?= $publisher['id'] ?>" <?= $checked ?> />
+                        <?= $publisher['publisher_name'] ?>
+                        <br>
+                    <?php
                     }
-                } else {
-                    // Handle the case when no filters are set
-                    // Loop through all books
-                    foreach ($books as $book) {
-                        echo "<div class='product-card'>";
-                        echo "<div class='product-image'>";
-                        echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
-                        echo "</div>";
-                        echo "<p>{$book['name']}</p>";
-                        echo "<p>{$book['price']}</p>";
-
-                        // Your code for displaying book details goes here
-                        echo "<form action='cart_function.php' method='post'>";
-                        echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
-                        echo "<input type='hidden' name='Pimage' value='{$book['cover']}'>";
-                        echo "<input type='number' name='quantity' value='1' min='1' class='invisible-input'>";
-                        echo "<input type='hidden'name='Pname' value='{$book['name']}'>";
-                        echo "<input type='hidden' name='Pprice' value='{$book['price']}'>";
-                        echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
-                        echo "<input type='submit' class='btn btn-buy addToCartBtn' name='add_to_cart' value='Add to cart'>";
-                        echo "</form>";
-                        echo "<a href='details.php?book_id={$book['id']}' class='btn btn-buy'><button class='btn btn-buy'>View details</button></a>";
-                        echo "</div>";
-                    }
-                }
-                ?>
-            </div>
+                    ?>
+                </div>
+            </form>
         </div>
     </div>
+
+    <div class="product">
+        <div class="product-container">
+            <?php
+
+            $searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
+
+            if (isset($_GET['category_filter']) || isset($_GET['publisher_filter']) || $formSubmitted || !empty($searchQuery)) {
+                $filteredBooks = array(); // Create an array to store filtered books
+
+                // Loop through all books
+                foreach ($books as $book) {
+                    // Check if the book matches the search query
+                    $searchMatches = empty($searchQuery) || stripos($book['name'], $searchQuery) !== false;
+
+                    // Check if the book matches the selected category filters
+                    $categoryMatches = empty($_GET['category_filter']) || in_array($book['category'], $_GET['category_filter']);
+
+                    // Check if the book matches the selected publisher filters
+                    $publisherMatches = empty($_GET['publisher_filter']) || in_array($book['publisher'], $_GET['publisher_filter']);
+
+                    // If search, category, and publisher match, add the book to the filtered array
+                    if ($searchMatches && $categoryMatches && $publisherMatches) {
+                        $filteredBooks[] = $book;
+                    }
+                }
+
+                // Loop through the filtered books and display them
+                foreach ($filteredBooks as $book) {
+                    echo "<div class='product-card'>";
+                    echo "<div class='product-image'>";
+                    echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
+                    echo "</div>";
+                    echo "<p>{$book['name']}</p>";
+                    echo "<p>RM {$book['price']}</p>";
+
+                    // Your code for displaying book details goes here
+
+                    echo "<form action='cart_function.php' method='post'>";
+                    echo "<input type='number' name='quantity' value='1' min='1' class='invisible-input'>";
+                    echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
+                    echo "<input type='hidden' name='Pimage' value='{$book['cover']}'>";
+                    echo "<input type='hidden'name='Pname' value='{$book['name']}'>";
+                    echo "<input type='hidden' name='Pprice' value='{$book['price']}'>";
+                    echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
+                    echo "<div class='btn-class'>";
+                    echo "<input type='submit' class='btn btn-custom addToCartBtn' name='add_to_cart' value='Add to cart'>";
+                    echo "</form>";
+                    echo "<a href='details.php?book_id={$book['id']}' class='btn btn-custom '><button class='btn btn-buy'>View details</button></a>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+            } else {
+                // Handle the case when no filters are set
+                // Loop through all books
+                foreach ($books as $book) {
+                    echo "<div class='product-card'>";
+                    echo "<div class='product-image'>";
+                    echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
+                    echo "</div>";
+                    echo "<p>{$book['name']}</p>";
+                    echo "<p>{$book['price']}</p>";
+
+                    // Your code for displaying book details goes here
+                    echo "<form action='cart_function.php' method='post'>";
+                    echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
+                    echo "<input type='hidden' name='Pimage' value='{$book['cover']}'>";
+                    echo "<input type='number' name='quantity' value='1' min='1' class='invisible-input'>";
+                    echo "<input type='hidden'name='Pname' value='{$book['name']}'>";
+                    echo "<input type='hidden' name='Pprice' value='{$book['price']}'>";
+                    echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
+                    echo "<div class='btn-class'>";
+                    echo "<input type='submit' class='btn btn-custom addToCartBtn' name='add_to_cart' value='Add to cart'>";
+                    echo "</form>";
+                    echo "<a href='details.php?book_id={$book['id']}' '><button class='btn btn-custom'>View details</button></a>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+            }
+            ?>
+        </div>
+    </div>
+</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 

@@ -12,41 +12,71 @@
 
     <?php
     session_start();
+
     if (isset($_SESSION["user"])) {
         header("Location: homepage.php");
         exit();
     }
+
     $error = [];
+
     if (isset($_POST["login"])) {
         $uname = htmlspecialchars($_POST["uname"]);
         $upassword = $_POST["upassword"];
         require_once "database.php";
 
-        $sql = "SELECT * FROM users WHERE full_name = ?";
+        $sql = "SELECT id, full_name, email, phone_number, usertype, password FROM users WHERE full_name = ?";
+
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "s", $uname);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-        if ($user) {
-            if (password_verify($upassword, $user["password"])) {
-                $_SESSION["user"] = true;
-                $_SESSION["usertype"] = $user["usertype"];
-                if ($user["usertype"] === "admin") {
-                    $_SESSION['uname'] = $user['full_name'];
-                    header("Location: admin_dashboard.php");
-                } else {
-                    $_SESSION['uid'] = $user['id'];
+        if ($result) {
+            $user = mysqli_fetch_assoc($result);
+
+            if ($user) {
+                if (password_verify($upassword, $user["password"])) {
+                    $_SESSION["user"] = true;
+                    $_SESSION["usertype"] = $user["usertype"];
                     $_SESSION['customer_name'] = $user['full_name'];
-                    header("Location: homepage.php");
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['phone'] = $user['phone_number'];
+
+                    $addressSql = "SELECT * FROM address WHERE customer_id = ?";
+                    $addressStmt = mysqli_prepare($conn, $addressSql);
+                    mysqli_stmt_bind_param($addressStmt, "i", $_SESSION['uid']);
+                    mysqli_stmt_execute($addressStmt);
+                    $addressResult = mysqli_stmt_get_result($addressStmt);
+
+                    if ($addressResult) {
+                        $address = mysqli_fetch_assoc($addressResult);
+
+                        // Store address information in the session
+                        if ($address) {
+                            $_SESSION['unit'] = $address['unit'];
+                            $_SESSION['street'] = $address['street'];
+                            $_SESSION['postcode'] = $address['postcode'];
+                            $_SESSION['city'] = $address['city'];
+                            $_SESSION['state'] = $address['state'];
+                        }
+                    }
+
+                    if ($user["usertype"] === "admin") {
+                        header("Location: admin_dashboard.php");
+                    } else {
+                        $_SESSION['uid'] = $user['id'];
+                        header("Location: homepage.php");
+                    }
+                    exit();
+                } else {
+                    $error[] = "Password not match";
                 }
-                exit();
             } else {
-                $error[] = "Password not match";
+                $error[] = "User does not exist";
             }
         } else {
-            $error[] = "User does not exist";
+            $error[] = "Query failed";
         }
     }
     ?>
@@ -70,7 +100,7 @@
             <input type="password" class="form-control" name="upassword" placeholder="Enter password">
             <img src="/project/biw_project/image/icon/eye_closed.png" id="eye-icon" alt="Toggle Password Visibility" title="Toggle Password Visibility">
         </div>
-
+        <!-- <input type="submit" name="forget" class="nothing" value="Forget Password?"> -->
         <input type="submit" name="login" class="btn2" value="Login">
         <br><br>
         <a href="register.php" class="connect_register">Haven't registered?</a>

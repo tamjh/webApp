@@ -49,71 +49,73 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </head>
 
 <body>
-<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
-    <div class="container-fluid">
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+        <div class="container-fluid">
 
-        <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
+            <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
-                <li class="nav-item">
-                    <a class="nav-link" href="homepage.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about us.html">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="ProductPage.html">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact website.html">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Billing.html">Order Form</a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homepage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about us.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ProductPage.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact website.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Billing.html">Order Form</a>
+                    </li>
+                </ul>
 
-            <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-                <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
-                <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
-                <div class="dropdown">
-                    <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
-                    <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                        <div class="account_box" style="padding: 10px; font-size:2rem;">
-                            <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
+                <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
+                    <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
+                    <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+                    <div class="dropdown">
+                        <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
+                        <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
+                            <div class="account_box" style="padding: 10px; font-size:2rem;">
+                                <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
+                            </div>
+                            <p style="font-size:2rem;">Account</p>
+                            <form method="post">
+                                <button type="submit" name="logout" class="logout">Logout</button>
+                            </form>
                         </div>
-                        <p style="font-size:2rem;">Account</p>
-                        <form method="post">
-                            <button type="submit" name="logout" class="logout">Logout</button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <h1>Order History</h1>
     <div class="page">
         <div class="side">
-            <input type="submit" class="btn" value="Account"><br>
-            <input type="submit" class="btn" value="Contact and Address"><br>
-            <input type="submit" class="btn" value="Order History">
+            <div class="side-bar">
+                <input type="submit" class="side-btn" value="Account"><br>
+                <input type="submit" class="side-btn" value="Contact and Address"><br>
+                <input type="submit" class="side-btn" value="Order History">
+            </div>
         </div>
         <div class="box-container">
             <?php
             foreach ($orders as $order) {
                 echo "
-                    <div class='box'>
-                        <div class='container'>
-                            <div class='info'>
-                                <p>Order Number: {$order['order_number']}</p>
-                                <p>Order Date: {$order['created']}</p>
-                ";
+        <div class='box'>
+            <div class='container'>
+                <div class='info'>
+                    <p>Order Number: {$order['order_number']}</p>
+                    <p>Order Date: {$order['created']}</p>
+    ";
 
                 if ($statuses == 0 || empty($statuses)) {
                     echo "Undefined";
@@ -132,10 +134,10 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 }
 
                 echo "
-                        <p>Total Price: RM {$order['grand_total']}</p>
-                    </div>
-                    
-                ";
+                <p>Total Price: RM {$order['grand_total']}</p>
+            </div>
+            <div class='img-container'>
+    ";
 
                 // Fetch and display order items for each order
                 $orderItemId = $order['id'];
@@ -158,18 +160,18 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     $bookDetails = mysqli_fetch_assoc($bookResult);
 
                     echo "
-                        <div class='img-container'>
-                            <img class='img' src='/project/biw_project/image/coverpage/{$bookDetails['cover']}' alt='{$bookDetails['name']}'><br>
-                            <p>(x{$orderItem['quantity']})</p>
-                        </div>
-                    ";
+            <div class='img1'>
+                <img class='img' src='/project/biw_project/image/coverpage/{$bookDetails['cover']}' alt='{$bookDetails['name']}'><br>
+                <p>(x{$orderItem['quantity']})</p>
+            </div>
+        ";
                 }
 
-                // Remove the closing </div> tag from here
                 echo "
-                    </div>
-                </div>
-                ";
+            </div>
+        </div>
+    </div>
+    ";
             }
             ?>
         </div>
@@ -184,13 +186,11 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
     let statusElements = document.getElementsByClassName("applying");
     for (let i = 0; i < statusElements.length; i++) {
         let status = statusElements[i].textContent;
-        if(status === "Preparing"){
+        if (status === "Preparing") {
             statusElements[i].style.backgroundColor = "yellow";
-        }
-        else if(status === "Shipping"){
+        } else if (status === "Shipping") {
             statusElements[i].style.backgroundColor = "blue";
-        }
-        else{
+        } else {
             statusElements[i].style.backgroundColor = "green";
         }
     }

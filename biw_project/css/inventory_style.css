@@ -112,6 +112,7 @@ table{
     font-size: 20px; /* Reducing the font size for better readability */
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 100px;
 }
 
 th, td {
@@ -126,7 +127,7 @@ th {
 
 td {
     max-width: 200px; /* Limiting cell width to prevent excessive stretching */
-    white-space: nowrap;
+    white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -141,7 +142,7 @@ td {
 .btn {
     color: #fff;
     font-size: 18px;
-    padding: 8px 15px;
+    padding: 8px 10px;
     background: #ff8c00; /* Use orange background */
     border-radius: 5px; /* Adjust border radius */
     text-decoration: none;
@@ -199,11 +200,6 @@ td {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 18px; /* Adjust the font size as needed */
-}
-
-.btn-new{
-    float:right;
-    margin:30px;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -302,4 +298,10 @@ td {
 .popup_content_new textarea {
     border:#363a43 1px solid;
     border-radius: 5px;
+}
+
+.btn-new{
+    position:fixed;
+    right:10px;
+    bottom: 10px;
 }

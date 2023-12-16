@@ -22,8 +22,6 @@ header {
     left: 0;
     right: 0;
     background: #FBFFFF;
-        /* Change the background property to the provided gradient */
-        /*background: linear-gradient(100.22deg, #E6E6F6 43.14%, #2DB6FD 112.96%);*/
     padding: 2rem 9%;
     display: flex;
     align-items: center;
@@ -38,8 +36,6 @@ header .logo {
     color: grey;
     font-weight: bolder;
 }
-
-
 
 header .navbar a {
     font-size: 2rem;
@@ -65,7 +61,6 @@ header .icons a {
 header .icons a:last-child {
     margin-right: 0;
 }
-
 
 .menu {
     margin-top: 10px;
@@ -100,7 +95,7 @@ header .icons a:last-child {
 
 body {
     background: rgb(155,211,221);
-background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 100%);
+    background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 100%);
     align-items: center;
     text-align: center;
 }
@@ -124,7 +119,6 @@ background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 1
     margin: 0 auto;
     word-wrap: break-word;
     margin-right: 20px;
-   
 }
 
 .product {
@@ -136,9 +130,7 @@ background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 1
     height: 100%;
     min-height: 650px;
     float: left;
-    
     margin: 0 auto 10px auto;
-
 }
 
 .product-container {
@@ -146,12 +138,12 @@ background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 1
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 100%; /* Set a fixed or percentage width for the container */
+    width: 100%;
 }
 
 .product-card {
-    width: calc(25% - 30px); /* Adjust the width calculation based on margin */
-    height: 350px;
+    width: calc(25% - 30px);
+    height: auto;
     border-radius: 10px;
     border: 1px rgb(33, 32, 32) solid;
     display: flex;
@@ -161,7 +153,6 @@ background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 1
     box-sizing: border-box;
     margin: 15px;
 }
-
 
 .product-card p {
     font-size: 18px;
@@ -173,28 +164,51 @@ background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 1
     height: 200px;
 }
 
-.product-card button {
+.btn-custom {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
-    width: 100%;
-
+    width: 150px;
+    gap:10px;
 }
 
-.product-card button:hover {
+.btn-custom:hover {
     background-color: #45a049;
 }
 
-.search-box {
-    margin: 20px 10px 20px 10px;
-    border: 1px black solid;
-    padding: 10px;
-    border-radius: 50px;
+.btn-custom:first-child{
+    margin-bottom:5px;
 }
 
-.search-box .icon {
+.btn-custom button {
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Add the following CSS rule to style the search container */
+.search-container {
+    display: flex;
+    align-items: center;
+    border:1px black solid;
+    border-radius: 10px;
+}
+
+/* Adjust the styling of the search input */
+.searching {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    border-radius: 50px;
+   
+}
+
+/* Style the search button */
+.icon {
+    margin-right: 15px;
     cursor: pointer;
     background: #fff;
     color: black;
@@ -206,20 +220,28 @@ background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 1
     font-size: 15px;
 }
 
-.fbox{
+.fbox {
     border-radius: 10px;
-    position: fixed;
     top:35%;
     background: #fff;
     padding:10px;
-   
 }
 
 .invisible-input {
     display: none;
 }
 
-.s_title{
+.s_title {
     font-size:40px;
     font-family: kalnia;
+}
+
+.count {
+    display: flex;
+    margin-top: 10px;
+}
+
+.btn-custom a {
+    color: #fff; /* Set text color explicitly for the anchor tag */
+    text-decoration: none; /* Remove underline, if any */
 }

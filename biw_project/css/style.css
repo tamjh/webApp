@@ -140,3 +140,11 @@ input[type="password"] {
     right: 30px; /* Adjust as needed */
     cursor: pointer;
 }
+
+.nothing {
+    all: unset;
+    display: block; /* Adjust display property */
+    margin-bottom: 10px; /* Add margin as needed */
+    margin-right: 0%;
+    cursor: pointer;
+}
