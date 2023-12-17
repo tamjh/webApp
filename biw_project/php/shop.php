@@ -151,6 +151,7 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
     <div class="product">
         <div class="product-container">
             <?php
+            $isOutOfStock = false;
 
             $searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
 
@@ -176,14 +177,15 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
 
                 // Loop through the filtered books and display them
                 foreach ($filteredBooks as $book) {
+                    if($book['inventory']<=0){
+                        $isOutOfStock = true;
+                    }
                     echo "<div class='product-card'>";
                     echo "<div class='product-image'>";
                     echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
                     echo "</div>";
                     echo "<p>{$book['name']}</p>";
                     echo "<p>RM {$book['price']}</p>";
-
-                    // Your code for displaying book details goes here
 
                     echo "<form action='cart_function.php' method='post'>";
                     echo "<input type='number' name='quantity' value='1' min='1' class='invisible-input'>";
@@ -193,7 +195,7 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
                     echo "<input type='hidden' name='Pprice' value='{$book['price']}'>";
                     echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
                     echo "<div class='btn-class'>";
-                    echo "<input type='submit' class='btn btn-custom addToCartBtn' name='add_to_cart' value='Add to cart'>";
+                    echo "<input type='submit' class='btn btn-custom addToCartBtn' name='add_to_cart' value='Add to cart' data-inventory='{$book['inventory']}'>";
                     echo "</form>";
                     echo "<a href='details.php?book_id={$book['id']}' class='btn btn-custom '><button class='btn btn-buy'>View details</button></a>";
                     echo "</div>";
@@ -203,6 +205,9 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
                 // Handle the case when no filters are set
                 // Loop through all books
                 foreach ($books as $book) {
+                    if($book['inventory']<=0){
+                        $isOutOfStock = true;
+                    }
                     echo "<div class='product-card'>";
                     echo "<div class='product-image'>";
                     echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
@@ -219,9 +224,9 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
                     echo "<input type='hidden' name='Pprice' value='{$book['price']}'>";
                     echo "<input type='hidden' name='book_id' value='{$book['id']}'>";
                     echo "<div class='btn-class'>";
-                    echo "<input type='submit' class='btn btn-custom addToCartBtn' name='add_to_cart' value='Add to cart'>";
+                    echo "<input type='submit' class='btn btn-custom addToCartBtn' name='add_to_cart' value='Add to cart' data-inventory='{$book['inventory']}'>";
                     echo "</form>";
-                    echo "<a href='details.php?book_id={$book['id']}' '><button class='btn btn-custom'>View details</button></a>";
+                    echo "<a href='details.php?book_id={$book['id']}' class='btn btn-custom'>View details</a>";
                     echo "</div>";
                     echo "</div>";
                 }
@@ -239,14 +244,25 @@ $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                this.form.submit();
-            });
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            this.form.submit();
         });
     });
+
+    const addToCartBtns = document.querySelectorAll('.addToCartBtn');
+    addToCartBtns.forEach(function(btn) {
+        if (btn.getAttribute('data-inventory') <= 0) {
+            btn.value = 'Out Of Stock';
+            btn.disabled = true;
+            btn.style.backgroundColor = "grey";
+            btn.style.color = "white";
+        }
+    });
+});
+
 </script>
 
 </html>

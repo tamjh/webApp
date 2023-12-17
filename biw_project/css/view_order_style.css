@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -17,14 +16,18 @@ html {
     overflow-x: hidden;
 }
 
+body {
+    display: block;
+    align-items: center;
+    text-align: center;
+}
+
 header {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
     background: #FBFFFF;
-        /* Change the background property to the provided gradient */
-        /*background: linear-gradient(100.22deg, #E6E6F6 43.14%, #2DB6FD 112.96%);*/
     padding: 2rem 9%;
     display: flex;
     align-items: center;
@@ -39,8 +42,6 @@ header .logo {
     color: grey;
     font-weight: bolder;
 }
-
-
 
 header .navbar a {
     font-size: 2rem;
@@ -66,7 +67,6 @@ header .icons a {
 header .icons a:last-child {
     margin-right: 0;
 }
-
 
 .menu {
     margin-top: 10px;
@@ -99,8 +99,48 @@ header .icons a:last-child {
     border-radius: 5%;
 }
 
-body{
-    display:block;
+body {
+    display: block;
     align-items: center;
     text-align: center;
+}
+
+table {
+    width: 80%;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #bebcbc;
+    vertical-align: middle !important;
+    border: 1px red solid;
+}
+td {
+   
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Style for odd rows */
+tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.btn{
+    position: fixed;
+    bottom: 5rem;
+    margin-left: 2rem;
 }

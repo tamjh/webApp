@@ -92,7 +92,7 @@ require_once "database.php";
     <div class="container px-0 px-md-2 px-lg-5  my-4 w-75">
         <h1 class="text-center pb-4 display-4 ">Shipping Information</h1>
 
-        <form action="thank_you.php" method="" class="container shadow-lg border border-dark rounded-3 p-3 p-sm-4 p-md-5">
+        <form action="payment.php" method="" class="container shadow-lg border border-dark rounded-3 p-3 p-sm-4 p-md-5">
             <div class="container bg-light p-2 border rounded-4 mb-3 p-3 p-md-4">
                 <div class="display-6 pb-1 pb-md-3">Recipient</div>
                 <div class="row mx-sm-2 mx-md-3 mx-xl-4 mb-5">

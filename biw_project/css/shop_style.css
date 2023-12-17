@@ -245,3 +245,8 @@ body {
     color: #fff; /* Set text color explicitly for the anchor tag */
     text-decoration: none; /* Remove underline, if any */
 }
+
+.addToCartBtn{
+    background-color: #4caf50;
+    cursor:pointer;
+}

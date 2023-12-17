@@ -35,6 +35,34 @@ if (isset($_POST['add_to_cart'])) {
         );
 
         header("Location: shop.php");
+        exit();
+    }
+}
+if (isset($_POST['buy_now'])) {
+    $productId = $_POST['book_id'];
+    $productName = $_POST['Pname'];
+    $productPrice = $_POST['Pprice'];
+    $quantity = $_POST['quantity'];
+    $figure = $_POST['Pimage']; // Assuming this is the product image information
+
+    $check_product = array_column($_SESSION['cart'], 'productname');
+
+    if (in_array($productName, $check_product)) {
+        echo "
+            <script>
+            alert('Product already in cart!');
+            window.location.href = 'shop.php';
+            </script>";
+    } else {
+        $_SESSION['cart'][] = array(
+            'productid' => $productId,
+            'productname' => $productName,
+            'productprice' => $productPrice,
+            'productquantity' => $quantity,
+            'productimage' => "/project/biw_project/image/coverpage/" . $figure
+        );
+
+        header("Location: cart.php");
     }
 }
 
@@ -66,17 +94,17 @@ if (isset($_POST['payment'])) {
     $orderNumber = 'ORD' . str_pad(rand(1, 999999), 6, '0', STR_PAD_LEFT);
     $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
 
-    // Calculate the total grand total
-    $final = 0;
+    // // Calculate the total grand total
+    // $final = 0;
 
-    foreach ($_SESSION['cart'] as $cartItem) {
-        $final += $cartItem['productquantity'] * $cartItem['productprice'];
-    }
+    // foreach ($_SESSION['cart'] as $cartItem) {
+    //     $final += $cartItem['productquantity'] * $cartItem['productprice'];
+    // }
 
     // Insert the order into the orders table with the correct grand total
     $insertOrderQuery = "INSERT INTO orders (order_number, customer_id, grand_total, created) VALUES (?, ?, ?, NOW())";
     $stmt = $conn->prepare($insertOrderQuery);
-    $stmt->bind_param("sdd", $orderNumber, $customerId, $final);
+    $stmt->bind_param("sdd", $orderNumber, $customerId, $_SESSION['final']);
     $stmt->execute();
     $stmt->close();
 
@@ -90,10 +118,27 @@ if (isset($_POST['payment'])) {
         $stmt->bind_param("dsdsdd", $orderId, $orderNumber, $cartItem['productid'], $cartItem['productname'], $cartItem['productprice'], $cartItem['productquantity']);
         $stmt->execute();
         $stmt->close();
+
+        updateInventory($cartItem['productid'], $cartItem['productquantity']);
     }
+
+    
 
     // Clear the cart after successful checkout
     $_SESSION['cart'] = array();
 
     header("location:success.php");
+}
+
+
+function updateInventory($product_id, $quantity){
+
+    global $conn;
+    
+    $sql = "UPDATE books SET inventory = inventory - $quantity WHERE id = $product_id";
+
+    if ($conn->query($sql) === FALSE) {
+        echo "Error updating inventory: " . $conn->error;
+    }
+
 }

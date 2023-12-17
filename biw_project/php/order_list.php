@@ -3,12 +3,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
+// Check if the user is logged in as an admin
 if (!isset($_SESSION["user"]) || $_SESSION["usertype"] !== "admin") {
     header("Location: login.php");
     exit();
 }
 
+// Check if the user is logged in
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
     exit();
@@ -22,56 +23,49 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-//connect others php file
+// Connect to other PHP files
 require_once "database.php";
 require_once "books_function.php";
 require_once "update_info.php";
 
-//call function for books_function.php
-$books = get_all_books($conn);
-if (!is_array($books)) {
-    $books = array();
-}
-$categories = get_all_categories($conn);
-$publishers = get_all_publisher($conn);
+// Fetch order_number from the URL
+if (!empty($_GET['order_number'])) {
+    $orderNumber = $_GET['order_number'];
 
+    // Fetch order details
+    $orderSql = "SELECT * FROM orders WHERE order_number = ?";
+    $orderStmt = mysqli_prepare($conn, $orderSql);
+    mysqli_stmt_bind_param($orderStmt, "i", $orderNumber);
+    mysqli_stmt_execute($orderStmt);
+    $orderResult = mysqli_stmt_get_result($orderStmt);
+    $order = mysqli_fetch_assoc($orderResult);
 
-$sql = "SELECT
-            o.created,
-            o.order_number,
-            u.full_name,
-            u.phone_number,
-            CONCAT(a.unit, ', ', a.street, ', ', a.postcode, ', ', a.city, ', ', a.state) AS full_address,
-            o.grand_total,
-            o.status
-        FROM orders o
-        JOIN users u ON o.customer_id = u.id
-        JOIN address a ON o.customer_id = a.customer_id";
-$result = mysqli_query($conn, $sql);
+    mysqli_free_result($orderResult);
+    mysqli_stmt_close($orderStmt);
 
-$orders = array();
+    // Fetch items based on the order_number
+    $itemsSql = "SELECT oi.product_id, oi.quantity, b.name, b.cover FROM order_items oi
+                JOIN books b ON oi.product_id = b.id
+                WHERE oi.order_number = ?";
+    $itemsStmt = mysqli_prepare($conn, $itemsSql);
+    mysqli_stmt_bind_param($itemsStmt, "s", $orderNumber);
+    mysqli_stmt_execute($itemsStmt);
+    $itemsResult = mysqli_stmt_get_result($itemsStmt);
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $orders[] = $row;
-}
+    $orderItems = array();
+    while ($row = mysqli_fetch_assoc($itemsResult)) {
+        $orderItems[] = $row;
+    }
 
-mysqli_free_result($result);
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset($_POST["new_status"])) {
-    $orderId = $_POST["order_id"];
-    $newStatus = $_POST["new_status"];
-
-    $updateSql = "UPDATE orders SET status = ? WHERE order_number = ?";
-    $stmt = mysqli_prepare($conn, $updateSql);
-
-    mysqli_stmt_bind_param($stmt, "is", $newStatus, $orderId);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-    header("Location: " . $_SERVER['PHP_SELF']);
+    mysqli_free_result($itemsResult);
+    mysqli_stmt_close($itemsStmt);
+} else {
+    // Redirect or handle the case when order_number is not provided
+    header("Location: some_error_page.php");
     exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -135,51 +129,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
             </div>
         </div>
     </header>
-    <section class="container mt-5">
-        <h1 class="mb-4">Customer Orders</h1>
 
-        <table class="table table-bordered">
+    <section>
+        <h1>Order List</h1>
+
+        <table>
             <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Order Number</th>
-                    <th>Customer Name</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Total</th>
-                    <th>Items</th>
-                    <th>Status</th>
-                
-                </tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Quantity</th>
             </thead>
+
             <tbody>
-                <?php foreach ($orders as $order) : ?>
+                <?php foreach ($orderItems as $index => $item) : ?>
                     <tr>
-                        <td><?= $order['created'] ?></td>
-                        <td><?= $order['order_number'] ?></td>
-                        <td><?= $order['full_name'] ?></td>
-                        <td><?= $order['phone_number'] ?></td>
-                        <td><?= $order['full_address'] ?></td>
-                        <td>RM <?= $order['grand_total'] ?></td>
-                        <td><a href="order_list.php?order_number=<?= $order['order_number'] ?>">View Order List</a></td>
-                        <td>
-                            <form method="post">
-                                <input type="hidden" name="order_id" value="<?= $order['order_number'] ?>">
-                                <select class="dropdown_status" name="new_status" onchange="updateStatus(this)">
-                                    <option value="1"  <?= $order['status'] == 1 ? 'selected' : '' ?>>Pending</option>
-                                    <option value="2" <?= $order['status'] == 2 ? 'selected' : '' ?>>Shipping</option>
-                                    <option value="3" <?= $order['status'] == 3 ? 'selected' : '' ?>>Completed</option>
-                                </select>
-                                <button type="submit" style="display: none;"></button>
-                            </form>
-
-                        </td>
-
+                        <td><?= $index + 1 ?></td>
+                        <td><?= $item['name'] ?></td>
+                        <td><img src="/project/biw_project/image/coverpage/<?= $item['cover'] ?>" alt="Product Image" width="30%;"></td>
+                        <td><?= $item['quantity'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </section>
+
+    <button onclick="backfunction();" class="btn btn-primary" style="padding:1rem; font-size:2rem">Back</button>
+
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -189,11 +166,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
-    function updateStatus(select) {
-        var form = select.parentNode; // Get the parent form element
-        form.querySelector('button').click(); // Trigger the form submission using the hidden button
+    function backfunction(){
+        window.location = "view_order.php";
     }
 </script>
-
 
 </html>
