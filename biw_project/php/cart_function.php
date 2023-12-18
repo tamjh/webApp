@@ -93,7 +93,7 @@ if (isset($_POST['update'])) {
 if (isset($_POST['payment'])) {
     $orderNumber = 'ORD' . str_pad(rand(1, 999999), 6, '0', STR_PAD_LEFT);
     $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
-
+    
     // // Calculate the total grand total
     // $final = 0;
 
@@ -102,9 +102,9 @@ if (isset($_POST['payment'])) {
     // }
 
     // Insert the order into the orders table with the correct grand total
-    $insertOrderQuery = "INSERT INTO orders (order_number, customer_id, grand_total, created) VALUES (?, ?, ?, NOW())";
+    $insertOrderQuery = "INSERT INTO orders (order_number, customer_id, grand_total, created, comment) VALUES (?, ?, ?, NOW(), ?)";
     $stmt = $conn->prepare($insertOrderQuery);
-    $stmt->bind_param("sdd", $orderNumber, $customerId, $_SESSION['final']);
+    $stmt->bind_param("sdds", $orderNumber, $customerId, $_SESSION['final'], $_SESSION['comment']);
     $stmt->execute();
     $stmt->close();
 

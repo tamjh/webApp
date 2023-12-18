@@ -1,7 +1,5 @@
 <?php
-    session_start();
-
-
+session_start();
 
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
@@ -20,7 +18,84 @@ if (isset($_POST['logout'])) {
 
 require_once "database.php";
 
+    // Fetch user address data from the database
+    $userId = $_SESSION['uid'];
+    $addressQuery = "SELECT * FROM address WHERE customer_id = ?";
+    $addressStmt = $conn->prepare($addressQuery);
+    $addressStmt->bind_param("i", $userId);
+    $addressStmt->execute();
+    $addressResult = $addressStmt->get_result();
+
+    if ($addressResult->num_rows > 0) {
+        $addressData = $addressResult->fetch_assoc();
+
+        // Store address data in session for later use
+        $_SESSION['unit'] = $addressData['unit'];
+        $_SESSION['street'] = $addressData['street'];
+        $_SESSION['postcode'] = $addressData['postcode'];
+        $_SESSION['city'] = $addressData['city'];
+        $_SESSION['state'] = $addressData['state'];
+    }
+    $addressStmt->close();
+
+if (isset($_POST['submit'])) {
+    
+    $name = $_POST['name'];
+    $contactNumber = $_POST['contactNumber'];
+    $unit = $_POST['unit'];
+    $street = $_POST['street'];
+    $postcode = $_POST['postcode'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $_SESSION['comment'] = $_POST['comment'];
+
+    // Fetch existing address from the database
+    $id = $_SESSION['uid'];
+    $addressQuery = "SELECT * FROM address WHERE customer_id = ?";
+    $addressStmt = $conn->prepare($addressQuery);
+    $addressStmt->bind_param("i", $id);
+    $addressStmt->execute();
+    $result = $addressStmt->get_result();
+    $existingAddress = $result->fetch_assoc();
+
+    // Check if there are changes
+    if (
+        $name !== $_SESSION['customer_name'] ||
+        $contactNumber !== $_SESSION['phone'] ||
+        $unit !== $existingAddress['unit'] ||
+        $street !== $existingAddress['street'] ||
+        $postcode !== $existingAddress['postcode'] ||
+        $city !== $existingAddress['city'] ||
+        $state !== $existingAddress['state']
+    ) {
+        // Update the database
+        $updateUserQuery = "UPDATE users SET full_name = ?, phone_number = ? WHERE id = ?";
+        $updateUserStmt = $conn->prepare($updateUserQuery);
+        $updateUserStmt->bind_param("ssi", $name, $contactNumber, $id);
+        $updateUserStmt->execute();
+
+        $updateAddressQuery = "UPDATE address SET unit = ?, street = ?, postcode = ?, city = ?, state = ? WHERE customer_id = ?";
+        $updateAddressStmt = $conn->prepare($updateAddressQuery);
+        $updateAddressStmt->bind_param("sssssi", $unit, $street, $postcode, $city, $state, $id);
+        $updateAddressStmt->execute();
+
+        if ($updateUserStmt->execute() && $updateAddressStmt->execute()) {
+            // Update session variables after successful update
+            $_SESSION['customer_name'] = $name;
+            $_SESSION['phone'] = $contactNumber;
+
+            header("Location:payment.php");
+        } else {
+            echo "Error: " . $updateUserStmt->error . " " . $updateAddressStmt->error;
+        }
+    } else {
+        echo "No changes to update.";
+        header("Location:payment.php");
+    }
+}
 ?>
+
+<!-- The rest of your HTML code remains unchanged -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +167,7 @@ require_once "database.php";
     <div class="container px-0 px-md-2 px-lg-5  my-4 w-75">
         <h1 class="text-center pb-4 display-4 ">Shipping Information</h1>
 
-        <form action="payment.php" method="" class="container shadow-lg border border-dark rounded-3 p-3 p-sm-4 p-md-5">
+        <form action="#" method="post" class="container shadow-lg border border-dark rounded-3 p-3 p-sm-4 p-md-5">
             <div class="container bg-light p-2 border rounded-4 mb-3 p-3 p-md-4">
                 <div class="display-6 pb-1 pb-md-3">Recipient</div>
                 <div class="row mx-sm-2 mx-md-3 mx-xl-4 mb-5">
@@ -111,7 +186,7 @@ require_once "database.php";
             <div class="container bg-light p-2 border rounded-4 mb-3 p-3 p-md-4">
                 <div class="display-6 pb-1 pb-md-3">Address</div>
                 <div class="row mx-sm-2 mx-md-3 mx-xl-4 mb-3">
-                    <div class="col-12 col-md-4">
+                    <div cla#ss="col-12 col-md-4">
                         <label class="py-1 py-md-2" for="unit">Unit</label><br>
                         <input type="text" name="unit" id="unit" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['unit']) ? $_SESSION['unit'] : 'Unit' ?>">
                     </div>
