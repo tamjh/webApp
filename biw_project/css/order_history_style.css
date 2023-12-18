@@ -129,8 +129,9 @@ body {
 
 .side-bar{
     margin-top: 0;
-    height:auto;
+    height:320px;
     border:1px orange solid;
+   
 }
 
 .side-btn{
@@ -154,8 +155,8 @@ background: #706969;
     width: 100%;
     min-width: 800px;
 
-    height: 100%;
-    min-height: 650px;
+    height: auto;
+    min-height: 320px;
     float: left;
     border: 1px rgb(19, 19, 210) solid;
     margin: 0 auto;
@@ -168,6 +169,7 @@ background: #706969;
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
+    
 }
 
 .box-container {
@@ -176,7 +178,7 @@ background: #706969;
     width: 100%;
     min-width: 800px;
     height: 100%;
-    min-height: 650px;
+    
     border: 1px rgb(19, 19, 210) solid;
     margin: 0 auto;
     
@@ -187,12 +189,13 @@ background: #706969;
     border: 1px red solid;
     border-radius: 5px;
     width: calc(50% - 55px);
-    height: 320px;
+    height: auto;
     display: flex;
     flex-direction: column;
     padding: 10px;
     margin: 15px;
     position: relative;
+    
 }
 
 /* Info styling */

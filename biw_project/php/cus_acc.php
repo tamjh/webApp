@@ -3,13 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if the user is logged in as an admin
-if (!isset($_SESSION["user"]) || $_SESSION["usertype"] !== "admin") {
-    header("Location: login.php");
-    exit();
-}
 
-// Check if the user is logged in
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
     exit();
@@ -23,48 +17,36 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-// Connect to other PHP files
-require_once "database.php";
-require_once "books_function.php";
-require_once "update_info.php";
-
-// Fetch order_number from the URL
-if (!empty($_GET['order_number'])) {
-    $orderNumber = $_GET['order_number'];
-
-    // Fetch order details
-    $orderSql = "SELECT * FROM orders WHERE order_number = ?";
-    $orderStmt = mysqli_prepare($conn, $orderSql);
-    mysqli_stmt_bind_param($orderStmt, "i", $orderNumber);
-    mysqli_stmt_execute($orderStmt);
-    $orderResult = mysqli_stmt_get_result($orderStmt);
-    $order = mysqli_fetch_assoc($orderResult);
-
-    mysqli_free_result($orderResult);
-    mysqli_stmt_close($orderStmt);
-
-    // Fetch items based on the order_number
-    $itemsSql = "SELECT oi.product_id, oi.quantity, b.name, b.cover FROM order_items oi
-                JOIN books b ON oi.product_id = b.id
-                WHERE oi.order_number = ?";
-    $itemsStmt = mysqli_prepare($conn, $itemsSql);
-    mysqli_stmt_bind_param($itemsStmt, "s", $orderNumber);
-    mysqli_stmt_execute($itemsStmt);
-    $itemsResult = mysqli_stmt_get_result($itemsStmt);
-
-    $orderItems = array();
-    while ($row = mysqli_fetch_assoc($itemsResult)) {
-        $orderItems[] = $row;
-    }
-
-    mysqli_free_result($itemsResult);
-    mysqli_stmt_close($itemsStmt);
-} else {
-    // Redirect or handle the case when order_number is not provided
-    header("Location: some_error_page.php");
+if (isset($_POST['function'])) {
+    header("Location: #");
     exit();
 }
+require_once "database.php";
 
+if (isset($_POST['update_phone'])) {
+    $id = $_SESSION['uid'];
+
+    $newName = $_POST['c_name'];
+    $newemail = $_POST['c_email'];
+    $newPhoneNumber = $_POST['c_phone'];
+
+
+    $sql = "UPDATE users SET full_name = ?, email = ?, phone_number = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssi", $newName, $newemail, $newPhoneNumber, $id);
+    $stmt->execute();
+
+    if ($stmt->execute()) {
+        // Update session variables after successful update
+        $_SESSION['customer_name'] = $newName;
+        $_SESSION['email'] = $newemail;
+        $_SESSION['phone'] = $newPhoneNumber;
+
+        echo "Update successful!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
 
 ?>
 
@@ -74,11 +56,10 @@ if (!empty($_GET['order_number'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<link rel="stylesheet" href="/project/biw_project/css/view_order_style.css">
-    <title>Orders</title>
+    <link rel="stylesheet" href="/project/biw_project/css/cus_app_style.css">
+    <title>My account</title>
 </head>
 
 <body>
@@ -129,45 +110,50 @@ if (!empty($_GET['order_number'])) {
             </div>
         </div>
     </header>
+    <h1 class="title">Order History</h1>
+    <div class="page">
+        <div class="side">
+            <div class="side-bar">
+                <input type="submit" class="side-btn" value="Account"><br>
+                <input type="submit" class="side-btn" value="Contact and Address"><br>
+                <input type="submit" class="side-btn" value="Order History">
+            </div>
+        </div>
+        <div class="box-container">
+            <div class="container">
+                <form action="" method="post" class="acc">
+                    <h1 class="mb-4">Account Information</h1>
 
-    <section>
-        <h1>Order List</h1>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name:</label>
+                        <input type="text" class="form-control" id="name" name="c_name" value="<?= $_SESSION['customer_name'] ?>">
+                    </div>
 
-        <table>
-            <thead>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Quantity</th>
-            </thead>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" class="form-control" id="email" name="c_email" value="<?= $_SESSION['email'] ?>">
+                    </div>
 
-            <tbody class="t-body">
-                <?php foreach ($orderItems as $index => $item) : ?>
-                    <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= $item['name'] ?></td>
-                        <td><img src="/project/biw_project/image/coverpage/<?= $item['cover'] ?>" alt="Product Image" width="30%;"></td>
-                        <td><?= $item['quantity'] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </section>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Contact Number:</label>
+                        <input type="text" class="form-control" id="phone" name="c_phone" value="<?= $_SESSION['phone'] ?>">
+                    </div>
 
-    <button onclick="backfunction();" class="btn btn-primary" style="padding:1rem; font-size:2rem">Back</button>
+                    <button type="submit" class="btn btn-update" name="update_phone">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function backfunction(){
-        window.location = "view_order.php";
     }
 </script>
 

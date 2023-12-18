@@ -5,7 +5,7 @@
     outline: none;
     border: none;
     text-decoration: none;
-    text-transform: capitalize;
+ 
     transition: .2s linear;
 }
 
@@ -22,6 +22,8 @@ header {
     left: 0;
     right: 0;
     background: #FBFFFF;
+        /* Change the background property to the provided gradient */
+        /*background: linear-gradient(100.22deg, #E6E6F6 43.14%, #2DB6FD 112.96%);*/
     padding: 2rem 9%;
     display: flex;
     align-items: center;
@@ -36,6 +38,8 @@ header .logo {
     color: grey;
     font-weight: bolder;
 }
+
+
 
 header .navbar a {
     font-size: 2rem;
@@ -61,6 +65,7 @@ header .icons a {
 header .icons a:last-child {
     margin-right: 0;
 }
+
 
 .menu {
     margin-top: 10px;
@@ -92,74 +97,111 @@ header .icons a:last-child {
     padding: 10px;
     border-radius: 5%;
 }
-body {
+
+.title{
     display: block;
     align-items: center;
     text-align: center;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+ 
+}
+
+.side {
+    display: block;
+    align-items: center;
+    text-align: center;
+ 
+    width: 30%;
+    max-width: 400px;
+    height: auto;
+    float: left;
+    border: 1px rosybrown solid;
+    margin: 0 auto;
+    word-wrap: break-word;
+    margin-right: 20px;
    
 }
-table {
-    width: 80%;
-    margin: auto;
-    border-collapse: collapse;
-    margin-bottom: 100px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+.side-bar{
+    margin-top: 0;
+    height:auto;
+    border:1px orange solid;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 15px;
-    text-align: center;
-    font-size: 1.8rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-thead th {
-    background-color: #f8f9fa;
-    color: #495057;
-    font-weight: bold;
-}
-
-tbody td:hover {
-    background-color: #f2f2f2;
-}
-
-td {
-    max-width: 200px;
-    white-space: normal; /* Allow content to wrap */
-    word-wrap: break-word; /* Break words if they are too long */
-    max-height: 100px; /* Limit the cell height */
-    overflow: auto; /* Add a scrollbar if the content overflows the cell */
-    font-size: 1.6rem;
-}
-
-.btn {
-    position: fixed;
-    bottom: 5rem;
-    margin-left: 2rem;
-    background-color: #007bff;
+.side-btn{
+    background: #9b9595;
+    font-size:25px;
+    margin: 20px;
     color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
-    font-size: 1.6rem;
-    transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+.side-btn:hover{
+background: #706969;
 }
 
-.dropdown_status {
+
+
+.box-container{
+    display: flex;
+    
+    width: 100%;
+    min-width: 800px;
+
+    height:auto;
+    
+    float: left;
+    border: 1px rgb(19, 19, 210) solid;
+    margin: 0 auto;
+
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-right: 10px;
+    font-size: 1.8rem; /* Adjust font size as needed */
+}
+
+.form-group input {
+    flex: 1;
     padding: 8px;
-    font-size: 1.4rem;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
+    font-size: 1.8rem; /* Adjust font size as needed */
 }
 
-.t-body tr:hover{
-    background-color: #f2f2f2;
+
+body {
+    background-color: #f8f9fa;
+}
+
+
+.acc {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 3rem;
+}
+
+.acc input{
+    font-size: 2rem;
+}
+
+.btn-update {
+    background-color: #17a2b8;
+    color: #ffffff;
 }
