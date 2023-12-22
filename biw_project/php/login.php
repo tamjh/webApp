@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="/project/biw_project/css/style.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Rubik Bubbles">
+    
 </head>
 
 <body>
@@ -82,6 +85,9 @@
     ?>
 
     <form action="" method="post">
+        <div class="hello-box">
+            <p>Welcome to Inspirasi Sejahtera Bookstore</p>
+        </div>
         <h2>Login</h2>
 
         <?php
@@ -92,9 +98,9 @@
         }
         ?>
 
-        <label>User name: </label>
+        
         <input type="text" class="form-control" name="uname" placeholder="Enter name">
-        <label>User password: </label>
+        
 
         <div class="input-container">
             <input type="password" class="form-control" name="upassword" placeholder="Enter password">

@@ -35,10 +35,12 @@ if (!empty($_GET['order_number'])) {
     // Fetch order details
     $orderSql = "SELECT * FROM orders WHERE order_number = ?";
     $orderStmt = mysqli_prepare($conn, $orderSql);
-    mysqli_stmt_bind_param($orderStmt, "i", $orderNumber);
+    mysqli_stmt_bind_param($orderStmt, "s", $orderNumber);
     mysqli_stmt_execute($orderStmt);
     $orderResult = mysqli_stmt_get_result($orderStmt);
     $order = mysqli_fetch_assoc($orderResult);
+
+    $comment = $order['comment'];
 
     mysqli_free_result($orderResult);
     mysqli_stmt_close($orderStmt);
@@ -74,10 +76,10 @@ if (!empty($_GET['order_number'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<link rel="stylesheet" href="/project/biw_project/css/view_order_style.css">
+    <link rel="stylesheet" href="/project/biw_project/css/view_order_style.css">
     <title>Orders</title>
 </head>
 
@@ -152,9 +154,15 @@ if (!empty($_GET['order_number'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <div class="comment-area">
+            <label for="content">Comment:</label>
+            <textarea name="comment" id="content" rows="auto"><?= $comment ?></textarea>
+        </div>
+
     </section>
 
-    <button onclick="backfunction();" class="btn btn-primary" style="padding:1rem; font-size:2rem">Back</button>
+    <button onclick="backfunction();" class="btn btn-back btn-primary" style="padding:1rem; font-size:2rem">Back</button>
 
 
 
@@ -166,7 +174,7 @@ if (!empty($_GET['order_number'])) {
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
-    function backfunction(){
+    function backfunction() {
         window.location = "view_order.php";
     }
 </script>

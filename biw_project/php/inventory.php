@@ -47,60 +47,61 @@ $update_info = update_info($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/project/biw_project/css/inventory_style.css">
 </head>
 
 <body>
-<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
-    <div class="container-fluid">
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+        <div class="container-fluid">
 
-        <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
+            <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
-                <li class="nav-item">
-                    <a class="nav-link" href="homepage.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about us.html">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="ProductPage.html">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact website.html">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Billing.html">Order Form</a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homepage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about us.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ProductPage.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact website.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Billing.html">Order Form</a>
+                    </li>
+                </ul>
 
-            <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-                <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
-                <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
-                <div class="dropdown">
-                    <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
-                    <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                        <div class="account_box" style="padding: 10px; font-size:2rem;">
-                            <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
+                <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
+                    <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
+                    <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+                    <div class="dropdown">
+                        <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
+                        <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
+                            <div class="account_box" style="padding: 10px; font-size:2rem;">
+                                <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
+                            </div>
+                            <p style="font-size:2rem;">Account</p>
+                            <form method="post">
+                                <button type="submit" name="logout" class="logout">Logout</button>
+                            </form>
                         </div>
-                        <p style="font-size:2rem;">Account</p>
-                        <form method="post">
-                            <button type="submit" name="logout" class="logout">Logout</button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+    <div id="cover" class="cover"></div>
 
 
 
@@ -130,7 +131,7 @@ $update_info = update_info($conn);
                     </td>
                     <td>
                         <div class="btn-container">
-                            <button class="btn btn-edit" onclick="pop_up_edit(<?= $book['id'] ?>)">edit</button>
+                            <button class="btn btn-edit" onclick="pop_up_edit(<?= $book['id'] ?>)">Edit</button>
                             <form action="" method="post">
                                 <input type="hidden" name="id" value="<?= $book['id'] ?>">
                                 <input type="submit" name="delete" class="btn btn-delete" value="delete">
@@ -144,7 +145,19 @@ $update_info = update_info($conn);
         </tbody>
     </table>
 
-    <button type="button" class="btn btn-new" onclick="new_book()">Add new book</button>
+    <button class="plus btn" onclick="appear();">+</button>
+    <table class="btn-t">
+        <tr>
+            <td><button type="button" class="btn btn-new" onclick="new_book()">Add book</button></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-new" onclick="new_category()">Add category</button></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-new" onclick="new_publisher()">Add publisher</button></td>
+        </tr>
+    </table>
+
 
     <!--    ******************************************************************************************************************* -->
     <!-- Pop up form for edit -->
@@ -209,11 +222,37 @@ $update_info = update_info($conn);
                     <?php } ?>
                 </select>
                 <label for="price">Price: RM</label>
-                <input type="number" name="price">
+                <input type="number" name="price" step="0.01" min="0" max="100000000">
                 <label for="inventory">Inventory: </label>
                 <input type="number" name="inventory">
                 <button type="submit" name="submit_new" class="btn">Submit</button>
                 <button type="button" class="btn" onclick="closed_popup_new()">Cancel</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Pop-up form for new category -->
+    <form action="new_book.php" method="post">
+        <div class="popup_new" id="popup_new_category">
+            <div class="popup_content_new">
+                <h3>New Category</h3>
+                <label for="category_name">Category Name:</label>
+                <input type="text" name="category_name" required><br>
+                <button type="submit" name="submit_new_category" class="btn">Submit</button>
+                <button type="button" class="btn" onclick="closed_popup_new_category()">Cancel</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Pop-up form for new publisher -->
+    <form action="new_book.php" method="post">
+        <div class="popup_new" id="popup_new_publisher">
+            <div class="popup_content_new">
+                <h3>New Publisher</h3>
+                <label for="publisher_name">Publisher Name:</label>
+                <input type="text" name="publisher_name" required><br>
+                <button type="submit" name="submit_new_publisher" class="btn">Submit</button>
+                <button type="button" class="btn" onclick="closed_popup_new_publisher()">Cancel</button>
             </div>
         </div>
     </form>
@@ -234,15 +273,69 @@ $update_info = update_info($conn);
 
         function closed_popup(bookID) {
             document.getElementById("popup" + bookID).style.display = "none";
+            hideBtnT();
         }
 
         function new_book() {
-            console.log("yes");
             document.querySelector(".popup_new").style.display = "flex";
         }
 
         function closed_popup_new() {
+            console.log("Cancel button clicked");
+            document.getElementById("cover").style.display = "none";
             document.querySelector(".popup_new").style.display = "none";
+
+            // Hide btn-t
+            hideBtnT();
+        }
+
+
+        function new_category() {
+            document.getElementById("popup_new_category").style.display = "flex";
+        }
+
+        function closed_popup_new_category() {
+            document.getElementById("popup_new_category").style.display = "none";
+            hideBtnT();
+        }
+
+        function new_publisher() {
+            document.getElementById("popup_new_publisher").style.display = "flex";
+        }
+
+        function closed_popup_new_publisher() {
+            document.getElementById("popup_new_publisher").style.display = "none";
+            hideBtnT();
+        }
+        var isBtnVisible = false;
+
+        function appear() {
+            let cover = document.getElementById("cover");
+            let plus = document.getElementsByClassName("plus")[0];
+            let btnT = document.getElementsByClassName("btn-t")[0];
+
+            if (!isBtnVisible) {
+                cover.style.display = "block";
+                btnT.style.display = "flex";
+
+                isBtnVisible = true;
+            } else {
+                cover.style.display = "none";
+                btnT.style.display = "none";
+
+                isBtnVisible = false;
+            }
+        }
+
+
+        function hideBtnT() {
+            let cover = document.getElementById("cover");
+            let btnT = document.getElementsByClassName("btn-t")[0];
+
+            cover.style.display = "none";
+            btnT.style.display = "none";
+
+            isBtnVisible = false;
         }
     </script>
 </body>

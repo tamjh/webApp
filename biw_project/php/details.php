@@ -136,47 +136,59 @@ if ($bookId !== false && $bookId !== null) {
                 <!-- Display other book details using $bookData -->
                 <div class="name"><?= $bookData['name'] ?></div>
                 <div class="container2">
-                    <div class="publish">
-                        <span class="publisher">
+                    <div class="publisher-box">
+                        <p>Publisher : </p>
+                        <div class="publish">
+                            <span class="publisher">
+                                <?php
+                                if ($publishers == 0 || empty($publishers)) {
+                                    echo "Undefined";
+                                } else {
+                                    $publisherFound = false;
+                                    foreach ($publishers as $publisher) {
+                                        if ($publisher['id'] == $bookData['publisher']) {
+                                            echo $publisher['publisher_name'];
+                                            $publisherFound = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!$publisherFound) {
+                                        echo "Undefined";
+                                    }
+                                }
+                                ?></span>
+
+                        </div>
+                    </div>
+
+                    <div class="year-box">
+                    <p>Year : </p>
+                        <span class="publish-year"><?= $bookData['year'] ?></span>
+                    </div>
+
+                    <div class="category-box">
+                        <p>Category : </p>
+                        <span class="category">
                             <?php
-                            if ($publishers == 0 || empty($publishers)) {
+                            if ($categories == 0 || empty($categories)) {
                                 echo "Undefined";
                             } else {
-                                $publisherFound = false;
-                                foreach ($publishers as $publisher) {
-                                    if ($publisher['id'] == $bookData['publisher']) {
-                                        echo $publisher['publisher_name'];
-                                        $publisherFound = true;
+                                $categoryFound = false;
+                                foreach ($categories as $category) {
+                                    if ($category['id'] == $bookData['category']) {
+                                        echo $category['category_name'];
+                                        $categoryFound = true;
                                         break;
                                     }
                                 }
-                                if (!$publisherFound) {
+                                if (!$categoryFound) {
                                     echo "Undefined";
                                 }
                             }
-                            ?></span>
-
+                            ?>
+                        </span>
                     </div>
-                    <span class="publish-year"><?= $bookData['year'] ?></span>
-                    <span class="category">
-                        <?php
-                        if ($categories == 0 || empty($categories)) {
-                            echo "Undefined";
-                        } else {
-                            $categoryFound = false;
-                            foreach ($categories as $category) {
-                                if ($category['id'] == $bookData['category']) {
-                                    echo $category['category_name'];
-                                    $categoryFound = true;
-                                    break;
-                                }
-                            }
-                            if (!$categoryFound) {
-                                echo "Undefined";
-                            }
-                        }
-                        ?>
-                    </span>
+
                 </div>
                 <div class="price">RM<span><?= $bookData['price'] ?></span></div>
 
@@ -195,8 +207,8 @@ if ($bookId !== false && $bookId !== null) {
                         </div>
                     </div>
                     <div class="button">
-                    <button name="add_to_cart" class="cart purchase">Add to Cart</button>
-                    <button name="buy_now" class="buy purchase">Buy Now</button>
+                        <button name="add_to_cart" class="cart purchase">Add to Cart</button>
+                        <button name="buy_now" class="buy purchase">Buy Now</button>
                     </div>
                 </form>
 

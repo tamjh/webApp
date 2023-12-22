@@ -163,3 +163,47 @@ td {
 .t-body tr:hover{
     background-color: #f2f2f2;
 }
+
+.comment-area {
+    margin: 20px;
+margin-bottom: 100px;
+}
+
+.comment-area label {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.comment-area textarea {
+    width: 70%;
+    padding: 10px;
+    font-size: 1.6rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing of the textarea */
+}
+
+.comment-area textarea:focus {
+    outline: none;
+    border-color: #007bff; /* Change border color on focus */
+    
+}
+
+.btn-back {
+    position: fixed;
+    bottom: 5rem;
+    right: 2rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #0056b3;
+}

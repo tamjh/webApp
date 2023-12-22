@@ -1,101 +1,96 @@
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height:95vh;
-    background-color: #69A4B5;
+    height: 95vh;
+    background: rgb(121, 181, 228);
+    background: linear-gradient(90deg, rgba(121, 181, 228, 1) 5%, rgba(124, 181, 230, 1) 49%, rgba(159, 205, 247, 1) 94%);
 }
 
-*{
+* {
     font-family: sans-serif;
     box-sizing: border-box;
 }
 
-h2{
+
+.hello-box p{
+    font-size: 40px;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    font-family: Rubik Bubbles;
+}
+
+h2 {
     text-align: center;
     margin-bottom: 30px;
-    font-family:'Times New Roman', Times, serif;
-    text-transform:uppercase;
+    font-family: 'Times New Roman', Times, serif;
+    text-transform: uppercase;
 }
 
-form{
-    background: white;
-    padding:30px;
-    width:500px;
-    border-radius: 20px 80px ;
+form {
+    background: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
+    padding: 30px;
+    width: 500px;
+    border-radius: 20px 80px;
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
 }
 
-.form-grp{
+.form-grp {
     margin-bottom: 30px;
-    
 }
 
-label{
-    color:#888;
-    padding:10px;
+label {
+    color: black; /* Change text color to white for better visibility */
+    padding: 10px;
 }
 
-input{
+input {
     display: block;
-    border:2px solid #ccc;
-    width:95%;
-    padding:10px;
-    margin:10px auto;
-    border-radius:5px;
+    border: 2px solid #ccc;
+    width: 95%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+    background: white;
 }
 
-.btn1{
+.btn1,
+.btn2 {
     float: right;
-    background: #555;
+    background: rgba(0, 0, 0, 0.7); /* Adjust background color for buttons */
     color: #fff;
-    padding:10px 15px;
+    padding: 10px 15px;
     border-radius: 5px;
     margin-right: 10px;
     border: none;
-    cursor:pointer;
-    width:100px;
+    cursor: pointer;
+    width: 100px;
     margin-bottom: 0;
 }
 
-.btn1:hover{
-    opacity: .6;
-    box-shadow: 0 0 20px blue;
+.btn1:hover,
+.btn2:hover {
+    opacity: 0.8; /* Adjust opacity on hover */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add box shadow on hover */
 }
 
-.btn2{
-    float: right;
-    background: #555;
-    color: #fff;
-    padding:10px 15px;
-    border-radius: 5px;
-    margin-right: 10px;
-    border: none;
-    cursor:pointer;
-    width:100px;
-    margin-bottom: 0;
-}
-
-.btn2:hover{
-    opacity: .6;
-    box-shadow: 0 0 20px blue;
-}
-
-.connect_register{
-    color:black;
+.connect_register {
+    color: white; /* Change text color to white */
     text-decoration: none;
 }
 
-.connect_login{
-    color:black;
+.connect_login {
+    color: white; /* Change text color to white */
     text-decoration: none;
 }
 
-.register{
-    display:none;
+.register {
+    display: none;
 }
 
-img{
-    max-width: 50px;;
+img {
+    max-width: 50px;
 }
 
 .error-container {
@@ -111,25 +106,26 @@ img{
 
 .alert-danger {
     background: #F2DEDE;
-    color: #8B0000; /* Adjust text color for better readability */
-}
-.alert-success {
-    background: #DFF0D8;
-    color: #468847; /* Adjust text color for better readability */
+    color: #8B0000;
 }
 
-.alert .form-grp{
-    margin:1px;
+.alert-success {
+    background: #DFF0D8;
+    color: #468847;
+}
+
+.alert .form-grp {
+    margin: 1px;
 }
 
 .input-container {
     position: relative;
-    padding:10px;
+    padding: 10px;
 }
 
 input[type="password"] {
-     /* Adjust as needed to accommodate the icon */
-    width:100%;
+    width: 100%;
+    background: white;
 }
 
 #eye-icon {
@@ -137,14 +133,14 @@ input[type="password"] {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 30px; /* Adjust as needed */
+    right: 30px;
     cursor: pointer;
 }
 
 .nothing {
     all: unset;
-    display: block; /* Adjust display property */
-    margin-bottom: 10px; /* Add margin as needed */
+    display: block;
+    margin-bottom: 10px;
     margin-right: 0%;
     cursor: pointer;
 }

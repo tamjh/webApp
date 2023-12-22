@@ -48,4 +48,70 @@ if (isset($_POST['submit_new'])) {
         echo "Invalid file type!";
     }
 }
+
+if (isset($_POST['submit_new_category'])) {
+    $cat_name = $_POST["category_name"];
+
+    // Using prepared statement to prevent SQL injection
+    $sql = "INSERT INTO `category` (`category_name`) VALUES (?)";
+
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // Bind the parameters
+        mysqli_stmt_bind_param($stmt, "s", $cat_name);
+
+        // Execute the statement
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result) {
+            // Query executed successfully
+            // You can redirect or perform other actions here
+            header("Location: inventory.php");
+        } else {
+            // Query failed
+            echo "Error: " . mysqli_error($conn);
+        }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    } else {
+        // Statement preparation failed
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
+if (isset($_POST['submit_new_publisher'])) {
+    $pub_name = $_POST["pub_name"];
+
+    // Using prepared statement to prevent SQL injection
+    $sql = "INSERT INTO `publisher` (`publisher_name`) VALUES (?)";
+
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // Bind the parameters
+        mysqli_stmt_bind_param($stmt, "s", $pub_name);
+
+        // Execute the statement
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result) {
+            // Query executed successfully
+            // You can redirect or perform other actions here
+            header("Location: inventory.php");
+        } else {
+            // Query failed
+            echo "Error: " . mysqli_error($conn);
+        }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    } else {
+        // Statement preparation failed
+        echo "Error: " . mysqli_error($conn);
+    }
+}
 ?>

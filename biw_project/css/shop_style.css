@@ -123,6 +123,7 @@ body {
 
 .product {
     display: flex;
+    flex-direction: column;
     background: white;
     width: 100%;
     min-width: 800px;
@@ -249,4 +250,22 @@ body {
 .addToCartBtn{
     background-color: #4caf50;
     cursor:pointer;
+}
+
+
+.pagination {
+    justify-content: center;
+    margin-top: 20px;
+    
+}
+
+.pagination .page-link {
+    font-size: 15px; /* Adjust the font size */
+    padding: 10px 15px; /* Adjust the padding */
+    
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #45a049; /* Change the background color of the active page */
+    border: 1px solid #45a049; /* Change the border color of the active page */
 }

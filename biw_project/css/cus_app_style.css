@@ -5,7 +5,6 @@
     outline: none;
     border: none;
     text-decoration: none;
- 
     transition: .2s linear;
 }
 
@@ -22,8 +21,6 @@ header {
     left: 0;
     right: 0;
     background: #FBFFFF;
-        /* Change the background property to the provided gradient */
-        /*background: linear-gradient(100.22deg, #E6E6F6 43.14%, #2DB6FD 112.96%);*/
     padding: 2rem 9%;
     display: flex;
     align-items: center;
@@ -38,8 +35,6 @@ header .logo {
     color: grey;
     font-weight: bolder;
 }
-
-
 
 header .navbar a {
     font-size: 2rem;
@@ -65,7 +60,6 @@ header .icons a {
 header .icons a:last-child {
     margin-right: 0;
 }
-
 
 .menu {
     margin-top: 10px;
@@ -98,7 +92,7 @@ header .icons a:last-child {
     border-radius: 5%;
 }
 
-.title{
+.title {
     display: block;
     align-items: center;
     text-align: center;
@@ -109,16 +103,13 @@ header .icons a:last-child {
     justify-content: center;
     max-width: 90%;
     margin: 0 auto;
-    margin-top: 100px;
-    margin-bottom: 100px;
- 
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .side {
     display: block;
-    align-items: center;
     text-align: center;
- 
     width: 30%;
     max-width: 400px;
     height: auto;
@@ -127,42 +118,40 @@ header .icons a:last-child {
     margin: 0 auto;
     word-wrap: break-word;
     margin-right: 20px;
-   
+    padding: 20px;
+    border-radius: 10px;
 }
 
-.side-bar{
+.side-bar {
     margin-top: 0;
-    height:auto;
-    border:1px orange solid;
+    height: auto;
+    border: 1px orange solid;
 }
 
-.side-btn{
+.side-btn {
     background: #9b9595;
-    font-size:25px;
+    font-size: 25px;
     margin: 20px;
     color: #fff;
     padding: 10px;
     cursor: pointer;
 }
 
-.side-btn:hover{
-background: #706969;
+.side-btn:hover {
+    background: #706969;
 }
 
-
-
-.box-container{
+.box-container {
     display: flex;
-    
     width: 100%;
-    min-width: 800px;
-
-    height:auto;
-    
-    float: left;
-    border: 1px rgb(19, 19, 210) solid;
+    max-width: 1200px;
     margin: 0 auto;
+    border: 1px rgb(19, 19, 210) solid;
+}
 
+.container {
+    width: 100%;
+    padding: 10px;
 }
 
 .form-group {
@@ -174,20 +163,19 @@ background: #706969;
 
 .form-group label {
     margin-right: 10px;
-    font-size: 1.8rem; /* Adjust font size as needed */
+    font-size: 1.8rem;
 }
 
 .form-group input {
-    flex: 1;
-    padding: 8px;
-    font-size: 1.8rem; /* Adjust font size as needed */
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1.6rem;
 }
-
 
 body {
     background-color: #f8f9fa;
 }
-
 
 .acc {
     background-color: #ffffff;
@@ -197,11 +185,24 @@ body {
     font-size: 3rem;
 }
 
-.acc input{
+.acc input {
     font-size: 2rem;
 }
 
 .btn-update {
+    margin-right: 10px;
     background-color: #17a2b8;
     color: #ffffff;
+    padding: 10px 20px;
+}
+
+.btn-update:hover{
+    background-color: #50c3d5;
+    color: #ffffff;
+}
+
+.box{
+    width:100%;
+    height: auto;
+    align-items: center;
 }

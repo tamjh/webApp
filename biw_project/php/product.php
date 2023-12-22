@@ -171,7 +171,7 @@ $edit_function = edit_book($conn);
                 <td>RM<?= $book['price'] ?></td>
                 <td>
                     <div class="btn-container">
-                        <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">edit</button>
+                        <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">Edit</button>
                         <form action="" method="post">
                             <input type="hidden" name="id" value="<?= $book['id'] ?>">
                             <input type="submit" name="delete" class="btn btn-delete" value="delete">

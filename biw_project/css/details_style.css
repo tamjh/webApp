@@ -141,6 +141,7 @@ img {
 
 .container2 {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
@@ -153,6 +154,8 @@ img {
     margin: 10px 15px 20px 0px;
     padding: 5px 10px;
     border-radius: 20px;
+    display: inline;
+    
 }
 
 .price {
@@ -345,4 +348,18 @@ input[type=number]::-webkit-outer-spin-button {
 
 .des-box{
     font-family: 'Alegreya', sans-serif;
+}
+
+.publisher-box,
+.year-box,
+.category-box{
+    margin-bottom: 10px;
+    width: auto;
+}
+
+.publisher-box p,
+.year-box p,
+.category-box p {
+    display: inline; /* Display the paragraph content inline */
+    margin: 0; /* Remove margin for better alignment */
 }
