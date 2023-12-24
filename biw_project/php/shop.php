@@ -278,6 +278,34 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
             }
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Script is running");
+
+        // Send a request to the server to track the view
+        fetch('track_view.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    page: 'homepage', // Add the 'page' key with the page name
+                    // You can include additional information if needed
+                }),
+            })
+            .then(response => {
+                console.log("Response status:", response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Data received:", data);
+                // Update the UI with the daily views count
+                document.getElementById('daily-views').innerText = data.daily_views;
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+            });
+    });
 </script>
 
 </html>

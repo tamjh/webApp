@@ -133,7 +133,7 @@ if (!empty($_GET['order_number'])) {
     </header>
 
     <section>
-        <h1>Order List</h1>
+        <h1 class="p-title">Order List</h1>
 
         <table>
             <thead>
@@ -162,7 +162,7 @@ if (!empty($_GET['order_number'])) {
 
     </section>
 
-    <button onclick="backfunction();" class="btn btn-back btn-primary" style="padding:1rem; font-size:2rem">Back</button>
+    <button onclick="backfunction();" class="btn ml-auto">Back</button>
 
 
 

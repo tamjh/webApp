@@ -105,7 +105,7 @@ $update_info = update_info($conn);
 
 
 
-    <h4>Inventory Management</h4>
+    <h1 class="im">Inventory Management</h1>
     <table>
         <tr>
             <th>No.</th>
@@ -162,25 +162,25 @@ $update_info = update_info($conn);
     <!--    ******************************************************************************************************************* -->
     <!-- Pop up form for edit -->
     <?php
-    foreach ($books as $book) {
-    ?>
-        <form action="#" method="post">
-            <div class="popup" id="popup<?= $book['id'] ?>">
-                <div class="a">
-                    <input type="hidden" name="edit_id" id="edit_id<?= $book['id'] ?>" value="<?= $book['id'] ?>">
-                    <h4>Book stock</h4>
-                    <label for="stock">Stock number:</label>
-                    <div class="number-input-container">
-                        <input type="number" name="stock" value="<?= $book['inventory'] ?>">
-                    </div>
-                    <button type="submit" name="edit_stock" class="btn">Submit</button>
-                    <button type="button" class="btn" onclick="closed_popup(<?= $book['id'] ?>)">Cancel</button>
+foreach ($books as $book) {
+?>
+    <form action="#" method="post">
+        <div class="popup" id="popup<?= $book['id'] ?>">
+            <div class="popup_content_new">
+                <input type="hidden" name="edit_id" id="edit_id<?= $book['id'] ?>" value="<?= $book['id'] ?>">
+                <h3>Edit Book Stock</h3>
+                <label for="stock">Stock number:</label>
+                <div class="number-input-container">
+                    <input type="number" name="stock" value="<?= $book['inventory'] ?>">
                 </div>
+                <button type="submit" name="edit_stock" class="btn">Submit</button>
+                <button type="button" class="btn" onclick="closed_popup(<?= $book['id'] ?>)">Cancel</button>
             </div>
-        </form>
-    <?php
-    }
-    ?>
+        </div>
+    </form>
+<?php
+}
+?>
     <!--   ******************************************************************************************************************-->
 
     <!--    ******************************************************************************************************************* -->

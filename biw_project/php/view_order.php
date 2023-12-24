@@ -136,10 +136,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
         </div>
     </header>
     <section class="container mt-5">
-        <h1 class="mb-4">Customer Orders</h1>
+        <h1 class="mb-4 p-title">Customer Orders</h1>
 
         <table class="table table-bordered">
-            <thead>
+            
                 <tr>
                     <th>Date</th>
                     <th>Order Number</th>
@@ -151,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
                     <th>Status</th>
                 
                 </tr>
-            </thead>
+            
             <tbody>
                 <?php foreach ($orders as $order) : ?>
                     <tr>
@@ -166,9 +166,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
                             <form method="post">
                                 <input type="hidden" name="order_id" value="<?= $order['order_number'] ?>">
                                 <select class="dropdown_status" name="new_status" onchange="updateStatus(this)">
-                                    <option value="1"  <?= $order['status'] == 1 ? 'selected' : '' ?>>Pending</option>
-                                    <option value="2" <?= $order['status'] == 2 ? 'selected' : '' ?>>Shipping</option>
-                                    <option value="3" <?= $order['status'] == 3 ? 'selected' : '' ?>>Completed</option>
+                                    <option value="1"  <?= $order['status'] == 1 ? 'selected' : '' ?> class="pending">Pending</option>
+                                    <option value="2" <?= $order['status'] == 2 ? 'selected' : '' ?> class="shipping">Shipping</option>
+                                    <option value="3" <?= $order['status'] == 3 ? 'selected' : '' ?> class="complete">Completed</option>
                                 </select>
                                 <button type="submit" style="display: none;"></button>
                             </form>

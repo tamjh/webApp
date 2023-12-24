@@ -105,6 +105,7 @@ header .icons a:last-child {
   
   body {
     min-height: 100vh;
+    background-image: linear-gradient(to right top, #dcdcdc, #d4d8e7, #c0d7f1, #a2d9f7, #7bdbf6);
     overflow-x: hidden;
   }
   .page {
@@ -119,167 +120,28 @@ header .icons a:last-child {
     position: relative;
     width: 100%;
   }
-  
-  /* =============== Navigation ================ */
-  .navigation {
-    position: fixed;
-    width: 300px;
-    height: 100%;
-    background: var(--blue);
-    border-left: 10px solid var(--blue);
-    transition: 0.5s;
-    overflow: hidden;
-  }
-  .navigation.active {
-    width: 80px;
-  }
-  
-  .navigation ul {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-  
-  .navigation ul li {
-    position: relative;
-    width: 100%;
-    list-style: none;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-  }
-  
-  .navigation ul li:hover,
-  .navigation ul li.hovered {
-    background-color: var(--white);
-  }
-  
-  .navigation ul li:nth-child(1) {
-    margin-bottom: 40px;
-    pointer-events: none;
-  }
-  
-  .navigation ul li a {
-    position: relative;
-    display: block;
-    width: 100%;
-    display: flex;
-    text-decoration: none;
-    color: var(--white);
-  }
-  .navigation ul li:hover a,
-  .navigation ul li.hovered a {
-    color: var(--blue);
-  }
-  
-  .navigation ul li a .icon {
-    position: relative;
-    display: block;
-    min-width: 60px;
-    height: 60px;
-    line-height: 75px;
-    text-align: center;
-  }
-  .navigation ul li a .icon ion-icon {
-    font-size: 1.75rem;
-  }
-  
-  .navigation ul li a .title {
-    position: relative;
-    display: block;
-    padding: 0 10px;
-    height: 60px;
-    line-height: 60px;
-    text-align: start;
-    white-space: nowrap;
-  }
-  
-  /* --------- curve outside ---------- */
-  .navigation ul li:hover a::before,
-  .navigation ul li.hovered a::before {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: -50px;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--white);
-    pointer-events: none;
-  }
-  .navigation ul li:hover a::after,
-  .navigation ul li.hovered a::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -50px;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--white);
-    pointer-events: none;
-  }
-  
-  /* ===================== Main ===================== */
-  .main {
-    position: absolute;
-    width: calc(100% - 300px);
-    left: 300px;
-    min-height: 100vh;
-    background: var(--white);
-    transition: 0.5s;
-  }
-  .main.active {
-    width: calc(100% - 80px);
-    left: 80px;
-  }
-  
-  .topbar {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-  }
-  
-  .toggle {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
-    cursor: pointer;
-  }
-  
- 
-  
- 
-
-  
   /* ======================= Cards ====================== */
+ 
   .cardBox {
     position: relative;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 30px;
   }
   
   .cardBox .card {
     position: relative;
     background: var(--white);
-    padding: 30px;
+    padding: 10px;
     border-radius: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensure words and icons are side by side */
+    align-items: center; /* Center content vertically */
     cursor: pointer;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    height: auto;
   }
   
   .cardBox .card .numbers {
@@ -296,13 +158,14 @@ header .icons a:last-child {
   }
   
   .cardBox .card .iconBx {
-    font-size: 3.5rem;
+    font-size: 5rem;
     color: var(--black2);
   }
   
   .cardBox .card:hover {
     background: var(--blue);
   }
+  
   .cardBox .card:hover .numbers,
   .cardBox .card:hover .cardName,
   .cardBox .card:hover .iconBx {
@@ -323,6 +186,7 @@ header .icons a:last-child {
   .details .recentOrders {
     position: relative;
     display: grid;
+    width: 100%;
     min-height: 500px;
     background: var(--white);
     padding: 20px;
@@ -352,8 +216,10 @@ header .icons a:last-child {
   
   .details table {
     width: 100%;
+    font-size: 14px;
     border-collapse: collapse;
     margin-top: 10px;
+    padding:10px;
   }
   .details table thead td {
     font-weight: 600;
@@ -361,6 +227,8 @@ header .icons a:last-child {
   .details .recentOrders table tr {
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    height:30px;
   }
   .details .recentOrders table tr:last-child {
     border-bottom: none;
@@ -386,7 +254,6 @@ header .icons a:last-child {
 
   .recentCustomers {
     position: relative;
-    
     min-height: 500px;
     padding: 20px;
     background: var(--white);
@@ -396,6 +263,7 @@ header .icons a:last-child {
 
   .recentCustomers table tr td {
     padding: 12px 10px;
+    
   }
   .recentCustomers table tr td h4 {
     font-size: 16px;
@@ -415,10 +283,16 @@ header .icons a:last-child {
   }
   
 
-  .status {
-    font-size: 10px;
-    padding:0px 5px;
+  .details .recentOrders table tr:hover a {
+    color: #fff;
 }
+
+.details .recentOrders table tr td.status {
+  padding: 0px 5px; /* Adjust the padding to your preference */
+  font-size: 14px; /* Adjust the font size to your preference */
+}
+
+
 
 .whitte:hover{
     color:#fff !important;
@@ -428,7 +302,7 @@ header .icons a:last-child {
     background-color: rgb(108, 161, 231); /* Set your preferred blue color */
     color: white; /* Set text color for better contrast */
     border-radius: 10px;
-  
+    
     
 }
 
@@ -470,8 +344,8 @@ header .icons a:last-child {
       left: 300px;
     }
     .cardBox {
-      grid-template-columns: repeat(2, 1fr);
-    }
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjusted for smaller screens */
+  }
   }
   
   @media (max-width: 768px) {
@@ -489,7 +363,7 @@ header .icons a:last-child {
   @media (max-width: 480px) {
     .cardBox {
       grid-template-columns: repeat(1, 1fr);
-    }
+  }
     .cardHeader h2 {
       font-size: 20px;
     }

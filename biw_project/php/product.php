@@ -123,11 +123,11 @@ $edit_function = edit_book($conn);
             ?>
             <tr>
                 <td><?= $i?></td>
-                <td><?= $book['name'] ?></td>
+                <td class="long-name"><?= $book['name'] ?></td>
                 <td>
 					<img width="100" src="/project/biw_project/image/coverpage/<?=$book['cover']?>" >
 				</td>
-                <td><?= $book['description'] ?></td>
+                <td class="long-description"><?= $book['description'] ?></td>
                 <td><?= $book['year'] ?></td>
                 <td>
                 <?php

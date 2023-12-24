@@ -128,48 +128,86 @@ if ($recentCustomersResult) {
 
         <!-- ======================= Cards ================== -->
         <div class="cardBox">
+
+
             <div class="card">
-                <div>
-                    <div class="numbers">1,504</div>
+                <div class="cardContent">
+                    <div class="numbers">
+                    <span id="daily-views">
+                        <?php
+                        $countQuery = "SELECT COUNT(*) AS daily_views FROM page_views WHERE DATE(view_date) = CURDATE()";
+                        $countResult = mysqli_query($conn, $countQuery);
+                        
+                        if ($countResult) {
+                            $countData = mysqli_fetch_assoc($countResult);
+                            $dailyViews = $countData['daily_views'];
+                        } else {
+                            $dailyViews = 0;
+                        }
+                        echo "$dailyViews";
+                        ?>
+                        Visits
+                    </span>
+                    </div>
                     <div class="cardName">Daily Views</div>
                 </div>
-
                 <div class="iconBx">
                     <ion-icon name="eye-outline"></ion-icon>
                 </div>
             </div>
 
             <div class="card">
-                <div>
-                    <div class="numbers">80</div>
-                    <div class="cardName">Sales</div>
+                <div class="cardContent">
+                    <div class="numbers">
+                    <?php
+                        $num = 0;
+                        $select_pending = mysqli_query($conn, "SELECT * FROM `orders`") or die('query failed');
+                        if (mysqli_num_rows($select_pending) > 0) {
+                            while ($fetch_pendings = mysqli_fetch_assoc($select_pending)) {
+                                
+                                $num++;
+                            };
+                        };
+                        ?>
+                        <?php echo $num; ?>
+                        Orders
+                    </div>
+                    <div class="cardName">Monthly Sales</div>
                 </div>
-
                 <div class="iconBx">
                     <ion-icon name="cart-outline"></ion-icon>
                 </div>
             </div>
 
-
-
             <div class="card">
-                <div>
-                    <div class="numbers">$7,842</div>
-                    <div class="cardName">Earning</div>
+                <div class="cardContent">
+                    <div class="numbers">
+                    RM
+                    <?php
+                        $total_pendings = 0;
+                        $select_pending = mysqli_query($conn, "SELECT grand_total FROM `orders`") or die('query failed');
+                        if (mysqli_num_rows($select_pending) > 0) {
+                            while ($fetch_pendings = mysqli_fetch_assoc($select_pending)) {
+                                $total_price = $fetch_pendings['grand_total'];
+                                $total_pendings += $total_price;
+                            };
+                        };
+                        ?>
+                        <?php echo $total_pendings; ?>
+                    </div>
+                    <div class="cardName">Monthly Earning</div>
                 </div>
-
                 <div class="iconBx">
                     <ion-icon name="cash-outline"></ion-icon>
                 </div>
             </div>
         </div>
-
         <!-- ================ Order Details List ================= -->
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>Recent Orders</h2>
-                    <a href="view_order.php" class="btn">View All</a>
+                    <a href="view_order.php" class="btn" style="font-size:15px;">View All</a>
                 </div>
 
                 <table>
@@ -189,7 +227,7 @@ if ($recentCustomersResult) {
                             <tr class="whitte">
 
                                 <td><?= $order['created'] ?></td>
-                                <td><a href="order_list.php?order_number=<?= $order['order_number'] ?>"><?= $order['order_number'] ?></a></td>
+                                <td class="orderNumber"><a href="order_list.php?order_number=<?= $order['order_number'] ?>"><?= $order['order_number'] ?></a></td>
                                 <td><?= $order['full_name'] ?></td>
                                 <td>RM <?= $order['grand_total'] ?></td>
                                 <td>Paid</td>
@@ -255,6 +293,10 @@ if ($recentCustomersResult) {
         navigation.classList.toggle("active");
         main.classList.toggle("active");
     };
+
+
+
+
 </script>
 
 </html>

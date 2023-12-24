@@ -99,152 +99,151 @@ header .icons a:last-child {
 }
 
 body {
+    width:100%;
+    margin: 0;
+    background-image: linear-gradient(to right bottom, #ffffff, #f9fbff, #f0f7ff, #e5f5ff, #d7f3ff, #d7f3ff, #d7f3ff, #d7f3ff, #e5f5ff, #f0f7ff, #f9fbff, #ffffff);
     display: block;
     align-items: center;
     text-align: center;
 }
 
-h1 {
-    text-align: center;
-    margin-top: 20px; /* Adjust this value as needed */
+.container{
+    width:100%;
 }
 
-.page {
-    display: flex;
-    justify-content: center;
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: 100px;
+.c1{
+    background: #b0d1fe;
+}
+.carousel-item img{
+    height: 60vh;
+    border:none;
 }
 
-.side {
-    display: fixed;
-    width: 25%;
-    min-width: 350px;
-    max-width: 400px;
-    height: available;
-    min-height: 400px;
-    float: left;
-    border: 1px rosybrown solid;
-    margin: 0 auto;
-    word-wrap: break-word;
-}
-
-.product {
-    align-items: center;
-    width: 100%;
-    min-width: 800px;
-    max-width: 1000px;
-    height: available;
-    min-height: 650px;
-    float: left;
-    border: 1px rgb(19, 19, 210) solid;
-    margin: 0 auto;
-
-}
-
-.category-container {
-    border: 1px pink solid;
-    width: 95%;
-    margin: 20px 0;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-x: auto;
-    white-space: nowrap;
-    position: relative; /* Make the container  relative */
-    margin:0 auto;
-    margin-bottom: 20px;
-    transition: 0.5s all ease-out;
-}
-
-/* .category-container::-webkit-scrollbar {
-    display: none;
-} */
-
-.product-container {
-    border: 1px rgb(219, 5, 5) solid;
-    height: auto;
-    width: 250px;
-    margin: 20px;
-    display: inline-block; /* Display horizontally */
-}
-
-.category-container h4 {
-    margin: 10px 0;
-    font-size: 24px;
-}
-
-.product-card {
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.product-image img {
-    width: 200px;
-    height: 300px;
-    margin-bottom: 10px;
-}
-
-.product-info h2 {
-    font-size: 1.5rem !important;
-    margin-bottom: 10px;
-}
-
-.product-info p {
-    margin-bottom: 10px;
-}
-
-.product-info form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.product-info input[type="number"] {
-    width: 50px;
-    margin-right: 10px;
-}
-
-.product-info input[type="submit"] {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-}
-
-.product-info input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.btn-wrapper {
-    display: flex;
-    align-items: center; /* Center buttons vertically */
-    position: relative; /* Change from sticky to relative */
-    width: 100%;
-    max-width: 95%;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.btn-scroll {
+.fea{
+    padding:20px 60px !important;
     background: #fff;
-    font-size: 24px;
-    padding: 5px 8px;
-    border-radius: 50%;
+}
+
+
+
+/* Style the carousel indicators */
+.carousel-indicators button {
+    background-color: #888; /* Set the color of inactive indicators */
+}
+
+.carousel-indicators .active {
+    background-color: #555; /* Set the color of the active indicator */
+}
+
+
+
+
+.book{
+    
+    justify-content: center;
+}
+
+
+.book-bg{
+    background-color: lightgrey;
+}
+
+.d-flex img{
+    height: 100%;
+}
+
+.books{
+    font-size: 50px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 5px;
+    padding:30px !important;
+    background: #fff;
+}
+
+
+
+.b-im{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px;
+}
+
+
+.feature{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding:10rem;
+    display: flex;
+    align-items: center;
+}
+
+.feature h1 {
+    font-size: 50px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+    width: 100%;
+    justify-content: center; /* Add this line to center the content horizontally */
+    display: flex; /* Add this line to enable flex properties */
+    border-radius: 10px;
+    
+    align-items: center;
+}
+
+
+.feature .icons img{
+    width:100px;
+    height:100px;
+}
+
+.feature .icons{
+    width:150px;
+    text-align: center;
+    padding:25px 15px;
+    border-radius: 4px;
+    margin:15px 0;
+}
+
+.feature .icons:hover{
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
+.a1 {
+    text-decoration: none;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-book {
+    width: 100%; /* Ensure the image takes up 100% of the container width */
+    height: auto; /* Maintain the image's aspect ratio */
+    max-height: 300px; /* Set a maximum height to control the item's overall height */
+    border-radius: 10px; /* Add some border-radius for a rounded look */
+}
+
+.b-im p {
+    margin-top: 20px;
+    font-size: 20px; /* Set the font size for the paragraph */
+}
+
+.shop{
+    padding: 5px;
+    
+    background-color: orange;
+    
+    box-shadow: #333;
+    color:white;
     cursor: pointer;
-    border: 1px solid #ccc;
-    margin: 0 5px; /* Add some margin between buttons */
-   
-    top: 50%;
-    transform: translateY(-50%);
+    border-radius: 10px;
 }
 
-.btn-left {
-    left: 0; /* Position the left button to the left */
-}
-
-.btn-right {
-    right: 0; /* Position the right button to the right */
+.shop:hover{
+    background-color: rgba(246, 179, 33, 0.732);
 }
