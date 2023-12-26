@@ -3,11 +3,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit(); // Make sure to exit after a header redirect
+if (!isset($_SESSION['customer_name'])) {
+    $_SESSION['customer_name'] = "user";
 }
+
 
 if (isset($_POST['logout'])) {
     // Unset and destroy the session
@@ -84,7 +83,14 @@ $publishers = get_all_publisher($conn);
                             </div>
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
-                                <button type="submit" name="logout" class="logout">Logout</button>
+                            <?php
+                                    if($_SESSION['customer_name']=="user"){
+                                        echo "<button type='submit' name='logout' class='logout'>Log In</button>";
+                                    }
+                                    else{
+                                        echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                    }
+                                ?>
                             </form>
                         </div>
                     </div>
@@ -114,6 +120,15 @@ $publishers = get_all_publisher($conn);
                         </div>
 
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#ad" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon " aria-hidden="true" ></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+    
+                <button class="carousel-control-next" type="button" data-bs-target="#ad" data-bs-slide="next">
+                    <span class="carousel-control-next-icon " aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
 
 
                     <div class="carousel-indicators ">
@@ -130,7 +145,7 @@ $publishers = get_all_publisher($conn);
 
             <section class="feature" style="margin: 20px 0px;">
             
-                <h1 class="display-6 text-center g-0 py-3 py-md-4 fea">Our feature</h1>
+                <h1 class="display-6 text-center g-0 py-3 py-md-4 fea">Why Choose Us</h1>
                 <div class="icons">
                     <img src="../image/image/f3.png">
                     <div class="info">
@@ -194,6 +209,40 @@ $publishers = get_all_publisher($conn);
             </div>
     </div>
 
+    <footer>
+    <div class="container-fluid ft px-5 py-2">
+        <div class="row p-5 g-4 h2">
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="pb-2 h2">Contact Number</div>
+                <div class="row px-3">
+                    <div class="col-1 px-0 bi-telephone w-auto "></div>
+                    <div class="col-11 h3">07-6883363</div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="pb-2">Email</div>
+                <div class="row px-3">
+                    <div class="col-1 px-0 bi-envelope w-auto "></div>
+                    <div class="col-11 h3">abc123@gmail.com</div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-6">
+                <div class="pb-2">Address</div>
+                <div class="row px-3">
+                    <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                    <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row px-5 pb-2">
+            <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+        </div>
+
+    </div>
+    </footer>
 
 
 </body>

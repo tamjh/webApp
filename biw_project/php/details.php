@@ -4,9 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit(); // Make sure to exit after a header redirect
+if (!isset($_SESSION['customer_name'])) {
+    $_SESSION['customer_name'] = "user";
 }
 
 if (isset($_POST['logout'])) {
@@ -114,7 +113,13 @@ if ($bookId !== false && $bookId !== null) {
                             </div>
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
-                                <button type="submit" name="logout" class="logout">Logout</button>
+                                <?php
+                                if ($_SESSION['customer_name'] == "user") {
+                                    echo "<button type='submit' name='logout' class='logout'>Log In</button>";
+                                } else {
+                                    echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                }
+                                ?>
                             </form>
                         </div>
                     </div>
@@ -134,92 +139,111 @@ if ($bookId !== false && $bookId !== null) {
             </div>
             <div class="text">
                 <!-- Display other book details using $bookData -->
+
                 <div class="name"><?= $bookData['name'] ?></div>
                 <div class="container2">
-                    <div class="publisher-box">
-                        <p>Publisher : </p>
-                        <div class="publish">
-                            <span class="publisher">
-                                <?php
-                                if ($publishers == 0 || empty($publishers)) {
-                                    echo "Undefined";
-                                } else {
-                                    $publisherFound = false;
-                                    foreach ($publishers as $publisher) {
-                                        if ($publisher['id'] == $bookData['publisher']) {
-                                            echo $publisher['publisher_name'];
-                                            $publisherFound = true;
-                                            break;
+                    <table>
+                        <tr>
+                            <td class="change">Publisher : </td>
+                            <td>
+                                <div class="publisher-box">
+
+                                    <div class="publish">
+                                        <span class="publisher">
+                                            <?php
+                                            if ($publishers == 0 || empty($publishers)) {
+                                                echo "Undefined";
+                                            } else {
+                                                $publisherFound = false;
+                                                foreach ($publishers as $publisher) {
+                                                    if ($publisher['id'] == $bookData['publisher']) {
+                                                        echo $publisher['publisher_name'];
+                                                        $publisherFound = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (!$publisherFound) {
+                                                    echo "Undefined";
+                                                }
+                                            }
+                                            ?></span>
+
+                                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="change">Year: </td>
+                            <td>
+                                <div class="year-box">
+
+                                    <span class="publish-year"><?= $bookData['year'] ?></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="change">Category: </td>
+                            <td>
+                                <div class="category-box">
+                                    
+                                    <span class="category">
+                                        <?php
+                                        if ($categories == 0 || empty($categories)) {
+                                            echo "Undefined";
+                                        } else {
+                                            $categoryFound = false;
+                                            foreach ($categories as $category) {
+                                                if ($category['id'] == $bookData['category']) {
+                                                    echo $category['category_name'];
+                                                    $categoryFound = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!$categoryFound) {
+                                                echo "Undefined";
+                                            }
                                         }
-                                    }
-                                    if (!$publisherFound) {
-                                        echo "Undefined";
-                                    }
-                                }
-                                ?></span>
+                                        ?>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
-                        </div>
-                    </div>
 
-                    <div class="year-box">
-                    <p>Year : </p>
-                        <span class="publish-year"><?= $bookData['year'] ?></span>
-                    </div>
-
-                    <div class="category-box">
-                        <p>Category : </p>
-                        <span class="category">
-                            <?php
-                            if ($categories == 0 || empty($categories)) {
-                                echo "Undefined";
-                            } else {
-                                $categoryFound = false;
-                                foreach ($categories as $category) {
-                                    if ($category['id'] == $bookData['category']) {
-                                        echo $category['category_name'];
-                                        $categoryFound = true;
-                                        break;
-                                    }
-                                }
-                                if (!$categoryFound) {
-                                    echo "Undefined";
-                                }
-                            }
-                            ?>
-                        </span>
-                    </div>
 
                 </div>
-                <div class="price">RM<span><?= $bookData['price'] ?></span></div>
 
 
-                <form action="cart_function.php" method="post" class="quantity">
-                    <input type='hidden' name='book_id' value='<?= $bookData['id'] ?>'>
-                    <input type='hidden' name='Pimage' value='<?= $bookData['cover'] ?>'>
-                    <input type='hidden' name='Pname' value='<?= $bookData['name'] ?>'>
-                    <input type='hidden' name='Pprice' value='<?= $bookData['price'] ?>'>
-                    <div class="quantity-container">
-                        <label for="quantity" class="label">Quantity</label>
-                        <div class="input-button">
-                            <span class="decre"><button class="q1">-</button></span>
-                            <input type="number" id="quantity" name="quantity" value="1" class="inputQuantity">
-                            <span class="incre"><button class="q2">+</button></span>
-                        </div>
+            <div class="price">RM<span><?= $bookData['price'] ?></span></div>
+
+
+            <form action="cart_function.php" method="post" class="quantity">
+                <input type='hidden' name='book_id' value='<?= $bookData['id'] ?>'>
+                <input type='hidden' name='Pimage' value='<?= $bookData['cover'] ?>'>
+                <input type='hidden' name='Pname' value='<?= $bookData['name'] ?>'>
+                <input type='hidden' name='Pprice' value='<?= $bookData['price'] ?>'>
+                <div class="quantity-container">
+                    <label for="quantity" class="label">Quantity</label>
+                    <div class="input-button">
+                        <span class="decre"><button class="q1"><i class="fa-solid fa-minus"></i></button></span>
+                        <input type="number" id="quantity" name="quantity" value="1" class="inputQuantity" class="number">
+                        <span class="incre"><button class="q2"><i class="fa-solid fa-plus"></i></button></span>
                     </div>
-                    <div class="button">
-                        <button name="add_to_cart" class="cart purchase">Add to Cart</button>
-                        <button name="buy_now" class="buy purchase">Buy Now</button>
-                    </div>
-                </form>
+                </div>
+                <div class="button">
+                    <button name="add_to_cart" class="cart purchase">Add to Cart</button>
+                    <button name="buy_now" class="buy purchase">Buy Now</button>
+                </div>
+            </form>
 
 
 
 
-            <?php else : ?>
-                <!-- Book not found or error message -->
-                <p>Error: Book not found or invalid book ID.</p>
-            <?php endif; ?>
-            </div>
+        <?php else : ?>
+            <!-- Book not found or error message -->
+            <p>Error: Book not found or invalid book ID.</p>
+        <?php endif; ?>
+    </div>
 
     </div>
 

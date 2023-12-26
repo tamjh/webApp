@@ -5,9 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $formSubmitted = isset($_GET['search']);
 
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit(); // Make sure to exit after a header redirect
+if (!isset($_SESSION['customer_name'])) {
+    $_SESSION['customer_name'] = "user";
 }
 
 if (isset($_POST['logout'])) {
@@ -91,6 +90,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/project/biw_project/css/shop_style.css">
     <title>Product Page</title>
@@ -139,7 +139,15 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                             </div>
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
-                                <button type="submit" name="logout" class="logout">Logout</button>
+                                <?php
+                                    if($_SESSION['customer_name']=="user"){
+                                        echo "<button type='submit' name='logout' class='logout'>Log In</button>";
+                                    }
+                                    else{
+                                        echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                    }
+                                ?>
+                                
                             </form>
                         </div>
                     </div>
@@ -207,7 +215,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                     echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
                     echo "</div>";
                     echo "<p>{$book['name']}</p>";
-                    echo "<p>{$book['price']}</p>";
+                    echo "<p>RM {$book['price']}</p>";
 
                     // Your code for displaying book details goes here
                     echo "<form action='cart_function.php' method='post'>";
