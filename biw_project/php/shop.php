@@ -91,6 +91,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/project/biw_project/css/shop_style.css">
     <title>Product Page</title>
@@ -140,14 +141,13 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <?php
-                                    if($_SESSION['customer_name']=="user"){
-                                        echo "<button type='submit' name='logout' class='logout'>Log In</button>";
-                                    }
-                                    else{
-                                        echo "<button type='submit' name='logout' class='logout'>Logout</button>";
-                                    }
+                                if ($_SESSION['customer_name'] == "user") {
+                                    echo "<button type='submit' name='logout' class='logout'>Log In</button>";
+                                } else {
+                                    echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                }
                                 ?>
-                                
+
                             </form>
                         </div>
                     </div>
@@ -256,8 +256,43 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                 </ul>
             </nav>
         </div>
+    </div>
+        <footer>
+            <div class="container-fluid ft px-5 py-2">
+                <div class="row p-5 g-4 h2">
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <div class="pb-2 h2">Contact Number</div>
+                        <div class="row px-3">
+                            <div class="col-1 px-0 bi-telephone w-auto "></div>
+                            <div class="col-11 h3">07-6883363</div>
+                        </div>
+                    </div>
 
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <div class="pb-2">Email</div>
+                        <div class="row px-3">
+                            <div class="col-1 px-0 bi-envelope w-auto "></div>
+                            <div class="col-11 h3">abc123@gmail.com</div>
+                        </div>
+                    </div>
 
+                    <div class="col-sm-12 col-md-4 col-lg-6">
+                        <div class="pb-2">Address</div>
+                        <div class="row px-3">
+                            <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                            <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row px-5 pb-2">
+                    <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+                </div>
+
+            </div>
+        </footer>
+
+        <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

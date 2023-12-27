@@ -144,7 +144,8 @@ if ($bookId !== false && $bookId !== null) {
                 <div class="container2">
                     <table>
                         <tr>
-                            <td class="change">Publisher : </td>
+                            <td class="change">Publisher</td>
+                            <td class="colom">:</td>
                             <td>
                                 <div class="publisher-box">
 
@@ -172,7 +173,8 @@ if ($bookId !== false && $bookId !== null) {
                             </td>
                         </tr>
                         <tr>
-                            <td class="change">Year: </td>
+                            <td class="change">Year</td>
+                            <td class="colom">:</td>
                             <td>
                                 <div class="year-box">
 
@@ -181,7 +183,8 @@ if ($bookId !== false && $bookId !== null) {
                             </td>
                         </tr>
                         <tr>
-                            <td class="change">Category: </td>
+                            <td class="change">Category</td>
+                            <td class="colom">:</td>
                             <td>
                                 <div class="category-box">
                                     
@@ -252,6 +255,8 @@ if ($bookId !== false && $bookId !== null) {
         <hr>
         <p class="des-box"><?= $bookData['description'] ?></p>
     </div>
+
+    
 </body>
 <script src="numberkey.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

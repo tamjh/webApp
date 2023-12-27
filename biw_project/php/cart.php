@@ -33,6 +33,8 @@ require_once "cart_function.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/project/biw_project/css/cart_style.css">
     <title>Cart</title>
@@ -92,9 +94,11 @@ require_once "cart_function.php";
 
 
 
-    <h1 class="title">My cart</h1>
+    <div class="title">
+        <h1 class="c_title">My Cart</h1>
+    </div>
     <br><br>
-    <hr>
+    
 
     <div class="page">
         <div class="cart">
@@ -132,12 +136,17 @@ require_once "cart_function.php";
                                     <td>RM {$value['productprice']}</td>
                                     
                                     <td class='btn-q'>
-                                    <span class='decre'><button type='button' class='q1'>-</button></span>
-                                    <input type='number' id='quantity' name='Pquantity' class='inputQuantity' value='{$value['productquantity']}'></input>
-                                    <span class='incre'><button type='button' class='q2'>+</button></span></td>
+                    <span class='decre'><button type='button' class='q1' onclick='decreaseQuantity({$no})'><i class='fa-solid fa-minus'></i></button></span>
+                    <input type='number' id='quantity_{$no}' name='Pquantity' class='inputQuantity' value='{$value['productquantity']}'></input>
+                    <span class='incre'><button type='button' class='q2' onclick='increaseQuantity({$no})'><i class='fa-solid fa-plus'></i></button></span>
+                </td>
                                     
-                                    <td><button name='update'>Update</button></td>
-                                    <td><button name='remove'>Remove</button></td>
+                                    <td><button name='update'><span class='material-symbols-outlined'>
+                                    update
+                                    </span></button></td>
+                                    <td><button name='remove'><span class='material-symbols-outlined'>
+                                    delete
+                                    </span></button></td>
                                     <input type='hidden' name='item' value='{$value['productname']}'>
                                     </tr>
                                     </form>
@@ -157,6 +166,7 @@ require_once "cart_function.php";
 
                     </tbody>
                 </table>
+                
             </div>
         </div>
         <div class="total">
@@ -165,7 +175,7 @@ require_once "cart_function.php";
 
                 <h1>Order Details</h1><br>
                 <h2>Subtotal (<?= (int)$no ?>): </h2>
-                <h2>RM <?= number_format($_SESSION['total'], 2) ?></h2>
+                <h2 class="totalPrice">RM <?= number_format($_SESSION['total'], 2) ?></h2>
                 <h2>Shipping fee: </h2>
                 <h2>RM <?= number_format($_SESSION['shipping'], 2) ?></h2>
                 <?php
@@ -183,9 +193,20 @@ require_once "cart_function.php";
 <script src="numberkey.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script>
+    function increaseQuantity(index) {
+        var inputQuantity = document.getElementById("quantity_" + index);
+        inputQuantity.stepUp();
+    }
+
+    function decreaseQuantity(index) {
+        var inputQuantity = document.getElementById("quantity_" + index);
+        inputQuantity.stepDown();
+    }
+
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
+
 </script>
 
 </html>

@@ -93,13 +93,6 @@ if (isset($_POST['update'])) {
 if (isset($_POST['payment'])) {
     $orderNumber = 'ORD' . str_pad(rand(1, 999999), 6, '0', STR_PAD_LEFT);
     $customerId = isset($_SESSION['uid']) ? $_SESSION['uid'] : null;
-    
-    // // Calculate the total grand total
-    // $final = 0;
-
-    // foreach ($_SESSION['cart'] as $cartItem) {
-    //     $final += $cartItem['productquantity'] * $cartItem['productprice'];
-    // }
 
     // Insert the order into the orders table with the correct grand total
     $insertOrderQuery = "INSERT INTO orders (order_number, customer_id, grand_total, created, comment) VALUES (?, ?, ?, NOW(), ?)";

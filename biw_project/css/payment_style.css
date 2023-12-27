@@ -1,9 +1,29 @@
 body {
-    background-color: lightblue;
+    background-image: linear-gradient(
+        45deg,
+        hsl(240deg 90% 81%) 0%,
+        hsl(232deg 90% 82%) 11%,
+        hsl(225deg 90% 82%) 22%,
+        hsl(217deg 89% 83%) 33%,
+        hsl(209deg 89% 83%) 44%,
+        hsl(201deg 89% 84%) 56%,
+        hsl(194deg 89% 84%) 67%,
+        hsl(186deg 89% 85%) 78%,
+        hsl(178deg 89% 85%) 89%,
+        hsl(171deg 89% 86%) 100%
+      );
+
+      margin:0;
 }
 
 form {
-    background-color: white;
+    
+    background-color: white; /* Set the desired background color */
+    display: flex;
+    flex-direction: column;
+}
+form .your-child-element {
+    padding: 20px; /* Adjust as needed */
 }
 
 * {
@@ -98,6 +118,7 @@ header .icons a:last-child {
     max-width: 940px;
     margin: 0 auto;
     padding: 0 16px;
+    height: 100%;
 }
 /* end: Globals */
 
@@ -106,6 +127,7 @@ header .icons a:last-child {
 /* start: Payment */
 .payment-section {
     padding: 48px 0;
+    height: 100%;
 }
 .payment-wrapper {
     display: grid;

@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 
 
 
@@ -86,7 +86,7 @@ require_once "database.php";
             </div>
         </div>
     </header>
-    
+
     <!-- start: Payment -->
     <section class="payment-section">
         <div class="container">
@@ -100,27 +100,33 @@ require_once "database.php";
                     <div class="payment-content">
                         <div class="payment-body">
                             <div class="payment-plan">
-                                
+
                                 <div class="payment-plan-info">
                                     <div class="payment-plan-info-name">Cart</div>
-                                    
+
                                 </div>
                                 <a href="cart.php" class="payment-plan-change">Change</a>
                             </div>
                             <div class="payment-summary">
                                 <div class="payment-summary-item">
                                     <div class="payment-summary-name">Items Price</div>
-                                    <div class="payment-summary-price"><p>RM <?= number_format($_SESSION['total'], 2) ?></p></div>
+                                    <div class="payment-summary-price">
+                                        <p>RM <?= number_format($_SESSION['total'], 2) ?></p>
+                                    </div>
                                 </div>
                                 <div class="payment-summary-item">
                                     <div class="payment-summary-name">Shipping Fee</div>
-                                    <div class="payment-summary-price"><p>RM <?= number_format($_SESSION['shipping'], 2) ?></p></div>
+                                    <div class="payment-summary-price">
+                                        <p>RM <?= number_format($_SESSION['shipping'], 2) ?></p>
+                                    </div>
                                 </div>
-                               
+
                                 <div class="payment-summary-divider"></div>
                                 <div class="payment-summary-item payment-summary-total">
                                     <div class="payment-summary-name">Total</div>
-                                    <div class="payment-summary-price"><p>RM <?= number_format($_SESSION['final'], 2) ?></p></div>
+                                    <div class="payment-summary-price">
+                                        <p>RM <?= number_format($_SESSION['final'], 2) ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -165,19 +171,16 @@ require_once "database.php";
                                 <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
                             </div>
                         </div>
-                        <form action="cart_function.php"  method="POST">
+                        <form action="cart_function.php" method="POST">
                             <button type="submit" name="payment" class="payment-form-submit-button"> Pay</button>
                         </form>
-                        
-</div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- end: Payment -->
 
-</body>
-    
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -185,7 +188,6 @@ require_once "database.php";
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
-
 </script>
 
 </html>

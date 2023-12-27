@@ -5,7 +5,6 @@
     outline: none;
     border: none;
     text-decoration: none;
-   
     transition: .2s linear;
 }
 
@@ -16,14 +15,28 @@ html {
     overflow-x: hidden;
 }
 
+body{
+    background-image: linear-gradient(
+        45deg,
+        hsl(240deg 90% 81%) 0%,
+        hsl(232deg 90% 82%) 11%,
+        hsl(225deg 90% 82%) 22%,
+        hsl(217deg 89% 83%) 33%,
+        hsl(209deg 89% 83%) 44%,
+        hsl(201deg 89% 84%) 56%,
+        hsl(194deg 89% 84%) 67%,
+        hsl(186deg 89% 85%) 78%,
+        hsl(178deg 89% 85%) 89%,
+        hsl(171deg 89% 86%) 100%
+      );
+}
+
 header {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
     background: #FBFFFF;
-        /* Change the background property to the provided gradient */
-        /*background: linear-gradient(100.22deg, #E6E6F6 43.14%, #2DB6FD 112.96%);*/
     padding: 2rem 9%;
     display: flex;
     align-items: center;
@@ -38,8 +51,6 @@ header .logo {
     color: grey;
     font-weight: bolder;
 }
-
-
 
 header .navbar a {
     font-size: 2rem;
@@ -97,81 +108,107 @@ header .icons a:last-child {
     border-radius: 5%;
 }
 
-.title {
-    margin: 20px;
+.title{
+    margin-top: 5rem;
+}
+
+.c_title{
+    font-family: ZCOOL QingKe HuangYou;
+    text-align: center;
+    font-size: 5rem;
+    font-size: 10rem;
+
 }
 
 .page {
     display: flex;
-    justify-content: center;
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: 50x;
-    margin-bottom:50px;
+    justify-content: space-between; /* Added space-between */
+    max-width: 100%;
+    margin: 0;
+    margin-top: 20px; /* Adjusted the unit from 50x to 50px */
+    margin-bottom: 50px;
 }
 
 .cart {
-    display: flex;
-    width: 100%;
- 
+    
+    width: 100%; /* Adjusted width to 70% */
     height: 100%;
     min-height: 650px;
     float: left;
-    border: 1px solid rgb(19, 19, 210);
     margin: 0 auto;
-    padding: 20px;
-    justify-content: space-around; /* Adjust the spacing between items */
+   
+    justify-content: space-around;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.card{
+    padding:20px;
+    border-radius: 10px;
+    margin-right:0px;
 }
 
 .total {
-    display: block;
-    width: 30%;
+    display: flex;
+    width: 30%; /* Adjusted width to 30% */
     max-width: 400px;
-    height: auto;
-   
-    float: left;
-    border: 1px solid rosybrown;
-    margin: 0 auto;
+    float: right;
+    margin: 0;
     word-wrap: break-word;
-    margin-right: 20px;
     position: sticky;
-    padding: 20px;
+   
+    border-radius: 10px;
 }
-
-
 table, th, td {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #cfc5c5;
+
     font-size: 20px;
-    
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    margin-bottom: 10px; /* Adjust the bottom margin */
+    margin-bottom: 10px;
 }
+
 th, td {
     padding: 15px;
     text-align: left;
-    border:1px red solid;
+    
+}
+
+td{
+    text-align: center;
+    padding: 20px;
 }
 
 th {
-    background-color: #f2f2f2;
+    border-bottom: 2px grey solid;
+    margin-top: 0;
+    text-align: center;
+}
+
+table tr {
+    border-bottom: 1px solid #a39f9f; 
+    border-width: 80%;
+    
+}
+.gap{
+    column-gap: 10px;
 }
 
 .cart button {
-    background-color: #4CAF50;
+    background-color: orange;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    
 }
 
 .cart button:hover {
-    background-color: #45a049;
+    background-color: orange;
 }
 
 .pimg {
@@ -181,17 +218,15 @@ th {
 }
 
 .cart table tr:first-child .pimg {
-    object-fit: contain; /* Maintain aspect ratio without cropping */
+    object-fit: contain;
 }
 
 input[type="number"] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
-    width:40px;
+    width: 40px;
     text-align: center;
-  
-    
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -200,66 +235,21 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-.incre,
-.decre {
-    height: 33px;
-    font-size: 20px; /* Adjust the font size as needed */
-    margin: 0;
-}
-
-.q1,
-.q2 {
-    background-color: black;
-    color: white;
-    border: 1px solid black;
-    font-size: 18px; /* Adjust the font size as needed */
-    padding: 5px 10px; /* Adjust the padding as needed */
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.q1:hover,
-.q2:hover {
-    background: white;
-    color: black;
-}
-
-.incre {
-    margin-left: auto; /* Push the + button to the right */
-}
-
-.decre {
-    left: -28px;
-    top: -4px;
-}
-
-.q1 {
-    width: 27px;
-    height: 35px;
-    border-radius: 10px 0px 0px 10px;
-}
-
-.q2 {
-    width: 27px;
-    height: 35px;
-
-    border-radius: 0px 10px 10px 0px;
-}
-
 .sum {
+    margin:auto 0;
     display: block;
     width: 80%;
     max-width: 400px;
     height: auto;
- 
+    max-height: 400px;
     float: left;
-    border: 1px solid rosybrown;
+    
     margin: 0 auto;
     word-wrap: break-word;
     position: sticky;
     padding: 20px;
-    background-color: #f8f8f8; /* Add a background color */
-    border-radius: 10px; /* Add border-radius for rounded corners */
+    background-color: #f8f8f8;
+    border-radius: 10px;
 }
 
 .sum h1{
@@ -268,32 +258,52 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .sum h2{
-    font-size:20px;
-    margin:10px 0 10px 0;
-    
+    font-size: 20px;
+    margin: 10px 0 10px 0;
 }
 
 .sum button{
-    width:100%;
-    padding:10px;
-    font-size:20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
     margin: 10px 0 10px 0;
-    border:1px black solid;
-    border-radius:10px;
+    border: 1px black solid;
+    border-radius: 10px;
     background: rgba(0,0,0,-0.5);
     cursor: pointer;
 }
 
 .sum button:hover{
-    background: rgba(245, 245, 300);
+    background: orange;
+    border:1px orange solid;
+    color:white;
 }
 
 .btn-q{
-    border: 1px black solid;
-    width:120px;
+    display: flex;
+   
     justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    height: 100%;
+}
+
+
+
+.q1,
+.q2{
+    padding:5px;
+    font-size: 10px;
 }
 
 .ctr-name{
-    width:250px;
+    width: 250px;
+}
+
+.material-symbols-outlined{
+    padding: 0;
+}
+
+.page form {
+    all: initial;
 }
