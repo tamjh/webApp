@@ -106,6 +106,10 @@ header .icons a:last-child {
     border-radius: 5%;
 }
 
+.account_box p{
+    margin-bottom: 0;
+  }
+
 .container{
     width:100%;
     

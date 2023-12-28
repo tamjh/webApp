@@ -74,7 +74,7 @@ if ($bookId !== false && $bookId !== null) {
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -86,32 +86,24 @@ if ($bookId !== false && $bookId !== null) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.html">Home</a>
+                        <a class="nav-link" href="homepage.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about us.html">About Us</a>
+                        <a class="nav-link" href="about_us.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ProductPage.html">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact website.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Billing.html">Order Form</a>
+                        <a class="nav-link" href="shop.php">Shop</a>
                     </li>
                 </ul>
 
                 <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-                    <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
-                    <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+                    <a href="cart.php" class="fas fa-cart-plus" style="text-decoration: none;">
+                        <span id="cartItemCount" class="cart-item-count">(<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : '0' ?>)</span>
+                    </a>
                     <div class="dropdown">
                         <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            <div class="account_box" style="padding: 10px; font-size:2rem;">
-                                <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
-                            </div>
-                            <p style="font-size:2rem;">Account</p>
+                            <p onclick="redirectToAccount()" style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <?php
                                 if ($_SESSION['customer_name'] == "user") {
@@ -124,6 +116,10 @@ if ($bookId !== false && $bookId !== null) {
                         </div>
                     </div>
                 </div>
+                <div class="account_box" style="padding: 10px; font-size:2rem;">
+                    <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
+                </div>
+                
             </div>
         </div>
     </header>
@@ -255,7 +251,42 @@ if ($bookId !== false && $bookId !== null) {
         <hr>
         <p class="des-box"><?= $bookData['description'] ?></p>
     </div>
+    <footer>
+            <div class="container-fluid ft px-5 py-2">
+                <div class="row p-5 g-4 h2">
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <div class="pb-2 h2">Contact Number</div>
+                        <div class="row px-3">
+                            <div class="col-1 px-0 bi-telephone w-auto "></div>
+                            <div class="col-11 h3">07-6883363</div>
+                        </div>
+                    </div>
 
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <div class="pb-2">Email</div>
+                        <div class="row px-3">
+                            <div class="col-1 px-0 bi-envelope w-auto "></div>
+                            <div class="col-11 h3">abc123@gmail.com</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-6">
+                        <div class="pb-2">Address</div>
+                        <div class="row px-3">
+                            <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                            <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row px-5 pb-2">
+                    <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+                </div>
+
+            </div>
+        </footer>
+
+        <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
     
 </body>
 <script src="numberkey.js"></script>

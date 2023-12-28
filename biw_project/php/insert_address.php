@@ -44,6 +44,10 @@
             }
         }
     }
+
+    if (isset($_POST['skip'])) {
+        header("Location: login.php");
+    }
     ?>
 
     <div class="container-fluid h-100 d-flex align-items-center justify-content-center">
@@ -60,10 +64,10 @@
                 echo "<div class='alert alert-success'>You are registered successfully.</div>";
                 if ($success) {
                     echo "<script>
-            setTimeout(function() {
-                window.location.href = 'login.php';
-            }, 3000);
-        </script>";
+                    setTimeout(function() {
+                        window.location.href = 'login.php';
+                    }, 3000);
+                    </script>";
                 }
                 unset($success);
             }
@@ -114,9 +118,14 @@
                 </div>
             </div>
 
-            <div class="text-end" style="margin-top:50px;">
-                <input type="submit" name="register" value="Submit" class="btn btn-primary ">
+
+            <div class="text-end mt-3">
+                <input type="submit" name="skip" class="skip btn me-2" value="Skip First!">
+                <input type="submit" name="register" value="Submit" class="btn">
             </div>
+
+
+
         </form>
     </div>
 </body>

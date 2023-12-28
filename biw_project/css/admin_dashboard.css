@@ -44,6 +44,7 @@ header .navbar a:hover {
 header .icons {
     display: flex;
     align-items: center;
+    margin-bottom: 0;
 }
 
 header .icons a {
@@ -327,6 +328,21 @@ header .icons a:last-child {
     height: 50px;
     
 }
+
+.web{
+  background: orange;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 0;
+  color: white;
+  font-size: 2rem;
+}
+
+.web:hover{
+  background: rgb(255, 136, 0);
+}
+
   /* ====================== Responsive Design ========================== */
   @media (max-width: 991px) {
     .navigation {

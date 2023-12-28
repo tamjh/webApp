@@ -90,6 +90,10 @@ header .icons a:last-child {
     border-radius: 5%;
 }
 
+.account_box p{
+    margin-bottom: 0;
+  }
+
 body {
     background: rgb(155,211,221);
     background: linear-gradient(90deg, rgba(155,211,221,1) 0%, rgba(136,176,224,1) 100%);

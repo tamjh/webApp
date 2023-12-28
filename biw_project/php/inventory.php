@@ -54,7 +54,7 @@ $update_info = update_info($conn);
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -66,37 +66,32 @@ $update_info = update_info($conn);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.html">Home</a>
+                        <a class="nav-link" href="admin_dashboard.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about us.html">About Us</a>
+                        <a class="nav-link" href="inventory.php">Inventory</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ProductPage.html">Products</a>
+                        <a class="nav-link" href="view_order.php">Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact website.html">Contact</a>
+                        <a class="nav-link" href="product.php">Product</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Billing.html">Order Form</a>
-                    </li>
+
                 </ul>
 
                 <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-                    <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
-                    <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+
                     <div class="dropdown">
-                        <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            <div class="account_box" style="padding: 10px; font-size:2rem;">
-                                <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
-                            </div>
+                            
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <button type="submit" name="logout" class="logout">Logout</button>
                             </form>
                         </div>
                     </div>
+                    <a href="homepage.php" class="web"><p class="web">View Website</p></a>
                 </div>
             </div>
         </div>
@@ -256,6 +251,7 @@ foreach ($books as $book) {
             </div>
         </div>
     </form>
+    <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
 
     <!--    ******************************************************************************************************************* -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

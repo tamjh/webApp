@@ -42,7 +42,7 @@ require_once "database.php";
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -54,37 +54,36 @@ require_once "database.php";
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.html">Home</a>
+                        <a class="nav-link" href="homepage.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about us.html">About Us</a>
+                        <a class="nav-link" href="about_us.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ProductPage.html">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact website.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Billing.html">Order Form</a>
+                        <a class="nav-link" href="shop.php">Shop</a>
                     </li>
                 </ul>
 
                 <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-                    <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
-                    <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+                    <a href="cart.php" class="fas fa-cart-plus" style="text-decoration: none;"></a>
                     <div class="dropdown">
                         <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            <div class="account_box" style="padding: 10px; font-size:2rem;">
-                                <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
-                            </div>
-                            <p style="font-size:2rem;">Account</p>
+                            <p  onclick="redirectToAccount()" style="font-size:2rem;">Account</p>
                             <form method="post">
-                                <button type="submit" name="logout" class="logout">Logout</button>
+                                <?php
+                                if ($_SESSION['customer_name'] == "user") {
+                                    echo "<button type='submit' name='logout' class='logout'>Log In</button>";
+                                } else {
+                                    echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                }
+                                ?>
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="account_box" style="padding: 10px; font-size:2rem;">
+                    <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
                 </div>
             </div>
         </div>
@@ -123,6 +122,11 @@ require_once "database.php";
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function redirectToAccount() {
+        // Redirect to cus_acc.php when the "Account" word is clicked
+        window.location.href = 'cus_acc.php';
     }
 </script>
 

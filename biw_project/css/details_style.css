@@ -94,6 +94,9 @@ header .icons a:last-child {
     border-radius: 5%;
 }
 
+.account_box p{
+    margin-bottom: 0;
+  }
 
 
 body {
@@ -376,4 +379,41 @@ td.change{
 
 .colom{
     font-size: large;
+}
+
+footer .container-fluid {
+    background-color: black;
+    color: white;
+  }
+  
+  .text-center {
+    color: gray;
+  }
+  
+  .top {
+    background: orange; 
+    color: white;
+    font-size: 3rem;
+    padding: 1px 10px;
+    position: fixed;
+    bottom: 8rem;
+    right: 2rem;
+    border-radius: 50%;
+    width: 40px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.top i {
+    vertical-align: middle; /* Align the icon vertically */
+}
+
+.top:hover{
+    background: white;
+    color:orange;
 }

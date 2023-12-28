@@ -45,7 +45,7 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
         $_SESSION['city'] = $newCity;
         $_SESSION['state'] = $newState;
 
-        echo "Update successful!";
+        
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -59,6 +59,8 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/project/biw_project/css/cus_app_style.css">
@@ -66,7 +68,7 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -78,38 +80,40 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.html">Home</a>
+                        <a class="nav-link" href="homepage.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about us.html">About Us</a>
+                        <a class="nav-link" href="about_us.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ProductPage.html">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact website.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Billing.html">Order Form</a>
+                        <a class="nav-link" href="shop.php">Shop</a>
                     </li>
                 </ul>
 
                 <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-                    <a href="#" class="fas fa-search" style="text-decoration: none;"></a>
-                    <a href="#" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+                    <a href="cart.php" class="fas fa-cart-plus" style="text-decoration: none;">
+                        <span id="cartItemCount" class="cart-item-count">(<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : '0' ?>)</span>
+                    </a>
                     <div class="dropdown">
                         <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            <div class="account_box" style="padding: 10px; font-size:2rem;">
-                                <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
-                            </div>
-                            <p style="font-size:2rem;">Account</p>
+                            <p onclick="redirectToAccount()" style="font-size:2rem;">Account</p>
                             <form method="post">
-                                <button type="submit" name="logout" class="logout">Logout</button>
+                                <?php
+                                if ($_SESSION['customer_name'] == "user") {
+                                    echo "<button type='submit' name='logout' class='logout'>Log In</button>";
+                                } else {
+                                    echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                }
+                                ?>
                             </form>
                         </div>
                     </div>
                 </div>
+                <div class="account_box" style="padding: 10px; font-size:2rem;">
+                    <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
+                </div>
+                
             </div>
         </div>
     </header>
@@ -117,9 +121,9 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
     <div class="page">
         <div class="side">
             <div class="side-bar">
-                <input type="submit" class="side-btn" value="Account"><br>
-                <input type="submit" class="side-btn" value="Contact and Address"><br>
-                <input type="submit" class="side-btn" value="Order History">
+            <input type="button" class="side-btn" value="Account" onclick="redirectToAccount()"><br>
+    <input type="button" class="side-btn" value="Contact and Address" onclick="redirectToContactAndAddress()"><br>
+    <input type="button" class="side-btn" value="Order History" onclick="redirectToOrderHistory()">
             </div>
         </div>
         <div class="box-container">
@@ -143,11 +147,11 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
                             </div>
                         </div>
 
-                        <div class="row mx-sm-2 mx-md-3 mx-xl-4">
-                            <div class="col-12 col-md-4 col-xl-2">
+                        <div class="row mx-sm-2 mx-md-3 mx-xl-4 sb">
+                            <div class="col-12 col-md-4 col-xl-2 sb">
                                 <div class="form-group">
                                     <label for="postcode">Postcode</label>
-                                    <input type="text" name="postcode" id="postcode" class="border rounded-2 px-2 w-100" value="<?= isset($_SESSION['postcode']) ? $_SESSION['postcode'] : '' ?>" placeholder="<?= empty($_SESSION['postcode']) ? 'postcode' : '' ?>">
+                                    <input type="text" name="postcode" id="postcode" class="border rounded-2 px-2 w-100" style="width:20px;" value="<?= isset($_SESSION['postcode']) ? $_SESSION['postcode'] : '' ?>" placeholder="<?= empty($_SESSION['postcode']) ? 'postcode' : '' ?>">
                                 </div>
                             </div>
                             <div class="col-12 col-md-4 col-xl-5">
@@ -163,14 +167,15 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-end"> <!-- Add this container for button alignment -->
+                        <div class="d-flex justify-content-end"> <!-- Add this container for button alignment -->
                         <button type="submit" class="btn btn-update" name="update_address">Update</button>
                     </div>
+                    </div>
+                    
                 </form>
             </div>
 
-
+<
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -178,6 +183,26 @@ if (isset($_POST['update_address'])) { // Updated to 'update_address'
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function redirectToAccount() {
+        // Redirect to cus_acc.php when the "Account" word is clicked
+        window.location.href = 'cus_acc.php';
+    }
+
+    function redirectToAccount() {
+        // Redirect to cus_acc.php when "Account" button is clicked
+        window.location.href = 'cus_acc.php';
+    }
+
+    function redirectToContactAndAddress() {
+        // Redirect to cus_add.php when "Contact and Address" button is clicked
+        window.location.href = 'cus_add.php';
+    }
+
+    function redirectToOrderHistory() {
+        // Redirect to order_history.php when "Order History" button is clicked
+        window.location.href = 'order_history.php';
     }
 </script>
 

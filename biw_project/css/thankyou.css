@@ -76,6 +76,10 @@ header .icons a:last-child {
     border-radius: 5px;
 }
 
+.account_box p{
+    margin-bottom: 0;
+  }
+
 a{
     color: white;
     text-decoration: none;

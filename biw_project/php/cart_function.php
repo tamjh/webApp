@@ -120,7 +120,7 @@ if (isset($_POST['payment'])) {
     // Clear the cart after successful checkout
     $_SESSION['cart'] = array();
 
-    header("location:success.php");
+    header("location:thankyou.php");
 }
 
 

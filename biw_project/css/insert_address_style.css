@@ -2,6 +2,7 @@ body {
     background-color: lightblue;
     height: 100vh;
     margin: 0;
+    background: linear-gradient(90deg, rgba(121, 181, 228, 1) 5%, rgba(124, 181, 230, 1) 49%, rgba(159, 205, 247, 1) 94%);
 }
 
 .container {
@@ -32,4 +33,18 @@ body {
 .alert-success {
     background: #DFF0D8;
     color: #468847; /* Adjust text color for better readability */
+}
+
+.btn{
+    background: orange;
+    color:white;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px orange solid;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: rgb(255, 153, 0);
+    color:white
 }

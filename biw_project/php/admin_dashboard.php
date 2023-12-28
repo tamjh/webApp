@@ -31,7 +31,8 @@ $ordersQuery = "SELECT orders.*, users.full_name, status.condition
                 FROM orders 
                 JOIN users ON orders.customer_id = users.id
                 JOIN status ON orders.status = status.id
-                ORDER BY orders.created DESC";
+                ORDER BY orders.created DESC
+                LIMIT 30";
 $ordersResult = mysqli_query($conn, $ordersQuery);
 
 // Check if the query was successful
@@ -91,16 +92,16 @@ if ($recentCustomersResult) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.html">Home</a>
+                        <a class="nav-link" href="admin_dashboard.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about us.html">Inventory</a>
+                        <a class="nav-link" href="inventory.php">Inventory</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="ProductPage.html">Orders</a>
+                        <a class="nav-link" href="view_order.php">Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact website.html">Customer</a>
+                        <a class="nav-link" href="product.php">Product</a>
                     </li>
 
                 </ul>
@@ -108,17 +109,15 @@ if ($recentCustomersResult) {
                 <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
 
                     <div class="dropdown">
-                        <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            <div class="account_box" style="padding: 10px; font-size:2rem;">
-                                <p>Username: <span><?= $_SESSION['customer_name']; ?></span></p>
-                            </div>
+                            
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <button type="submit" name="logout" class="logout">Logout</button>
                             </form>
                         </div>
                     </div>
+                    <a href="homepage.php" class="web"><p class="web">View Website</p></a>
                 </div>
             </div>
         </div>

@@ -8,6 +8,22 @@
     transition: .2s linear;
 }
 
+body {
+    background-image: linear-gradient(
+        45deg,
+        hsl(207deg 84% 75%) 0%,
+        hsl(202deg 80% 73%) 11%,
+        hsl(197deg 74% 73%) 22%,
+        hsl(192deg 66% 72%) 33%,
+        hsl(187deg 57% 73%) 44%,
+        hsl(181deg 47% 74%) 56%,
+        hsl(173deg 44% 77%) 67%,
+        hsl(163deg 41% 80%) 78%,
+        hsl(152deg 36% 83%) 89%,
+        hsl(136deg 30% 85%) 100%
+      );
+}
+
 html {
     font-size: 62.5%;
     scroll-behavior: smooth;
@@ -92,10 +108,18 @@ header .icons a:last-child {
     border-radius: 5%;
 }
 
+.account_box p{
+    margin-bottom: 0;
+  }
+
 .title {
     display: block;
     align-items: center;
     text-align: center;
+    font-weight: bold;
+    font-size: 7rem;
+    font-family: ZCOOL QingKe HuangYou;
+    margin-top: 50px;
 }
 
 .page {
@@ -114,7 +138,6 @@ header .icons a:last-child {
     max-width: 400px;
     height: auto;
     float: left;
-    border: 1px rosybrown solid;
     margin: 0 auto;
     word-wrap: break-word;
     margin-right: 20px;
@@ -123,22 +146,26 @@ header .icons a:last-child {
 }
 
 .side-bar {
+    background: #f8f9fa;
     margin-top: 0;
     height: auto;
-    border: 1px orange solid;
+    border: 1px white solid;
+    border-radius:10px;
 }
 
 .side-btn {
-    background: #9b9595;
+    background: orange;
     font-size: 25px;
     margin: 20px;
     color: #fff;
     padding: 10px;
     cursor: pointer;
+    width:30rem;
 }
 
 .side-btn:hover {
-    background: #706969;
+    background: rgb(255, 98, 0);
+    color: white;
 }
 
 .box-container {
@@ -146,11 +173,12 @@ header .icons a:last-child {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    border: 1px rgb(19, 19, 210) solid;
+    
 }
 
 .container {
     width: 100%;
+    font-family: 'Ubuntu', 'Times New Roman', Times, serif;
     padding: 10px;
 }
 
@@ -173,9 +201,7 @@ header .icons a:last-child {
     font-size: 1.6rem;
 }
 
-body {
-    background-color: #f8f9fa;
-}
+
 
 .acc {
     background-color: #ffffff;
@@ -190,19 +216,36 @@ body {
 }
 
 .btn-update {
-    margin-right: 10px;
-    background-color: #17a2b8;
+
+    
+    background-color: orange;
     color: #ffffff;
     padding: 10px 20px;
+    font-size: 20px;
 }
 
 .btn-update:hover{
-    background-color: #50c3d5;
+    background-color: rgb(255, 128, 0);
     color: #ffffff;
 }
 
 .box{
+    margin-top: 20px;
     width:100%;
     height: auto;
     align-items: center;
 }
+
+.info{
+    font-size: 30px !important;
+}
+
+.form-label{
+    font-size: 25px;
+}
+
+.form-group label {
+    margin-right: 10px;
+    font-size: 1.8rem;
+}
+
