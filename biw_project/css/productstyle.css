@@ -136,7 +136,7 @@ th {
 td {
     max-width: 200px; /* Limiting cell width to prevent excessive stretching */
     white-space: nowrap;
-    overflow: scroll;
+    overflow: hidden;
     text-overflow: ellipsis;
     font-size: 15px;
 }
@@ -152,7 +152,7 @@ td.long-name {
 
 td.long-description {
     max-width: 200px; /* Adjust the max-width as needed */
-    overflow: scroll; /* Enable scrolling for long descriptions */
+    overflow: hidden; /* Enable scrolling for long descriptions */
     white-space: nowrap; /* Prevent the description from wrapping */
 }
 tr:hover{
@@ -316,3 +316,13 @@ tr:hover{
     background: white;
     color:orange;
   }
+
+  .original-price {
+    text-decoration: line-through;
+    color: #999; /* Optional: Change the color for the original price */
+}
+
+.discounted-price {
+    color: #e74c3c; /* Optional: Change the color for the discounted price */
+    font-weight: bold; /* Optional: Apply bold to the discounted price */
+}

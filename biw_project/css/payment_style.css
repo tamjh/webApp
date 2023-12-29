@@ -306,28 +306,31 @@ header .icons a:last-child {
     margin-bottom: 12px;
     line-height: 1.3;
 }
+
+.payment-method input {
+    display: none;
+}
 .payment-method {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+    gap: 12px; /* Adjust the gap between items as needed */
     overflow-x: auto;
     padding: 6px 0;
     margin-bottom: 12px;
     width: 100%;
 }
-.payment-method input {
-    display: none;
-}
+
 .payment-method-item {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 80px; /* Adjust the height as needed */
     padding: 8px;
     border: 1px solid var(--gray-200);
     border-radius: 8px;
-    margin-right: 12px;
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
 }
+
 input:checked + .payment-method-item {
     border-color: var(--indigo-500);
 }

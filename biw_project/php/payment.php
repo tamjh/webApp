@@ -147,10 +147,7 @@ require_once "database.php";
                             <label for="method-3" class="payment-method-item">
                                 <img src="/project/biw_project/image/icon/paypal.png" alt="">
                             </label>
-                            <input type="radio" name="payment-method" id="method-4">
-                            <label for="method-4" class="payment-method-item">
-                                <img src="/project/biw_project/image/icon/stripe.png" alt="">
-                            </label>
+                            
                         </div>
                         <div class="payment-form-group">
                             <input type="email" placeholder=" " class="payment-form-control" id="email">

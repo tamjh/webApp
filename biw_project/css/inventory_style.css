@@ -248,13 +248,24 @@ tr
 .popup_content_new select,
 .popup_content_new textarea {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 12px; /* Increase padding for larger input fields */
+    margin-bottom: 15px;
     box-sizing: border-box;
     border: 1px solid #363a43;
     border-radius: 5px;
+    font-size: 18px;
 }
 
+/* Adjust the font size and padding for the dropdown */
+.popup_content_new select {
+    font-size: 18px;
+    padding: 10px;
+}
+
+/* Additional styling for the textarea */
+.popup_content_new textarea {
+    resize: vertical; /* Allow vertical resizing of the textarea */
+}
 
 .btn-t {
     margin-bottom: auto;

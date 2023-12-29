@@ -28,7 +28,7 @@ require_once "books_function.php";
 
 //call function for books_function.php
 $books = get_all_books($conn);
-if(!is_array($books)){
+if (!is_array($books)) {
     $books = array();
 }
 $categories = get_all_categories($conn);
@@ -40,19 +40,21 @@ $edit_function = edit_book($conn);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/project/biw_project/css/productstyle.css">
-    
+
 
 </head>
+
 <body>
-<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -82,14 +84,16 @@ $edit_function = edit_book($conn);
 
                     <div class="dropdown">
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            
+
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <button type="submit" name="logout" class="logout">Logout</button>
                             </form>
                         </div>
                     </div>
-                    <a href="homepage.php" class="web"><p class="web">View Website</p></a>
+                    <a href="homepage.php" class="web">
+                        <p class="web">View Website</p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -117,39 +121,38 @@ $edit_function = edit_book($conn);
             foreach ($books as $book) {
                 $i++;
             ?>
-            <tr>
-                <td><?= $i?></td>
-                <td class="long-name"><?= $book['name'] ?></td>
-                <td>
-					<img width="100" src="/project/biw_project/image/coverpage/<?=$book['cover']?>" >
-				</td>
-                <td class="long-description"><?= $book['description'] ?></td>
-                <td><?= $book['year'] ?></td>
-                <td>
-                <?php
-                    if ($categories == 0 || empty($categories)) {
-                        echo "Undefined";
-                    } else {
-                        $categoryFound = false;
-                        foreach ($categories as $category) {
-                            if ($category['id'] == $book['category']) {
-                                echo $category['category_name'];
-                                $categoryFound = true;
-                                break;
+                <tr>
+                    <td><?= $i ?></td>
+                    <td class="long-name"><?= $book['name'] ?></td>
+                    <td>
+                        <img width="100" src="/project/biw_project/image/coverpage/<?= $book['cover'] ?>">
+                    </td>
+                    <td class="long-description"><?= $book['description'] ?></td>
+                    <td><?= $book['year'] ?></td>
+                    <td>
+                        <?php
+                        if ($categories == 0 || empty($categories)) {
+                            echo "Undefined";
+                        } else {
+                            $categoryFound = false;
+                            foreach ($categories as $category) {
+                                if ($category['id'] == $book['category']) {
+                                    echo $category['category_name'];
+                                    $categoryFound = true;
+                                    break;
+                                }
+                            }
+                            if (!$categoryFound) {
+                                echo "Undefined";
                             }
                         }
-                        if (!$categoryFound) {
+                        ?>
+                    <td>
+                        <?php
+
+                        if ($publishers == 0 || empty($publishers)) {
                             echo "Undefined";
-                        }
-                    }
-                ?>
-                <td>
-                    <?php
-                    
-                        if($publishers ==0 || empty($publishers)){
-                            echo "Undefined";
-                        }
-                        else{
+                        } else {
                             $publisherfound = false;
                             foreach ($publishers as $publisher) {
                                 if ($publisher['id'] == $book['publisher']) {
@@ -158,25 +161,43 @@ $edit_function = edit_book($conn);
                                     break;
                                 }
                             }
-                            if(!$publisherfound){
+                            if (!$publisherfound) {
                                 echo "Undefined";
                             }
                         }
-                    ?>
-                </td>
-                <td>RM<?= number_format($book['price'], 2) ?></td>
+                        ?>
+                    </td>
+                    <!-- Modify the price display in your PHP loop -->
+<td>
+    <?php if ($book['promotion'] != 0) : ?>
+        <?php
+        $discountedPrice = $book['price'] - ($book['price'] * ($book['promotion'] / 100));
+        ?>
+        <span class="original-price">
+            RM<?= number_format($book['price'], 2) ?>
+        </span>
+        <br>
+        <span class="discounted-price">
+            RM<?= number_format($discountedPrice, 2) ?>
+        </span>
+    <?php else : ?>
+        RM<?= number_format($book['price'], 2) ?>
+    <?php endif; ?>
+</td>
 
-                <td>
-                    <div class="btn-container">
-                        <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">Edit</button>
-                        <form action="" method="post">
-                            <input type="hidden" name="id" value="<?= $book['id'] ?>">
-                            <input type="submit" name="delete" class="btn btn-delete" value="delete">
-                        </form>
-                    </div>
-                </td>
 
-            </tr>
+
+                    <td>
+                        <div class="btn-container">
+                            <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">Edit</button>
+                            <form action="" method="post">
+                                <input type="hidden" name="id" value="<?= $book['id'] ?>">
+                                <input type="submit" name="delete" class="btn btn-delete" value="delete">
+                            </form>
+                        </div>
+                    </td>
+
+                </tr>
             <?php
             }
             ?>
@@ -185,42 +206,46 @@ $edit_function = edit_book($conn);
     </table>
 
     <?php foreach ($books as $book) { ?>
-    <div class="popup" id="popup<?= $book['id'] ?>">
-        <div class="popup_content">
-            <h4>Book's information</h4>
-            <form action="" method="post">
-                <input type="hidden" name="edit_book_id" value="<?= $book['id'] ?>">
-                <div class="form-row">
-                    <label for="BookName">Book Name:</label>
-                    <input type="text" name="bookName" value="<?= $book['name'] ?>">
-                </div>
-                <div class="form-row">
-                    <label for="Description">Description:</label>
-                    <input type="text" name="description" value="<?= $book['description'] ?>">
-                </div>
-                <div class="form-row">
-                    <label for="year">Year:</label>
-                    <input type="text" name="Year" value="<?= $book['year'] ?>">
-                </div>
-                <div class="form-row">
-                    <label for="price">Price:</label>
-                    <input type="text" name="Price" value="<?= $book['price'] ?>">
-                </div>
-                <div class="button-row">
-                    <input type="submit" name="edit" class="btn-submit" value="Submit">
-                    <button type="button" class="btn-cancel" onclick="close_edit_popup(<?= $book['id'] ?>)">Cancel</button>
-                </div>
-            </form>
+        <div class="popup" id="popup<?= $book['id'] ?>">
+            <div class="popup_content">
+                <h4>Book's information</h4>
+                <form action="" method="post">
+                    <input type="hidden" name="edit_book_id" value="<?= $book['id'] ?>">
+                    <div class="form-row">
+                        <label for="BookName">Book Name:</label>
+                        <input type="text" name="bookName" value="<?= $book['name'] ?>">
+                    </div>
+                    <div class="form-row">
+                        <label for="Description">Description:</label>
+                        <input type="text" name="description" value="<?= $book['description'] ?>">
+                    </div>
+                    <div class="form-row">
+                        <label for="year">Year:</label>
+                        <input type="text" name="Year" value="<?= $book['year'] ?>">
+                    </div>
+                    <div class="form-row">
+                        <label for="price">Price:</label>
+                        <input type="text" name="Price" value="<?= $book['price'] ?>">
+                    </div>
+                    <div class="form-row">
+                        <label for="promotion">Promotion:</label>
+                        <input type="number" name="promotion" value="<?= $book['promotion'] ?>">
+                    </div>
+                    <div class="button-row">
+                        <input type="submit" name="edit" class="btn-submit" value="Submit">
+                        <button type="button" class="btn-cancel" onclick="close_edit_popup(<?= $book['id'] ?>)">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-<?php } ?>
+    <?php } ?>
 
-<a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
+    <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <script>
-    function myFunction() { 
+    function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
@@ -238,6 +263,6 @@ $edit_function = edit_book($conn);
         var popup = document.getElementById("popup" + bookID);
         popup.style.display = "none";
     }
-
 </script>
+
 </html>

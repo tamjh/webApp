@@ -2,6 +2,7 @@
 
 include "database.php"; 
 
+
 if (isset($_POST['submit_new'])) {
     $title = $_POST['title'];
     $description = $_POST['description'];
@@ -11,6 +12,7 @@ if (isset($_POST['submit_new'])) {
     $publisher = $_POST['publisher'];
     $inventory = $_POST['inventory'];
     $cover = $_FILES['cover'];
+    $promotion = $_POST['promotion'];
 
     $cover_name = $_FILES['cover']['name'];
     $cover_tmp = $_FILES['cover']['tmp_name'];
@@ -35,9 +37,25 @@ if (isset($_POST['submit_new'])) {
 
             // Move the uploaded file to the destination
             if (move_uploaded_file($cover_tmp, $fileDestination)) {
-                // Perform database insert or any other operations here
-                mysqli_query($conn, "INSERT INTO `books`(`name`, `year`, `publisher`, `price`, `cover`, `description`, `category`, `inventory`) VALUES ('$title','$year','$publisher','$price','$cover_name','$description','$category','$inventory')");
-                header("Location: inventory.php");
+                // Perform database insert using prepared statement
+                $stmt = $conn->prepare("INSERT INTO `books` (`name`, `year`, `publisher`, `price`, `cover`, `description`, `category`, `inventory`, `promotion`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                // Bind the parameters
+                $stmt->bind_param("sssssssss", $title, $year, $publisher, $price, $cover_name, $description, $category, $inventory, $promotion);
+
+                // Execute the statement
+                $result = $stmt->execute();
+
+                if ($result) {
+                    // Query executed successfully
+                    header("Location: inventory.php");
+                } else {
+                    // Query failed
+                    echo "Error: " . $stmt->error;
+                }
+
+                // Close the statement
+                $stmt->close();
             } else {
                 echo "Error uploading file!";
             }

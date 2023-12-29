@@ -334,3 +334,24 @@ footer .container-fluid {
     background: white;
     color:orange;
 }
+
+/* Add the following CSS rule to style the price container */
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.price-container p {
+    margin: 3px;
+}
+
+.discounted-price {
+    color: rgb(11, 10, 10); /* Adjust the color of the discounted price */
+
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: grey; /* Adjust the color of the original price */
+}

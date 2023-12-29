@@ -149,7 +149,7 @@ img {
 .category {
     font-size: 15px;
     background: orange;
-    margin: 10px 15px 20px 0px;
+    margin: 20px 15px 10px 0px;
     padding: 5px 10px;
     border-radius: 20px;
     display: inline;
@@ -416,4 +416,18 @@ footer .container-fluid {
 .top:hover{
     background: white;
     color:orange;
+}
+
+.btn{
+    background: orange;
+    color:white;
+    padding:10px;
+    margin-top:1rem;
+    font-size: 2rem;
+    margin-left: 1rem
+}
+
+.btn:hover{
+    background: rgb(255, 136, 0);
+    color:white;
 }

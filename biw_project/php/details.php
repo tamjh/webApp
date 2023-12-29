@@ -74,7 +74,7 @@ if ($bookId !== false && $bookId !== null) {
 </head>
 
 <body>
-<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -119,13 +119,13 @@ if ($bookId !== false && $bookId !== null) {
                 <div class="account_box" style="padding: 10px; font-size:2rem;">
                     <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
                 </div>
-                
+
             </div>
         </div>
     </header>
 
 
-
+    <a href="shop.php" class="btn">Back to Shop</a>
 
     <div class="container">
         <?php if (isset($bookData) && $bookData) : ?>
@@ -183,7 +183,7 @@ if ($bookId !== false && $bookId !== null) {
                             <td class="colom">:</td>
                             <td>
                                 <div class="category-box">
-                                    
+
                                     <span class="category">
                                         <?php
                                         if ($categories == 0 || empty($categories)) {
@@ -213,36 +213,45 @@ if ($bookId !== false && $bookId !== null) {
                 </div>
 
 
-            <div class="price">RM<span><?= $bookData['price'] ?></span></div>
+                <div class="price">
+                    <?php if ($bookData['promotion'] > 0) :
+                        $discountedPrice = $bookData['price'] - ($bookData['price'] * ($bookData['promotion'] / 100));
+                    ?>
+                        <span class="original-price" style="text-decoration: line-through; color:grey; font-size:3rem">RM<?= number_format($bookData['price'], 2) ?></span>
+                        <span class="discounted-price">RM<?= number_format($discountedPrice, 2) ?></span>
+                    <?php else : ?>
+                        RM<span><?= number_format($bookData['price'], 2) ?></span>
+                    <?php endif; ?>
+                </div>
 
 
-            <form action="cart_function.php" method="post" class="quantity">
-                <input type='hidden' name='book_id' value='<?= $bookData['id'] ?>'>
-                <input type='hidden' name='Pimage' value='<?= $bookData['cover'] ?>'>
-                <input type='hidden' name='Pname' value='<?= $bookData['name'] ?>'>
-                <input type='hidden' name='Pprice' value='<?= $bookData['price'] ?>'>
-                <div class="quantity-container">
-                    <label for="quantity" class="label">Quantity</label>
-                    <div class="input-button">
-                        <span class="decre"><button class="q1"><i class="fa-solid fa-minus"></i></button></span>
-                        <input type="number" id="quantity" name="quantity" value="1" class="inputQuantity" class="number">
-                        <span class="incre"><button class="q2"><i class="fa-solid fa-plus"></i></button></span>
+                <form action="cart_function.php" method="post" class="quantity">
+                    <input type='hidden' name='book_id' value='<?= $bookData['id'] ?>'>
+                    <input type='hidden' name='Pimage' value='<?= $bookData['cover'] ?>'>
+                    <input type='hidden' name='Pname' value='<?= $bookData['name'] ?>'>
+                    <input type='hidden' name='Pprice' value='<?= $bookData['price'] ?>'>
+                    <div class="quantity-container">
+                        <label for="quantity" class="label">Quantity</label>
+                        <div class="input-button">
+                            <span class="decre"><button class="q1"><i class="fa-solid fa-minus"></i></button></span>
+                            <input type="number" id="quantity" name="quantity" value="1" class="inputQuantity" class="number">
+                            <span class="incre"><button class="q2"><i class="fa-solid fa-plus"></i></button></span>
+                        </div>
                     </div>
-                </div>
-                <div class="button">
-                    <button name="add_to_cart" class="cart purchase">Add to Cart</button>
-                    <button name="buy_now" class="buy purchase">Buy Now</button>
-                </div>
-            </form>
+                    <div class="button">
+                        <button name="add_to_cart" class="cart purchase">Add to Cart</button>
+                        <button name="buy_now" class="buy purchase">Buy Now</button>
+                    </div>
+                </form>
 
 
 
 
-        <?php else : ?>
-            <!-- Book not found or error message -->
-            <p>Error: Book not found or invalid book ID.</p>
-        <?php endif; ?>
-    </div>
+            <?php else : ?>
+                <!-- Book not found or error message -->
+                <p>Error: Book not found or invalid book ID.</p>
+            <?php endif; ?>
+            </div>
 
     </div>
 
@@ -252,42 +261,42 @@ if ($bookId !== false && $bookId !== null) {
         <p class="des-box"><?= $bookData['description'] ?></p>
     </div>
     <footer>
-            <div class="container-fluid ft px-5 py-2">
-                <div class="row p-5 g-4 h2">
-                    <div class="col-sm-12 col-md-4 col-lg-3">
-                        <div class="pb-2 h2">Contact Number</div>
-                        <div class="row px-3">
-                            <div class="col-1 px-0 bi-telephone w-auto "></div>
-                            <div class="col-11 h3">07-6883363</div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 col-lg-3">
-                        <div class="pb-2">Email</div>
-                        <div class="row px-3">
-                            <div class="col-1 px-0 bi-envelope w-auto "></div>
-                            <div class="col-11 h3">abc123@gmail.com</div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 col-lg-6">
-                        <div class="pb-2">Address</div>
-                        <div class="row px-3">
-                            <div class="col-1 px-0 bi-geo-alt w-auto"></div>
-                            <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
-                        </div>
+        <div class="container-fluid ft px-5 py-2">
+            <div class="row p-5 g-4 h2">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2 h2">Contact Number</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-telephone w-auto "></div>
+                        <div class="col-11 h3">07-6883363</div>
                     </div>
                 </div>
 
-                <div class="row px-5 pb-2">
-                    <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2">Email</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-envelope w-auto "></div>
+                        <div class="col-11 h3">abc123@gmail.com</div>
+                    </div>
                 </div>
 
+                <div class="col-sm-12 col-md-4 col-lg-6">
+                    <div class="pb-2">Address</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                        <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                    </div>
+                </div>
             </div>
-        </footer>
 
-        <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
-    
+            <div class="row px-5 pb-2">
+                <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+            </div>
+
+        </div>
+    </footer>
+
+    <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
+
 </body>
 <script src="numberkey.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

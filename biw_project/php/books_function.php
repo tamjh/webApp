@@ -95,9 +95,11 @@ function edit_book($conn)
         $year = $_POST['Year'];
         $description = $_POST['description'];
         $price = $_POST['Price'];
-        $sql = "UPDATE books SET name=?, year=?, description=?, price=? WHERE id=?";
+        $promotion = $_POST['promotion'];
+        
+        $sql = "UPDATE books SET name=?, year=?, description=?, price=?, promotion=? WHERE id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssi", $name, $year, $description, $price, $id);
+        $stmt->bind_param("ssssii", $name, $year, $description, $price, $promotion, $id);
 
         if ($stmt->execute()) {
             header('Location: product.php');

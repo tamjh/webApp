@@ -143,7 +143,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                 <div class="account_box" style="padding: 10px; font-size:2rem;">
                     <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
                 </div>
-                
+
             </div>
         </div>
     </header>
@@ -207,7 +207,18 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                     echo "<img src='/project/biw_project/image/coverpage/{$book['cover']}' alt='{$book['name']}'>";
                     echo "</div>";
                     echo "<p>{$book['name']}</p>";
-                    echo "<p>RM ". number_format($book['price'],2) ."</p>";
+
+                    if ($book['promotion'] != 0) {
+                        $originalPrice = $book['price']; // Store the original price
+                        $book['price'] = $book['price'] - ($book['price'] * ($book['promotion'] / 100));
+                        echo "<div class='price-container'>";
+                        echo "<p class='discounted-price'>RM " . number_format($book['price'], 2) . "</p>";
+                        echo "<p class='original-price' style='text-decoration: line-through;'>RM " . number_format($originalPrice, 2) . "</p>";
+                        echo "</div>";
+                    } else {
+                        echo "<p>RM " . number_format($book['price'], 2) . "</p>";
+                    }
+                    
 
                     // Your code for displaying book details goes here
                     echo "<form action='cart_function.php' method='post'>";
@@ -222,8 +233,10 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                     echo "<a href='details.php?book_id={$book['id']}' class='btn btn-custom'>View details</a>";
                     echo "</div>";
                     echo "</div>";
+
                 }
                 ?>
+
             </div>
             <!-- Pagination -->
             <nav aria-label="Page navigation example">
