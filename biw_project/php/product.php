@@ -228,7 +228,7 @@ $edit_function = edit_book($conn);
                         <input type="text" name="Price" value="<?= $book['price'] ?>">
                     </div>
                     <div class="form-row">
-                        <label for="promotion">Promotion:</label>
+                        <label for="promotion">Promotion percentage (%):</label>
                         <input type="number" name="promotion" value="<?= $book['promotion'] ?>">
                     </div>
                     <div class="button-row">

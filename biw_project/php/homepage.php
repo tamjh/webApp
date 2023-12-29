@@ -219,7 +219,7 @@ $publishers = get_all_publisher($conn);
                     <div class="pb-2">Email</div>
                     <div class="row px-3">
                         <div class="col-1 px-0 bi-envelope w-auto "></div>
-                        <div class="col-11 h3">abc123@gmail.com</div>
+                        <div class="col-11 h3">inspirasi@gmail.com</div>
                     </div>
                 </div>
 

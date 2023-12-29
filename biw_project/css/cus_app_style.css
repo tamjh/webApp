@@ -249,3 +249,16 @@ header .icons a:last-child {
     font-size: 1.8rem;
 }
 
+footer .container-fluid {
+    background-color: black;
+    color: white;
+  }
+
+  .form-group select {
+    width: 100%; /* Set the same width as the input field */
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1.6rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}

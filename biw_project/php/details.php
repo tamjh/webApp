@@ -275,7 +275,7 @@ if ($bookId !== false && $bookId !== null) {
                     <div class="pb-2">Email</div>
                     <div class="row px-3">
                         <div class="col-1 px-0 bi-envelope w-auto "></div>
-                        <div class="col-11 h3">abc123@gmail.com</div>
+                        <div class="col-11 h3">inspirasi@gmail.com</div>
                     </div>
                 </div>
 
@@ -302,6 +302,11 @@ if ($bookId !== false && $bookId !== null) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <script>
+    function redirectToAccount() {
+        // Redirect to cus_acc.php when the "Account" word is clicked
+        window.location.href = 'cus_acc.php';
+    }
+
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }

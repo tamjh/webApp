@@ -62,11 +62,13 @@ require_once "database.php";
                 </ul>
 
                 <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-                    <a href="cart.php" class="fas fa-cart-plus" style="text-decoration: none;"></a>
+                    <a href="cart.php" class="fas fa-cart-plus" style="text-decoration: none;">
+                        <span id="cartItemCount" class="cart-item-count">(<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : '0' ?>)</span>
+                    </a>
                     <div class="dropdown">
                         <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            <p  onclick="redirectToAccount()" style="font-size:2rem;">Account</p>
+                            <p onclick="redirectToAccount()" style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <?php
                                 if ($_SESSION['customer_name'] == "user") {
@@ -82,6 +84,7 @@ require_once "database.php";
                 <div class="account_box" style="padding: 10px; font-size:2rem;">
                     <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
                 </div>
+
             </div>
         </div>
     </header>
@@ -101,30 +104,30 @@ require_once "database.php";
                             <div class="payment-plan">
 
                                 <div class="payment-plan-info">
-                                    <div class="payment-plan-info-name">Cart</div>
+                                    <div class="payment-plan-info-name" style="font-size:3rem;">Cart</div>
 
                                 </div>
-                                <a href="cart.php" class="payment-plan-change">Change</a>
+                                <a href="cart.php" class="payment-plan-change" style="font-size:1.5rem;">Change</a>
                             </div>
                             <div class="payment-summary">
                                 <div class="payment-summary-item">
-                                    <div class="payment-summary-name">Items Price</div>
+                                    <div class="payment-summary-name" style="font-size:2rem;">Items Price</div>
                                     <div class="payment-summary-price">
-                                        <p>RM <?= number_format($_SESSION['total'], 2) ?></p>
+                                        <p style="font-size:2rem;">RM <?= number_format($_SESSION['total'], 2) ?></p>
                                     </div>
                                 </div>
                                 <div class="payment-summary-item">
-                                    <div class="payment-summary-name">Shipping Fee</div>
+                                    <div class="payment-summary-name" style="font-size:2rem;">Shipping Fee</div>
                                     <div class="payment-summary-price">
-                                        <p>RM <?= number_format($_SESSION['shipping'], 2) ?></p>
+                                        <p style="font-size:2rem;">RM <?= number_format($_SESSION['shipping'], 2) ?></p>
                                     </div>
                                 </div>
 
                                 <div class="payment-summary-divider"></div>
                                 <div class="payment-summary-item payment-summary-total">
-                                    <div class="payment-summary-name">Total</div>
+                                    <div class="payment-summary-name" style="font-size:2rem;">Total</div>
                                     <div class="payment-summary-price">
-                                        <p>RM <?= number_format($_SESSION['final'], 2) ?></p>
+                                        <p style="font-size:2rem;">RM <?= number_format($_SESSION['final'], 2) ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +179,40 @@ require_once "database.php";
             </div>
         </div>
     </section>
+    <footer>
+        <div class="container-fluid ft px-5 py-2">
+            <div class="row p-5 g-4 h2">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2 h2">Contact Number</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-telephone w-auto "></div>
+                        <div class="col-11 h3">07-6883363</div>
+                    </div>
+                </div>
 
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2">Email</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-envelope w-auto "></div>
+                        <div class="col-11 h3">inspirasi@gmail.com</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-6">
+                    <div class="pb-2">Address</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                        <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row px-5 pb-2">
+                <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+            </div>
+
+        </div>
+    </footer>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

@@ -569,3 +569,16 @@ footer .container-fluid {
     background: white;
     color:orange;
 }
+
+.forempty{
+    width:100%;
+    background-color: white;
+    height: fit-content;
+    align-items: center;
+
+}
+
+.empty{
+    font-size: 3rem;
+    font-family: monospace;
+}

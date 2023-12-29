@@ -148,7 +148,40 @@ if (isset($_POST['update_phone'])) {
             </div>
         </div>
     </div>
+    <footer>
+        <div class="container-fluid ft px-5 py-2">
+            <div class="row p-5 g-4 h2">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2 h2">Contact Number</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-telephone w-auto "></div>
+                        <div class="col-11 h3">07-6883363</div>
+                    </div>
+                </div>
 
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2">Email</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-envelope w-auto "></div>
+                        <div class="col-11 h3">inspirasi@gmail.com</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-6">
+                    <div class="pb-2">Address</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                        <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row px-5 pb-2">
+                <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+            </div>
+
+        </div>
+    </footer>
 
 
 </body>

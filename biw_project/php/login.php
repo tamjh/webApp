@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik Bubbles">
     <link rel="stylesheet" type="text/css" href="/project/biw_project/css/style.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Rubik Bubbles">
     
 </head>
 
 <body>
-
+    
     <?php
     session_start();
 
@@ -24,14 +24,14 @@
     $error = [];
 
     if (isset($_POST["login"])) {
-        $uname = htmlspecialchars($_POST["uname"]);
+        $uemail = htmlspecialchars($_POST["uemail"]);
         $upassword = $_POST["upassword"];
         require_once "database.php";
 
-        $sql = "SELECT id, full_name, email, phone_number, usertype, password FROM users WHERE full_name = ?";
+        $sql = "SELECT id, full_name, email, phone_number, usertype, password FROM users WHERE email = ?";
 
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $uname);
+        mysqli_stmt_bind_param($stmt, "s", $uemail);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
@@ -66,6 +66,7 @@
                     }
 
                     if ($user["usertype"] === "admin") {
+                        $_SESSION['uid'] = $user['id'];
                         header("Location: admin_dashboard.php");
                     } else {
                         $_SESSION['uid'] = $user['id'];
@@ -99,7 +100,7 @@
         ?>
 
         
-        <input type="text" class="form-control" name="uname" placeholder="Enter name">
+        <input type="text" class="form-control" name="uemail" placeholder="Enter email">
         
 
         <div class="input-container">

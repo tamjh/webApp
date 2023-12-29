@@ -160,7 +160,7 @@ header .icons a:last-child {
     margin-bottom: 4px;
 }
 .payment-header-description {
-    font-size: 15px;
+    font-size: 20px;
     color: var(--gray-200);
     line-height: 1.5;
 }
@@ -187,11 +187,13 @@ header .icons a:last-child {
     position: relative;
     padding-top: 8px;
     overflow: hidden;
+    
 }
 .payment-plan {
     display: flex;
     align-items: center;
     padding: 12px;
+    font-size: 2rem;
 }
 .payment-plan-type {
     width: 40px;
@@ -364,6 +366,7 @@ input:checked + .payment-method-item::before {
     padding: 24px 16px 8px 16px;
     width: 100%;
     transition: all .15s ease-in-out;
+    font-size: 15px;
 }
 .payment-form-label {
     position: absolute;
@@ -372,6 +375,7 @@ input:checked + .payment-method-item::before {
     left: 16px;
     color: var(--gray-400);
     pointer-events: none;
+    font-size: 2rem;
     transition: all .1s ease-in-out;
 }
 .payment-form-control:focus {
@@ -409,8 +413,9 @@ input:checked + .payment-method-item::before {
     cursor: pointer;
     color: var(--white);
     font-weight: 600;
-    padding: 16px;
+    padding: 10px;
     transition: all .15s ease-in-out;
+    font-size: 3rem;
 }
 .payment-form-submit-button:hover {
     background-color: var(--indigo-600);
@@ -709,3 +714,10 @@ input:checked + .payment-method-item::before {
     --rose-900: #881337;
     --rose-950: #4c0519;
 }
+
+footer .container-fluid {
+    background-color: black;
+    color: white;
+  }
+
+ 

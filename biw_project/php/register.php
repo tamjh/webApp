@@ -30,11 +30,11 @@
             $errors[] = "All fields are required";
         }
 
-        if (!filter_var($uemail, FILTER_VALIDATE_EMAIL)) {
+        else if (!filter_var($uemail, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Email is not valid";
         }
 
-        if ($upassword !== $repeat_password) {
+        else if ($upassword !== $repeat_password) {
             $errors[] = "Passwords do not match";
         }
 

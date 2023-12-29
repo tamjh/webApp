@@ -54,7 +54,7 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </head>
 
 <body>
-<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -99,7 +99,7 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <div class="account_box" style="padding: 10px; font-size:2rem;">
                     <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
                 </div>
-                
+
             </div>
         </div>
     </header>
@@ -108,15 +108,22 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <div class="page">
         <div class="side">
             <div class="side-bar">
-            <input type="button" class="side-btn" value="Account" onclick="redirectToAccount()"><br>
-    <input type="button" class="side-btn" value="Contact and Address" onclick="redirectToContactAndAddress()"><br>
-    <input type="button" class="side-btn" value="Order History" onclick="redirectToOrderHistory()">
+                <input type="button" class="side-btn" value="Account" onclick="redirectToAccount()"><br>
+                <input type="button" class="side-btn" value="Contact and Address" onclick="redirectToContactAndAddress()"><br>
+                <input type="button" class="side-btn" value="Order History" onclick="redirectToOrderHistory()">
             </div>
         </div>
         <div class="box-container">
             <?php
-            foreach ($orders as $order) {
+            if (empty($orders)) {
                 echo "
+                <div class='forempty'>
+                <p class='empty'>Haven't bought anything yet.</p>
+                </div>
+                ";
+            } else {
+                foreach ($orders as $order) {
+                    echo "
         <div class='box'>
             <div class='container'>
                 <div class='info'>
@@ -124,61 +131,62 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <p>Order Date: " . substr($order['created'], 0, 10) . "</p>
                     ";
 
-                if ($statuses == 0 || empty($statuses)) {
-                    echo "Undefined";
-                } else {
-                    $statusfound = false;
-                    foreach ($statuses as $status) {
-                        if ($status['id'] == $order['status']) {
-                            echo "<p class='scondition'>Order Status: <span class='applying'>{$status['condition']}</span></p>";
-                            $statusfound = true;
-                            break;
+                    if ($statuses == 0 || empty($statuses)) {
+                        echo "Undefined";
+                    } else {
+                        $statusfound = false;
+                        foreach ($statuses as $status) {
+                            if ($status['id'] == $order['status']) {
+                                echo "<p class='scondition'>Order Status: <span class='applying'>{$status['condition']}</span></p>";
+                                $statusfound = true;
+                                break;
+                            }
+                        }
+                        if (!$statusfound) {
+                            echo "Undefined";
                         }
                     }
-                    if (!$statusfound) {
-                        echo "Undefined";
-                    }
-                }
 
-                echo "
+                    echo "
                 <p class='highlight'>Total Price: RM " . number_format($order['grand_total'], 2) . "</p>
                 </div>
             <div class='img-container'>
     ";
 
-                // Fetch and display order items for each order
-                $orderItemId = $order['id'];
-                $orderItemsSql = "SELECT * FROM order_items WHERE order_id = ?";
-                $orderItemsStmt = mysqli_prepare($conn, $orderItemsSql);
-                mysqli_stmt_bind_param($orderItemsStmt, 'i', $orderItemId);
-                $orderItemsStmt->execute();
-                $orderresult = mysqli_stmt_get_result($orderItemsStmt);
-                $orderItems = mysqli_fetch_all($orderresult, MYSQLI_ASSOC);
+                    // Fetch and display order items for each order
+                    $orderItemId = $order['id'];
+                    $orderItemsSql = "SELECT * FROM order_items WHERE order_id = ?";
+                    $orderItemsStmt = mysqli_prepare($conn, $orderItemsSql);
+                    mysqli_stmt_bind_param($orderItemsStmt, 'i', $orderItemId);
+                    $orderItemsStmt->execute();
+                    $orderresult = mysqli_stmt_get_result($orderItemsStmt);
+                    $orderItems = mysqli_fetch_all($orderresult, MYSQLI_ASSOC);
 
-                foreach ($orderItems as $orderItem) {
-                    $productId = $orderItem['product_id'];
+                    foreach ($orderItems as $orderItem) {
+                        $productId = $orderItem['product_id'];
 
-                    // Fetch book details based on product_id
-                    $bookDetailsSql = "SELECT * FROM books WHERE id = ?";
-                    $bookDetailsStmt = mysqli_prepare($conn, $bookDetailsSql);
-                    mysqli_stmt_bind_param($bookDetailsStmt, 'i', $productId);
-                    $bookDetailsStmt->execute();
-                    $bookResult = mysqli_stmt_get_result($bookDetailsStmt);
-                    $bookDetails = mysqli_fetch_assoc($bookResult);
+                        // Fetch book details based on product_id
+                        $bookDetailsSql = "SELECT * FROM books WHERE id = ?";
+                        $bookDetailsStmt = mysqli_prepare($conn, $bookDetailsSql);
+                        mysqli_stmt_bind_param($bookDetailsStmt, 'i', $productId);
+                        $bookDetailsStmt->execute();
+                        $bookResult = mysqli_stmt_get_result($bookDetailsStmt);
+                        $bookDetails = mysqli_fetch_assoc($bookResult);
 
-                    echo "
+                        echo "
             <div class='img1'>
                 <img class='img' src='/project/biw_project/image/coverpage/{$bookDetails['cover']}' alt='{$bookDetails['name']}'><br>
                 <p>(x{$orderItem['quantity']})</p>
             </div>
         ";
-                }
+                    }
 
-                echo "
+                    echo "
             </div>
         </div>
     </div>
     ";
+                }
             }
             ?>
         </div>
@@ -199,7 +207,7 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <div class="pb-2">Email</div>
                     <div class="row px-3">
                         <div class="col-1 px-0 bi-envelope w-auto "></div>
-                        <div class="col-11 h3">abc123@gmail.com</div>
+                        <div class="col-11 h3">inspirasi@gmail.com</div>
                     </div>
                 </div>
 
@@ -239,10 +247,7 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
     }
 
-    function redirectToAccount() {
-        // Redirect to cus_acc.php when the "Account" word is clicked
-        window.location.href = 'cus_acc.php';
-    }
+
 
     function redirectToAccount() {
         // Redirect to cus_acc.php when "Account" button is clicked

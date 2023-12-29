@@ -46,7 +46,7 @@ $sql = "SELECT
             o.status
         FROM orders o
         JOIN users u ON o.customer_id = u.id
-        JOIN address a ON o.customer_id = a.customer_id";
+        JOIN address a ON o.customer_id = a.customer_id ORDER BY created DESC" ;
 $result = mysqli_query($conn, $sql);
 
 $orders = array();

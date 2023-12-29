@@ -3,8 +3,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 95vh;
-    background: rgb(121, 181, 228);
-    background: linear-gradient(90deg, rgba(121, 181, 228, 1) 5%, rgba(124, 181, 230, 1) 49%, rgba(159, 205, 247, 1) 94%);
+   
+    background-image: url('bgbanner.jpg');
+    background-attachment: fixed;
+    background-size: 100%;
+    
 }
 
 * {
@@ -12,6 +15,9 @@ body {
     box-sizing: border-box;
 }
 
+.bg{
+    background-size: cover;
+}
 
 .hello-box p{
     font-size: 40px;
@@ -29,7 +35,7 @@ h2 {
 }
 
 form {
-    background: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
+    background: rgba(255, 255, 255, 0.5); /* Glassmorphism effect */
     padding: 30px;
     width: 500px;
     border-radius: 20px 80px;

@@ -41,7 +41,7 @@ require_once "cart_function.php";
 </head>
 
 <body>
-<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">Inspirasi<span>.</span></a>
@@ -86,7 +86,7 @@ require_once "cart_function.php";
                 <div class="account_box" style="padding: 10px; font-size:2rem;">
                     <p>Hello, <span><?= $_SESSION['customer_name']; ?></span></p>
                 </div>
-                
+
             </div>
         </div>
     </header>
@@ -99,32 +99,39 @@ require_once "cart_function.php";
         <h1 class="c_title">My Cart</h1>
     </div>
     <br><br>
-    
+
 
     <div class="page">
         <div class="cart">
             <div class="card">
-                <table>
+                <?php
+                $no = 0; // Initialize the $no variable
+                $total = 0;
+                
+                $_SESSION['total'] = 0;
+                ?>
+                <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) : ?>
+
+                    <table>
 
 
-                    <tbody>
-                        <?php
-                        $no = 1; // Initialize the $no variable
-                        $total = 0;
-                        $_SESSION['total'] = 0;
-                        if (isset($_SESSION['cart'])) {
-                            // echo '<pre>';
-                            // print_r($_SESSION['cart']);
-                            // echo '</pre>';
-                            // $imagePath = '/project/biw_project/image/coverpage/sheclock.jpg';
-                            // echo "<img src='$imagePath' alt='Test Image'>";
-                            foreach ($_SESSION['cart'] as $key => $value) {
-                                // Check if the key exists before trying to access it
-                                $productImage = isset($value['productimage']) ? $value['productimage'] : '';
-                                $total = (float)$value['productquantity'] * (float)$value['productprice'];
+                        <tbody>
+                            <?php
 
-                                $_SESSION['total'] += $total;
-                                echo "
+
+                            if (isset($_SESSION['cart'])) {
+                                // echo '<pre>';
+                                // print_r($_SESSION['cart']);
+                                // echo '</pre>';
+                                // $imagePath = '/project/biw_project/image/coverpage/sheclock.jpg';
+                                // echo "<img src='$imagePath' alt='Test Image'>";
+                                foreach ($_SESSION['cart'] as $key => $value) {
+                                    // Check if the key exists before trying to access it
+                                    $productImage = isset($value['productimage']) ? $value['productimage'] : '';
+                                    $total = (float)$value['productquantity'] * (float)$value['productprice'];
+
+                                    $_SESSION['total'] += $total;
+                                    echo "
                             
                                     <form action='cart_function.php' method='POST'>
                                     <tr>
@@ -134,7 +141,7 @@ require_once "cart_function.php";
 
                                     <td class='ctr-name'>{$value['productname']}</td>
                                     
-                                    <td>RM ". number_format($value['productprice'],2) ."</td>
+                                    <td>RM " . number_format($value['productprice'], 2) . "</td>
                                     
                                     <td class='btn-q'>
                     <span class='decre'><button type='button' class='q1' onclick='decreaseQuantity({$no})'><i class='fa-solid fa-minus'></i></button></span>
@@ -152,22 +159,26 @@ require_once "cart_function.php";
                                     </tr>
                                     </form>
                                     ";
-                                $no++;
+                                    $no++;
+                                }
+
+                                // Calculate shipping fee based on the total
+                                if ($_SESSION['total'] > 20) {
+                                    $_SESSION['shipping'] = 0; // Free shipping if total is more than 20
+                                } else {
+                                    $_SESSION['shipping'] = 5; // Set shipping fee to 5 if total is 20 or less
+                                }
                             }
 
-                            // Calculate shipping fee based on the total
-                            if ($_SESSION['total'] > 20) {
-                                $_SESSION['shipping'] = 0; // Free shipping if total is more than 20
-                            } else {
-                                $_SESSION['shipping'] = 5; // Set shipping fee to 5 if total is 20 or less
-                            }
-                        }
+                            ?>
 
-                        ?>
-
-                    </tbody>
-                </table>
-                
+                        </tbody>
+                    </table>
+                <?php else : 
+                   $_SESSION['shipping'] = 0; 
+                    ?>
+                    <p class="empty">The cart is empty.</p>
+                <?php endif; ?>
             </div>
         </div>
         <div class="total">
@@ -190,41 +201,41 @@ require_once "cart_function.php";
         </div>
     </div>
     <footer>
-            <div class="container-fluid ft px-5 py-2">
-                <div class="row p-5 g-4 h2">
-                    <div class="col-sm-12 col-md-4 col-lg-3">
-                        <div class="pb-2 h2">Contact Number</div>
-                        <div class="row px-3">
-                            <div class="col-1 px-0 bi-telephone w-auto "></div>
-                            <div class="col-11 h3">07-6883363</div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 col-lg-3">
-                        <div class="pb-2">Email</div>
-                        <div class="row px-3">
-                            <div class="col-1 px-0 bi-envelope w-auto "></div>
-                            <div class="col-11 h3">inspirasi@gmail.com</div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 col-lg-6">
-                        <div class="pb-2">Address</div>
-                        <div class="row px-3">
-                            <div class="col-1 px-0 bi-geo-alt w-auto"></div>
-                            <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
-                        </div>
+        <div class="container-fluid ft px-5 py-2">
+            <div class="row p-5 g-4 h2">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2 h2">Contact Number</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-telephone w-auto "></div>
+                        <div class="col-11 h3">07-6883363</div>
                     </div>
                 </div>
 
-                <div class="row px-5 pb-2">
-                    <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2">Email</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-envelope w-auto "></div>
+                        <div class="col-11 h3">inspirasi@gmail.com</div>
+                    </div>
                 </div>
 
+                <div class="col-sm-12 col-md-4 col-lg-6">
+                    <div class="pb-2">Address</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                        <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                    </div>
+                </div>
             </div>
-        </footer>
 
-        <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
+            <div class="row px-5 pb-2">
+                <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+            </div>
+
+        </div>
+    </footer>
+
+    <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
 </body>
 <script src="numberkey.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -242,6 +253,7 @@ require_once "cart_function.php";
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
+
     function redirectToAccount() {
         // Redirect to cus_acc.php when the "Account" word is clicked
         window.location.href = 'cus_acc.php';

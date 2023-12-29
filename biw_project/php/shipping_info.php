@@ -186,26 +186,26 @@ if (isset($_POST['submit'])) {
                 <div class="row mx-sm-2 mx-md-3 mx-xl-4 mb-3">
                     <div cla#ss="col-12 col-md-4">
                         <label class="py-1 py-md-2" for="unit">Unit</label><br>
-                        <input type="text" name="unit" id="unit" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['unit']) ? $_SESSION['unit'] : 'Unit' ?>">
+                        <input type="text" name="unit" placeholder="Unit" id="unit" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['unit']) ? $_SESSION['unit'] : '' ?>">
                     </div>
                     <div class="col-12 col-md-8">
                         <label class="py-1 py-md-2" for="street">Street</label><br>
-                        <input type="text" name="street" placeholder="Street" id="street" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['street']) ? $_SESSION['street'] : 'Street' ?>">
+                        <input type="text" name="street" placeholder="Street" id="street" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['street']) ? $_SESSION['street'] : '' ?>">
                     </div>
                 </div>
 
                 <div class="row mx-sm-2 mx-md-3 mx-xl-4 ">
                     <div class="col-12 col-md-4 col-xl-2">
                         <label class="py-1 py-md-2" for="postcode">Postcode</label><br>
-                        <input type="text" name="postcode" placeholder="Postcode" id="postcode" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['postcode']) ? $_SESSION['postcode'] : 'Postcode' ?>">
+                        <input type="text" name="postcode" placeholder="Postcode" id="postcode" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['postcode']) ? $_SESSION['postcode'] : '' ?>">
                     </div>
                     <div class="col-12 col-md-4 col-xl-5">
                         <label class="py-1 py-md-2" for="city">City</label><br>
-                        <input type="text" name="city" placeholder="City" id="city" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['city']) ? $_SESSION['city'] : 'City' ?>">
+                        <input type="text" name="city" placeholder="City" id="city" class="border rounded-2 px-2 w-100 " value="<?= isset($_SESSION['city']) ? $_SESSION['city'] : '' ?>">
                     </div>
                     <div class="col-12 col-md-4 col-xl-5">
                         <label class="py-1 py-md-2" for="state">State</label><br>
-                        <input type="text" name="state" placeholder="State" id="state" class="border rounded-2 px-2 w-100  " value="<?= isset($_SESSION['state']) ? $_SESSION['state'] : 'State' ?>">
+                        <input type="text" name="state" placeholder="State" id="state" class="border rounded-2 px-2 w-100  " value="<?= isset($_SESSION['state']) ? $_SESSION['state'] : '' ?>">
                     </div>
                 </div>
 
@@ -228,6 +228,40 @@ if (isset($_POST['submit'])) {
 
         </form>
     </div>
+    <footer>
+        <div class="container-fluid ft px-5 py-2">
+            <div class="row p-5 g-4 h2">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2 h2">Contact Number</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-telephone w-auto "></div>
+                        <div class="col-11 h3">07-6883363</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="pb-2">Email</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-envelope w-auto "></div>
+                        <div class="col-11 h3">inspirasi@gmail.com</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-6">
+                    <div class="pb-2">Address</div>
+                    <div class="row px-3">
+                        <div class="col-1 px-0 bi-geo-alt w-auto"></div>
+                        <div class="col-11 h3">55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, 82000, Pontian, Johor, Malaysia.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row px-5 pb-2">
+                <div class="col text-center "><span class="bi-c-circle pe-1"></span>2023 Inspirasi Bookstore. All Rights Reserved</div>
+            </div>
+
+        </div>
+    </footer>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

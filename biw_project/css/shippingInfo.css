@@ -142,3 +142,8 @@ textarea {
     background: rgb(255, 157, 0) !important;
     border: 1px orange solid;
 }
+
+footer .container-fluid {
+    background-color: black;
+    color: white;
+  }
