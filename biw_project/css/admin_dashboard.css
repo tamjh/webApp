@@ -300,24 +300,24 @@ header .icons a:last-child {
 }
 
 .bg-blue {
-    background-color: rgb(108, 161, 231); /* Set your preferred blue color */
-    color: white; /* Set text color for better contrast */
+    background-color: rgb(173, 216, 230); /* Set your preferred blue color */
+    color: black; /* Set text color for better contrast */
     border-radius: 10px;
     
     
 }
 
 .bg-yellow {
-    background-color: rgb(222, 180, 55); /* Set your preferred yellow color */
-    color: #fff;
+    background-color: rgb(238, 232, 170); /* Set your preferred yellow color */
+    color: #lack;
     border-radius: 10px;
    
     
 }
 
 .bg-green {
-    background-color: green; /* Set your preferred green color */
-    color: white; /* Set text color for better contrast */
+    background-color: rgb(144, 238, 144); /* Set your preferred green color */
+    color: black; /* Set text color for better contrast */
     border-radius: 10px;
  
     

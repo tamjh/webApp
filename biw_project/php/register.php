@@ -37,6 +37,9 @@
         else if ($upassword !== $repeat_password) {
             $errors[] = "Passwords do not match";
         }
+        else if(strlen($upassword)<8){
+            $errors[] = "Password is too short";
+        }
 
         require_once "database.php";
         $sql = "SELECT * FROM users WHERE email = '$uemail'";
@@ -58,8 +61,8 @@
             if ($prepareStmt) {
                 mysqli_stmt_bind_param($stmt, "ssss", $uname, $uemail, $passwordHash, $contact_number);
                 mysqli_stmt_execute($stmt);
-                $user_id = mysqli_insert_id($conn);  // Get the last inserted user ID
-                $_SESSION['uid'] = $user_id;  // Store the user ID in the session
+                $user_id = mysqli_insert_id($conn); 
+                $_SESSION['uid'] = $user_id; 
                 $success = true;
             } else {
                 die("Something went wrong");
