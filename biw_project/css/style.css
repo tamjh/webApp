@@ -63,6 +63,7 @@ input {
 
 .btn1,
 .btn2 {
+    
     float: right;
     background: rgba(0, 0, 0, 0.7); /* Adjust background color for buttons */
     color: #fff;
@@ -73,6 +74,9 @@ input {
     cursor: pointer;
     width: 100px;
     margin-bottom: 0;
+    
+    
+    
 }
 
 .btn1:hover,
@@ -84,6 +88,20 @@ input {
 .connect_register {
     color: white; /* Change text color to white */
     text-decoration: none;
+}
+
+
+.register-link {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.register-link img {
+    margin-right: 10px;
+    filter: invert(1); 
+    height: 40px;
+    width: 40px;
 }
 
 .connect_login {
@@ -149,4 +167,8 @@ input[type="password"] {
     margin-bottom: 10px;
     margin-right: 0%;
     cursor: pointer;
+}
+
+.loginbtn {
+    position: relative;
 }

@@ -101,7 +101,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
     <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
-        <a href="#" class="navbar-brand" style="font-size: 3rem">
+            <a href="#" class="navbar-brand" style="font-size: 3rem">
                 <span><img src="/project/biw_project/image/icon/logo.png" alt="Inspirasi Sejahtera" style="width: 100px; height: auto;"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,12 +132,18 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                             <form method="post">
                                 <?php
                                 if ($_SESSION['customer_name'] == "user") {
-                                    echo "<button type='submit' name='logout' class='logout'>Log In</button>";
+                                    $_SESSION['usertype'] = "customer";
+                                    echo "<button type='submit' name='logout' class='logout'><i class='fa-solid fa-right-to-bracket'></i>Login</button>";
                                 } else {
-                                    echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                    echo "<button type='submit' name='logout' class='logout'>
+                
+                Logout
+            </button>";
                                 }
                                 ?>
                             </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -225,7 +231,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                     } else {
                         echo "<p>RM " . number_format($book['price'], 2) . "</p>";
                     }
-                    
+
 
                     // Your code for displaying book details goes here
                     echo "<form action='cart_function.php' method='post'>";
@@ -240,7 +246,6 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                     echo "<a href='details.php?book_id={$book['id']}' class='btn btn-custom'>View details</a>";
                     echo "</div>";
                     echo "</div>";
-
                 }
                 ?>
 

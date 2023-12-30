@@ -23,7 +23,14 @@ require_once "database.php";
 require_once "books_function.php";
 require_once "cart_function.php";
 
+if (isset($_POST['clear_cart'])) {
+    // Clear the cart
+    $_SESSION['cart'] = array();
 
+    // Redirect back to the cart page
+    header("Location: cart.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +51,7 @@ require_once "cart_function.php";
     <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
-        <a href="#" class="navbar-brand" style="font-size: 3rem">
+            <a href="#" class="navbar-brand" style="font-size: 3rem">
                 <span><img src="/project/biw_project/image/icon/logo.png" alt="Inspirasi Sejahtera" style="width: 100px; height: auto;"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +84,10 @@ require_once "cart_function.php";
                                 if ($_SESSION['customer_name'] == "user") {
                                     echo "<button type='submit' name='logout' class='logout'>Log In</button>";
                                 } else {
-                                    echo "<button type='submit' name='logout' class='logout'>Logout</button>";
+                                    echo "<button type='submit' name='logout' class='logout'>
+                                    <img src='/project/biw_project/image/icon/logout.png' style='width:20px; height:20px;'>
+                                            Logout
+                                        </button>";
                                 }
                                 ?>
                             </form>
@@ -114,7 +124,7 @@ require_once "cart_function.php";
                 <?php
                 $no = 0; // Initialize the $no variable
                 $total = 0;
-                
+
                 $_SESSION['total'] = 0;
                 ?>
                 <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) : ?>
@@ -180,10 +190,17 @@ require_once "cart_function.php";
                             ?>
 
                         </tbody>
+
                     </table>
-                <?php else : 
-                   $_SESSION['shipping'] = 0; 
-                    ?>
+                    <form action="" method="POST">
+                        <button type="submit" name="clear_cart" class="btn btn-clear">
+                            <img src="/project/biw_project/image/icon/clear.png" alt="">
+                            Clear Cart
+                        </button>
+                    </form>
+                <?php else :
+                    $_SESSION['shipping'] = 0;
+                ?>
                     <p class="empty">The cart is empty.</p>
                 <?php endif; ?>
             </div>
@@ -201,9 +218,12 @@ require_once "cart_function.php";
                 $_SESSION['final'] = $_SESSION['total'] + $_SESSION['shipping'];
                 ?>
                 <form action="shipping_info.php" method="POST">
-                    <button type="submit" name="payment" class="btn btn-checkout">Checkout</button>
+                    <button type="submit" name="payment" class="btn btn-checkout">
+                        <img src="/project/biw_project/image/icon/checkout.png" class="ic" style="width:40px; height:40px;">
+                        Checkout
+                    </button>
                 </form>
-                <a href="shop.php"><button>Continue shopping</button></a>
+                <a href="shop.php"><button><i class="fa-solid fa-cart-shopping" style="font-size:20px"></i> Continue shopping</button></a>
             </div>
         </div>
     </div>

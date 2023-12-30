@@ -143,3 +143,26 @@ a{
   .visi p{
     font-family:Diphylleia;
   }
+
+  /* Add this CSS */
+.contact-box .contact-info,
+.address-box img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contact-box h2,
+.address-box h2 {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.contact-info p {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.address-box p {
+  font-size: 1.6rem;
+}

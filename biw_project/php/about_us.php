@@ -49,50 +49,56 @@ require_once "database.php";
 
 
 
-  <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
-    <div class="container-fluid">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+        <div class="container-fluid">
 
-    <a href="#" class="navbar-brand" style="font-size: 3rem">
+            <a href="#" class="navbar-brand" style="font-size: 3rem">
                 <span><img src="/project/biw_project/image/icon/logo.png" alt="Inspirasi Sejahtera" style="width: 100px; height: auto;"></span>
             </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
-          <li class="nav-item">
-            <a class="nav-link" href="homepage.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about_us.php">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="shop.php">Shop</a>
-          </li>
-        </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homepage.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about_us.php">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.php">Shop</a>
+                    </li>
+                </ul>
 
-        <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
-          <a href="cart.php" class="fas fa-cart-plus" style="text-decoration: none;">
-            <span id="cartItemCount" class="cart-item-count">(<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : '0' ?>)</span>
-          </a>
-          <div class="dropdown">
-            <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
-            <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-              <p onclick="redirectToAccount()" style="font-size:2rem;">Account</p>
-              <form method="post">
-                <?php
-                if ($_SESSION['customer_name'] == "user") {
-                  echo "<button type='submit' name='logout' class='logout'>Log In</button>";
-                } else {
-                  echo "<button type='submit' name='logout' class='logout'>Logout</button>";
-                }
-                ?>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="account_box" style="padding: 10px; font-size:2rem;">
+                <div class="icons" style="text-decoration: none; font-size: 2.5rem; display: flex;">
+                    <a href="cart.php" class="fas fa-cart-plus" style="text-decoration: none;">
+                        <span id="cartItemCount" class="cart-item-count">(<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : '0' ?>)</span>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="fas fa-user" onclick="myFunction()" style="text-decoration: none;"></a>
+                        <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
+                            <p onclick="redirectToAccount()" style="font-size:2rem;">Account</p>
+                            <form method="post">
+                                <?php
+                                if ($_SESSION['customer_name'] == "user") {
+                                    $_SESSION['usertype'] = "customer";
+                                    echo "<button type='submit' name='logout' class='logout'><i class='fa-solid fa-right-to-bracket'></i>Login</button>";
+                                } else {
+                                    echo "<button type='submit' name='logout' class='logout'>
+                
+                Logout
+            </button>";
+                                }
+                                ?>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="account_box" style="padding: 10px; font-size:2rem;">
                     <?php
                     if ($_SESSION['usertype'] == "admin") {
                         echo "<a href='admin_dashboard.php' style='text-decoration:none;'><p style='color:white;'>Back To Dashboard</p></a>";
@@ -102,9 +108,9 @@ require_once "database.php";
                     ?>
                 </div>
 
-      </div>
-    </div>
-  </header>
+            </div>
+        </div>
+    </header>
 
   <div class="intro-text">
     <h1 class="title">ABOUT US</h1>
@@ -113,8 +119,12 @@ require_once "database.php";
   <section>
 
     <div class="contact-box">
-      <h2>Contact:</h2>
-      <p>Phone: 07-688 3363</p>
+      <h2>Contact:</h2><br>
+      
+      <p><img src="/project/biw_project/image/icon/phone.png" style="width:30px; height:30px; margin-right:5px;"></span>Phone:<span> 07-688 3363</p>
+
+      <br><br>
+      <i class="fa-solid fa-envelope" style="font-size:30px;"></i>
       <h2>Email:</h2>
       <a href="mailto:inspirasi@gmail.com">
         <p style="color:black;">inspirasi@gmail.com</p>
@@ -132,6 +142,7 @@ require_once "database.php";
     </div>
 
     <div class="address-box">
+      <img src="/project/biw_project/image/icon/location.png" style="width:30px; height:30px;"></span>
       <h2>Address:</h2>
       <p>55 & 56, Aras Bawah, Bangunan Baitulmal, Jalan Delima, Pusat Perdagangan Pontian, Pontian, 82000, Pontian, Johor, 82000</p>
       <h2>Location:</h2>

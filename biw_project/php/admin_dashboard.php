@@ -229,7 +229,7 @@ if ($recentCustomersResult) {
                                 <td><?= $order['created'] ?></td>
                                 <td class="orderNumber"><a href="order_list.php?order_number=<?= $order['order_number'] ?>"><?= $order['order_number'] ?></a></td>
                                 <td><?= $order['full_name'] ?></td>
-                                <td>RM <?= $order['grand_total'] ?></td>
+                                <td>RM <?= number_format($order['grand_total'], 2) ?></td>
                                 <td>Paid</td>
                                 <td class="text-center status <?= getStatusColorClass($order['condition']) ?>">
                                     <?= $order['condition'] ?>

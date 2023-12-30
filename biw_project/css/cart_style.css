@@ -97,6 +97,16 @@ header .icons a:last-child {
     cursor: pointer;
 }
 
+.logout {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.logout img {
+    margin-right: 5px; /* Adjust the margin between the icon and the text */
+}
+
+
 .show {
     display: block;
 }
@@ -177,6 +187,7 @@ table {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
 
 th, td {
     padding: 15px;
@@ -346,6 +357,10 @@ footer .container-fluid {
     z-index: 1;
 }
 
+.btn-checkout:hover .ic {
+    filter:invert(1);
+}
+
 .top i {
     vertical-align: middle; /* Align the icon vertically */
 }
@@ -358,4 +373,21 @@ footer .container-fluid {
 .empty{
     font-size: 3rem;
     font-family: monospace;
+}
+
+.btn-clear{
+    padding:30px; 
+    font-size: 2rem;
+    width:20%;
+    margin-top:10px;
+    float:right;
+}
+
+.btn-clear:hover{
+    background: rgb(255, 136, 0);
+    color:white;
+}
+
+.btn-clear:hover img {
+    filter: brightness(0) invert(1);
 }

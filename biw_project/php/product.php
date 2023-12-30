@@ -188,15 +188,20 @@ $edit_function = edit_book($conn);
 
 
 
-                    <td>
-                        <div class="btn-container">
-                            <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">Edit</button>
-                            <form action="" method="post">
-                                <input type="hidden" name="id" value="<?= $book['id'] ?>">
-                                <input type="submit" name="delete" class="btn btn-delete" value="delete">
-                            </form>
-                        </div>
-                    </td>
+<td>
+    <div class="btn-container">
+        <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">
+        <i class="fa-solid fa-pen-to-square"></i>
+    </button>
+        <form action="" method="post">
+            <input type="hidden" name="id" value="<?= $book['id'] ?>">
+            <button type="submit" name="delete" class="btn btn-delete">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </form>
+    </div>
+</td>
+
 
                 </tr>
             <?php

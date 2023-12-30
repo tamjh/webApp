@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik Bubbles">
     <link rel="stylesheet" type="text/css" href="/project/biw_project/css/style.css">
-    
+
 </head>
 
 <body>
-    
+
     <?php
     session_start();
 
@@ -99,18 +99,26 @@
         }
         ?>
 
-        
+
         <input type="text" class="form-control" name="uemail" placeholder="Enter email">
-        
+
 
         <div class="input-container">
             <input type="password" class="form-control" name="upassword" placeholder="Enter password">
             <img src="/project/biw_project/image/icon/eye_closed.png" id="eye-icon" alt="Toggle Password Visibility" title="Toggle Password Visibility">
         </div>
-        <!-- <input type="submit" name="forget" class="nothing" value="Forget Password?"> -->
-        <input type="submit" name="login" class="btn2" value="Login">
+
+          
+          <input type="submit" name="login" class="btn2" value="Login">
+        
+
+
+
         <br><br>
-        <a href="register.php" class="connect_register">Haven't registered?</a>
+        <div class="register-link">
+                <img src="/project/biw_project/image/icon/register.png" alt="Register Icon">
+                <a href="register.php" class="connect_register">Haven't registered?</a>
+            </div>
     </form>
 
     <script>
