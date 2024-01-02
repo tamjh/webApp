@@ -80,10 +80,10 @@ if ($recentCustomersResult) {
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
-        <a href="#" class="navbar-brand" style="font-size: 3rem">
+            <a href="#" class="navbar-brand" style="font-size: 3rem">
                 <span><img src="/project/biw_project/image/icon/logo.png" alt="Inspirasi Sejahtera" style="width: 100px; height: auto;"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,6 +104,9 @@ if ($recentCustomersResult) {
                     <li class="nav-item">
                         <a class="nav-link" href="product.php">Product</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="view_acc.php">Account</a>
+                    </li>
 
                 </ul>
 
@@ -111,14 +114,16 @@ if ($recentCustomersResult) {
 
                     <div class="dropdown">
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            
+
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <button type="submit" name="logout" class="logout">Logout</button>
                             </form>
                         </div>
                     </div>
-                    <a href="homepage.php" class="web"><p class="web">View Website</p></a>
+                    <a href="homepage.php" class="web">
+                        <p class="web">View Website</p>
+                    </a>
                 </div>
             </div>
         </div>

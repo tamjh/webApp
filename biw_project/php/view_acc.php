@@ -3,7 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
 if (!isset($_SESSION["user"]) || $_SESSION["usertype"] !== "admin") {
     header("Location: login.php");
     exit();
@@ -32,7 +31,6 @@ $sql = "SELECT u.id, u.full_name, u.phone_number, u.usertype,
         LEFT JOIN orders o ON u.id = o.customer_id
         LEFT JOIN address ad ON u.id = ad.customer_id
         GROUP BY u.id";
-
 
 $result = mysqli_query($conn, $sql);
 
@@ -83,6 +81,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <li class="nav-item">
                         <a class="nav-link" href="product.php">Product</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="view_acc.php">Account</a>
+                    </li>
 
                 </ul>
 
@@ -105,15 +106,13 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
     </header>
 
-
-
-
-    <h1 class="im">Account Mangement</h1>
+    <h1 class="im">Account Management</h1>
     <div class="separate">
-        <button class="btn btn-sep">Customer</button>
-        <button class="btn btn-sep">Admin</button>
+        <button class="btn btn-sep" onclick="displayTable('customer')">Customer</button>
+        <button class="btn btn-sep" onclick="displayTable('admin')">Admin</button>
     </div>
-    <table>
+
+    <table id="customerTable">
         <thead>
             <tr>
                 <th>No.</th>
@@ -136,22 +135,48 @@ while ($row = mysqli_fetch_assoc($result)) {
                     echo "<td>{$customer['order_count']}</td>";
                     echo "</tr>";
                     $count++;
-                } else {
-
                 }
             }
             ?>
+        </tbody>
+    </table>
 
-
+    <table id="adminTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Number of Orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $count = 1;
+            foreach ($cus as $customer) {
+                if ($customer['usertype'] == "admin") {
+                    echo "<tr>";
+                    echo "<td>{$count}</td>";
+                    echo "<td>{$customer['full_name']}</td>";
+                    echo "<td>" . ($customer['phone_number'] ? $customer['phone_number'] : 'N/A') . "</td>";
+                    echo "<td>" . ($customer['full_address'] ? $customer['full_address'] : 'N/A') . "</td>";
+                    echo "<td>{$customer['order_count']}</td>";
+                    echo "</tr>";
+                    $count++;
+                }
+            }
+            ?>
         </tbody>
     </table>
 
     <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
-    <button class="plus btn" onclick="appear();">Add Admin</i></button>
+    <button class="plus btn" onclick="appear();">Add Admin</button>
 
     <!--pop out form-->
     <div id="popup_new_admin" class="popup-form formnone" style="text-transform:none;">
-        <form method="post" action="process_admin.php"> <!-- Replace with the actual processing script -->
+        <form method="post" action="process_admin.php">
+            <!-- Replace with the actual processing script -->
             <h2>Add New Admin</h2>
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -171,34 +196,62 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
             <div class="btn-group">
                 <button type="submit" name="btn-submit" class="btn-submit btn">Add Admin</button>
-
                 <button class="btn" style="margin-left: 10px;" onclick="closePopup()">Close</button>
             </div>
         </form>
-
     </div>
     <!---->
 
-    <!--    ******************************************************************************************************************* -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- ... Your HTML code ... -->
 
     <script>
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
+    function displayTable(userType) {
+        if (userType === 'customer') {
+            document.getElementById('customerTable').style.display = 'table';
+            document.getElementById('adminTable').style.display = 'none';
+        } else if (userType === 'admin') {
+            document.getElementById('customerTable').style.display = 'none';
+            document.getElementById('adminTable').style.display = 'table';
         }
+        hideOrdersColumn(userType === 'admin');
+    }
 
-        function appear() {
-            console.log("Appear function called");
-            document.getElementById("cover").style.display = "block";
-            document.getElementById("popup_new_admin").style.display = "block";
-        }
+    function hideOrdersColumn(isAdmin) {
+        var ordersColumnIndex = 4; // Adjust this index based on your table structure
 
-        function closePopup() {
-            console.log("Close popup function called");
-            document.getElementById("cover").style.display = "none";
-            document.getElementById("popup_new_admin").style.display = "none";
-        }
-    </script>
+        var tables = document.querySelectorAll('table');
+        tables.forEach(function(table) {
+            var headerCells = table.querySelectorAll('thead tr th');
+            var rows = table.querySelectorAll('tbody tr');
+
+            headerCells[ordersColumnIndex].style.display = isAdmin ? 'none' : 'table-cell';
+
+            rows.forEach(function(row) {
+                var cells = row.querySelectorAll('td');
+                cells[ordersColumnIndex].style.display = isAdmin ? 'none' : 'table-cell';
+            });
+        });
+    }
+
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function appear() {
+        console.log("Appear function called");
+        document.getElementById("cover").style.display = "block";
+        document.getElementById("popup_new_admin").style.display = "block";
+    }
+
+    function closePopup() {
+        console.log("Close popup function called");
+        document.getElementById("cover").style.display = "none";
+        document.getElementById("popup_new_admin").style.display = "none";
+    }
+</script>
+
+
+
 </body>
 
 </html>

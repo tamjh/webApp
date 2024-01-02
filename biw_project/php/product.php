@@ -54,7 +54,7 @@ $edit_function = edit_book($conn);
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">
@@ -77,6 +77,9 @@ $edit_function = edit_book($conn);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="product.php">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="view_acc.php">Account</a>
                     </li>
 
                 </ul>
@@ -102,16 +105,9 @@ $edit_function = edit_book($conn);
 
 
 
-
     <h4 class="p_title">All Product</h4>
 
-    <div class="search-box">
-            <div class="search-container">
-                <input type="text" name="search" class="searching" id="searchInput" placeholder="Search..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>" autocomplete="off">
-                <button type="button" class="icon" onclick="searchAndHighlight()"><i class="fa fa-search"></i></button>
-            </div>
-
-        </div>
+    
 
     <table class="details">
         <tr>
@@ -279,27 +275,7 @@ $edit_function = edit_book($conn);
         popup.style.display = "none";
     }
 
-    function searchAndHighlight() {
-        var searchTerm = document.getElementById("searchInput").value;
-        var table = document.querySelector('.table');
-        var cells = table.querySelectorAll('td');
-
-        // Remove previous highlights
-        cells.forEach(function(cell) {
-            cell.innerHTML = cell.textContent;
-        });
-
-        // Highlight matching content
-        cells.forEach(function(cell) {
-            var content = cell.innerHTML;
-            var index = content.toLowerCase().indexOf(searchTerm.toLowerCase());
-            if (index !== -1) {
-                var matchingText = content.substr(index, searchTerm.length);
-                var highlightedText = '<span class="matched-text">' + matchingText + '</span>';
-                cell.innerHTML = content.replace(new RegExp(matchingText, 'i'), highlightedText);
-            }
-        });
-    }
+   
 </script>
 
 </html>

@@ -449,6 +449,10 @@ label{
     background: #0056b3;
 }
 
+.hidden-row {
+    display: none;
+}
+
 .matched-text {
     background-color: yellow;
 }

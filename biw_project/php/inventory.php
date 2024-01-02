@@ -1,33 +1,30 @@
 <?php
+// Start or resume the session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
+// Check if the user is not logged in or is not an admin, redirect to login
 if (!isset($_SESSION["user"]) || $_SESSION["usertype"] !== "admin") {
     header("Location: login.php");
     exit();
 }
 
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit();
-}
-
+// Handle logout
 if (isset($_POST['logout'])) {
     // Unset and destroy the session
     session_unset();
     session_destroy();
-    header("Location: login.php"); // Redirect to the login page after logout
+    header("Location: login.php");
     exit();
 }
 
-//connect others php file
+// Include other PHP files
 require_once "database.php";
 require_once "books_function.php";
 require_once "update_info.php";
 
-//call function for books_function.php
+// Call functions from books_function.php
 $books = get_all_books($conn);
 if (!is_array($books)) {
     $books = array();
@@ -36,8 +33,6 @@ $categories = get_all_categories($conn);
 $publishers = get_all_publisher($conn);
 $delete_function = delete_inventory($conn);
 $update_info = update_info($conn);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +49,7 @@ $update_info = update_info($conn);
 </head>
 
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand" style="font-size: 3rem">
@@ -77,6 +72,9 @@ $update_info = update_info($conn);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="product.php">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="view_acc.php">Account</a>
                     </li>
 
                 </ul>
@@ -104,13 +102,7 @@ $update_info = update_info($conn);
 
 
     <h1 class="im">Inventory Management</h1>
-    <div class="search-box">
-        <div class="search-container">
-            <input type="text" name="search" class="searching" id="searchInput" placeholder="Search..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>" autocomplete="off">
-            <button type="button" class="icon" onclick="searchAndHighlight()"><i class="fa fa-search"></i></button>
-        </div>
-
-    </div>
+    
     <table class="t-search">
         <tr>
             <th>No.</th>
@@ -279,105 +271,86 @@ $update_info = update_info($conn);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <script>
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 
-        function pop_up_edit(bookID) {
-            console.log(bookID);
-            document.getElementById("edit_id" + bookID).value = bookID;
-            document.getElementById("popup" + bookID).style.display = "flex";
-        }
+    function pop_up_edit(bookID) {
+        console.log(bookID);
+        document.getElementById("edit_id" + bookID).value = bookID;
+        document.getElementById("popup" + bookID).style.display = "flex";
+    }
 
-        function closed_popup(bookID) {
-            document.getElementById("popup" + bookID).style.display = "none";
-            hideBtnT();
-        }
+    function closed_popup(bookID) {
+        document.getElementById("popup" + bookID).style.display = "none";
+        hideBtnT();
+    }
 
-        function new_book() {
-            document.querySelector(".popup_new").style.display = "flex";
-        }
+    function new_book() {
+        document.querySelector(".popup_new").style.display = "flex";
+    }
 
-        function closed_popup_new() {
-            console.log("Cancel button clicked");
-            document.getElementById("cover").style.display = "none";
-            document.querySelector(".popup_new").style.display = "none";
+    function closed_popup_new() {
+        console.log("Cancel button clicked");
+        document.getElementById("cover").style.display = "none";
+        document.querySelector(".popup_new").style.display = "none";
 
-            // Hide btn-t
-            hideBtnT();
-        }
+        // Hide btn-t
+        hideBtnT();
+    }
 
+    function new_category() {
+        document.getElementById("popup_new_category").style.display = "flex";
+    }
 
-        function new_category() {
-            document.getElementById("popup_new_category").style.display = "flex";
-        }
+    function closed_popup_new_category() {
+        document.getElementById("popup_new_category").style.display = "none";
+        hideBtnT();
+    }
 
-        function closed_popup_new_category() {
-            document.getElementById("popup_new_category").style.display = "none";
-            hideBtnT();
-        }
+    function new_publisher() {
+        document.getElementById("popup_new_publisher").style.display = "flex";
+    }
 
-        function new_publisher() {
-            document.getElementById("popup_new_publisher").style.display = "flex";
-        }
+    function closed_popup_new_publisher() {
+        document.getElementById("popup_new_publisher").style.display = "none";
+        hideBtnT();
+    }
 
-        function closed_popup_new_publisher() {
-            document.getElementById("popup_new_publisher").style.display = "none";
-            hideBtnT();
-        }
-        var isBtnVisible = false;
+    var isBtnVisible = false;
 
-        function appear() {
-            let cover = document.getElementById("cover");
-            let plus = document.getElementsByClassName("plus")[0];
-            let btnT = document.getElementsByClassName("btn-t")[0];
+    function appear() {
+        let cover = document.getElementById("cover");
+        let plus = document.getElementsByClassName("plus")[0];
+        let btnT = document.getElementsByClassName("btn-t")[0];
 
-            if (!isBtnVisible) {
-                cover.style.display = "block";
-                btnT.style.display = "flex";
+        if (!isBtnVisible) {
+            cover.style.display = "block";
+            btnT.style.display = "flex";
 
-                isBtnVisible = true;
-            } else {
-                cover.style.display = "none";
-                btnT.style.display = "none";
-
-                isBtnVisible = false;
-            }
-        }
-
-
-        function hideBtnT() {
-            let cover = document.getElementById("cover");
-            let btnT = document.getElementsByClassName("btn-t")[0];
-
+            isBtnVisible = true;
+        } else {
             cover.style.display = "none";
             btnT.style.display = "none";
 
             isBtnVisible = false;
         }
+    }
 
-        function searchAndHighlight() {
-                var searchTerm = document.getElementById("searchInput").value;
-                var table = document.querySelector('.t-search');
-                var cells = table.querySelectorAll('td');
+    function hideBtnT() {
+        let cover = document.getElementById("cover");
+        let btnT = document.getElementsByClassName("btn-t")[0];
 
-                // Remove previous highlights
-                cells.forEach(function(cell) {
-                    cell.innerHTML = cell.textContent;
-                });
+        cover.style.display = "none";
+        btnT.style.display = "none";
 
-                // Highlight matching content
-                cells.forEach(function(cell) {
-                    var content = cell.innerHTML;
-                    var index = content.toLowerCase().indexOf(searchTerm.toLowerCase());
-                    if (index !== -1) {
-                        var matchingText = content.substr(index, searchTerm.length);
-                        var highlightedText = '<span class="matched-text">' + matchingText + '</span>';
-                        cell.innerHTML = content.replace(new RegExp(matchingText, 'i'), highlightedText);
-                    }
-                });
-            }
-    </script>
+        isBtnVisible = false;
+    }
+
+
+
+</script>
+
 </body>
 
 </html>
