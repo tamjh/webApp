@@ -152,7 +152,16 @@ input[type="password"] {
     background: white;
 }
 
-#eye-icon {
+#eye-icon{
+    width: 20px;
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    right: 30px;
+    cursor: pointer;
+}
+
+.eye-icon1{
     width: 20px;
     position: absolute;
     top: 50%;
@@ -160,6 +169,17 @@ input[type="password"] {
     right: 30px;
     cursor: pointer;
 }
+
+.eye-icon2{
+    width: 20px;
+    position: absolute;
+    top: 50% !important;
+    transform: translateY(-50%);
+    right: 30px;
+    cursor: pointer;
+    
+}
+
 
 .nothing {
     all: unset;

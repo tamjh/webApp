@@ -202,7 +202,7 @@ $publishers = get_all_publisher($conn);
                 </a>
                 <a class="m-3 mb-5 a1 " href="shop.php">
                     <img class="img-book " src="../image/image/a8.jpg">
-                    <p class="shop">Secondary School</p>
+                    <p class="shop">High School</p>
                 </a>
 
                 <a class="m-3 mb-5 a1 " href=" shop.php?search=&category_filter[]=3">

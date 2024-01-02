@@ -313,3 +313,57 @@ footer .container-fluid {
   color:orange;
 }
 
+@media only screen and (max-width: 768px) {
+  header {
+      padding: 1rem;
+  }
+
+  header .navbar a {
+      font-size: 1.5rem;
+      padding: 0 1rem;
+  }
+
+  .icons a {
+      font-size: 2rem;
+  }
+
+  .icons a:last-child {
+      margin-right: 0;
+  }
+
+  .account_box {
+      font-size: 1rem;
+  }
+
+  .fea {
+      padding: 2rem;
+  }
+
+  .icons img {
+      width: 70px;
+      height: 70px;
+  }
+
+  .icons {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      margin: 1rem 0;
+  }
+
+  .feature {
+      padding: 2rem;
+  }
+
+  .books {
+      font-size: 2rem;
+      padding: 2rem !important;
+  }
+
+  .b-im {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .feature p {
+      font-size: 1rem;
+  

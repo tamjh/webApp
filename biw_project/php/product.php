@@ -57,7 +57,7 @@ $edit_function = edit_book($conn);
     <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
-        <a href="#" class="navbar-brand" style="font-size: 3rem">
+            <a href="#" class="navbar-brand" style="font-size: 3rem">
                 <span><img src="/project/biw_project/image/icon/logo.png" alt="Inspirasi Sejahtera" style="width: 100px; height: auto;"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,6 +104,15 @@ $edit_function = edit_book($conn);
 
 
     <h4 class="p_title">All Product</h4>
+
+    <div class="search-box">
+            <div class="search-container">
+                <input type="text" name="search" class="searching" id="searchInput" placeholder="Search..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>" autocomplete="off">
+                <button type="button" class="icon" onclick="searchAndHighlight()"><i class="fa fa-search"></i></button>
+            </div>
+
+        </div>
+
     <table class="details">
         <tr>
             <th>No.</th>
@@ -169,38 +178,38 @@ $edit_function = edit_book($conn);
                         ?>
                     </td>
                     <!-- Modify the price display in your PHP loop -->
-<td>
-    <?php if ($book['promotion'] != 0) : ?>
-        <?php
-        $discountedPrice = $book['price'] - ($book['price'] * ($book['promotion'] / 100));
-        ?>
-        <span class="original-price">
-            RM<?= number_format($book['price'], 2) ?>
-        </span>
-        <br>
-        <span class="discounted-price">
-            RM<?= number_format($discountedPrice, 2) ?>
-        </span>
-    <?php else : ?>
-        RM<?= number_format($book['price'], 2) ?>
-    <?php endif; ?>
-</td>
+                    <td>
+                        <?php if ($book['promotion'] != 0) : ?>
+                            <?php
+                            $discountedPrice = $book['price'] - ($book['price'] * ($book['promotion'] / 100));
+                            ?>
+                            <span class="original-price">
+                                RM<?= number_format($book['price'], 2) ?>
+                            </span>
+                            <br>
+                            <span class="discounted-price">
+                                RM<?= number_format($discountedPrice, 2) ?>
+                            </span>
+                        <?php else : ?>
+                            RM<?= number_format($book['price'], 2) ?>
+                        <?php endif; ?>
+                    </td>
 
 
 
-<td>
-    <div class="btn-container">
-        <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">
-        <i class="fa-solid fa-pen-to-square"></i>
-    </button>
-        <form action="" method="post">
-            <input type="hidden" name="id" value="<?= $book['id'] ?>">
-            <button type="submit" name="delete" class="btn btn-delete">
-                <i class="fa-solid fa-trash"></i>
-            </button>
-        </form>
-    </div>
-</td>
+                    <td>
+                        <div class="btn-container">
+                            <button class="btn btn-edit" onclick="pop_up_edit('<?= $book['id'] ?>')">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <form action="" method="post">
+                                <input type="hidden" name="id" value="<?= $book['id'] ?>">
+                                <button type="submit" name="delete" class="btn btn-delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
 
 
                 </tr>
@@ -268,6 +277,28 @@ $edit_function = edit_book($conn);
     function close_edit_popup(bookID) {
         var popup = document.getElementById("popup" + bookID);
         popup.style.display = "none";
+    }
+
+    function searchAndHighlight() {
+        var searchTerm = document.getElementById("searchInput").value;
+        var table = document.querySelector('.table');
+        var cells = table.querySelectorAll('td');
+
+        // Remove previous highlights
+        cells.forEach(function(cell) {
+            cell.innerHTML = cell.textContent;
+        });
+
+        // Highlight matching content
+        cells.forEach(function(cell) {
+            var content = cell.innerHTML;
+            var index = content.toLowerCase().indexOf(searchTerm.toLowerCase());
+            if (index !== -1) {
+                var matchingText = content.substr(index, searchTerm.length);
+                var highlightedText = '<span class="matched-text">' + matchingText + '</span>';
+                cell.innerHTML = content.replace(new RegExp(matchingText, 'i'), highlightedText);
+            }
+        });
     }
 </script>
 

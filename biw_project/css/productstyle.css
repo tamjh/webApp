@@ -326,3 +326,42 @@ tr:hover{
     color: #e74c3c; /* Optional: Change the color for the discounted price */
     font-weight: bold; /* Optional: Apply bold to the discounted price */
 }
+
+
+.search-container {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
+    margin-left: 70%; /* Align to the right of the screen */
+    margin-bottom: 10px;
+}
+
+/* Adjust the styling of the search input */
+.searching {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+}
+
+/* Style the search button */
+.icon {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.icon:hover {
+    background: #0056b3;
+}
+
+.matched-text {
+    background-color: yellow;
+}

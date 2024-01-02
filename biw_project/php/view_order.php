@@ -46,7 +46,7 @@ $sql = "SELECT
             o.status
         FROM orders o
         JOIN users u ON o.customer_id = u.id
-        JOIN address a ON o.customer_id = a.customer_id ORDER BY created DESC" ;
+        JOIN address a ON o.customer_id = a.customer_id ORDER BY created DESC";
 $result = mysqli_query($conn, $sql);
 
 $orders = array();
@@ -80,18 +80,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
- <link rel="stylesheet" href="/project/biw_project/css/view_order_style.css">
+    <link rel="stylesheet" href="/project/biw_project/css/view_order_style.css">
     <title>Orders</title>
 </head>
 
 <body>
-<header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 2rem; padding: 2rem 9%;">
         <div class="container-fluid">
 
-        <a href="#" class="navbar-brand" style="font-size: 3rem">
+            <a href="#" class="navbar-brand" style="font-size: 3rem">
                 <span><img src="/project/biw_project/image/icon/logo.png" alt="Inspirasi Sejahtera" style="width: 100px; height: auto;"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,35 +119,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
 
                     <div class="dropdown">
                         <div id="myDropdown" class="menu" style="padding: 20px; font-size: 1rem;">
-                            
+
                             <p style="font-size:2rem;">Account</p>
                             <form method="post">
                                 <button type="submit" name="logout" class="logout">Logout</button>
                             </form>
                         </div>
                     </div>
-                    <a href="homepage.php" class="web"><p class="web">View Website</p></a>
+                    <a href="homepage.php" class="web">
+                        <p class="web">View Website</p>
+                    </a>
                 </div>
             </div>
         </div>
     </header>
     <section class="container mt-5">
         <h1 class="mb-4 p-title">Customer Orders</h1>
+        <div class="search-box">
+            <div class="search-container">
+                <input type="text" name="search" class="searching" id="searchInput" placeholder="Search..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>" autocomplete="off">
+                <button type="button" class="icon" onclick="searchAndHighlight()"><i class="fa fa-search"></i></button>
+            </div>
 
+        </div>
         <table class="table table-bordered">
-            
-                <tr>
-                    <th>Date</th>
-                    <th>Order Number</th>
-                    <th>Customer Name</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Total</th>
-                    <th>Items</th>
-                    <th>Status</th>
-                
-                </tr>
-            
+
+            <tr>
+                <th>Date</th>
+                <th>Order Number</th>
+                <th>Customer Name</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Total</th>
+                <th>Items</th>
+                <th>Status</th>
+
+            </tr>
+
             <tbody>
                 <?php foreach ($orders as $order) : ?>
                     <tr>
@@ -156,13 +164,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
                         <td><?= $order['full_name'] ?></td>
                         <td><?= $order['phone_number'] ?></td>
                         <td><?= $order['full_address'] ?></td>
-                        <td>RM <?= number_format($order['grand_total'],2) ?></td>
+                        <td>RM <?= number_format($order['grand_total'], 2) ?></td>
                         <td><a href="order_list.php?order_number=<?= $order['order_number'] ?>">View Order List</a></td>
                         <td>
                             <form method="post">
                                 <input type="hidden" name="order_id" value="<?= $order['order_number'] ?>">
                                 <select class="dropdown_status" name="new_status" onchange="updateStatus(this)">
-                                    <option value="1"  <?= $order['status'] == 1 ? 'selected' : '' ?> class="pending">Pending</option>
+                                    <option value="1" <?= $order['status'] == 1 ? 'selected' : '' ?> class="preparing">Preparing</option>
                                     <option value="2" <?= $order['status'] == 2 ? 'selected' : '' ?> class="shipping">Shipping</option>
                                     <option value="3" <?= $order['status'] == 3 ? 'selected' : '' ?> class="complete">Completed</option>
                                 </select>
@@ -189,6 +197,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
     function updateStatus(select) {
         var form = select.parentNode; // Get the parent form element
         form.querySelector('button').click(); // Trigger the form submission using the hidden button
+    }
+
+    function searchAndHighlight() {
+        var searchTerm = document.getElementById("searchInput").value;
+        var table = document.querySelector('.table');
+        var cells = table.querySelectorAll('td');
+
+        // Remove previous highlights
+        cells.forEach(function(cell) {
+            cell.innerHTML = cell.textContent;
+        });
+
+        // Highlight matching content
+        cells.forEach(function(cell) {
+            var content = cell.innerHTML;
+            var index = content.toLowerCase().indexOf(searchTerm.toLowerCase());
+            if (index !== -1) {
+                var matchingText = content.substr(index, searchTerm.length);
+                var highlightedText = '<span class="matched-text">' + matchingText + '</span>';
+                cell.innerHTML = content.replace(new RegExp(matchingText, 'i'), highlightedText);
+            }
+        });
     }
 </script>
 

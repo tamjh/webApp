@@ -218,16 +218,16 @@ margin-bottom: 100px;
 
 
 
-.pending {
-    background-color: rgb(221, 234, 76);
+.preparing {
+    background-color: #EEE8AA;
 }
 
 .shipping {
-    background-color: rgb(50, 166, 238);
+    background-color: #ADD8E6;
 }
 
 .complete {
-    background-color: rgb(0, 255, 153);
+    background-color: #90EE90;
 }
 
 .web{
@@ -272,3 +272,41 @@ margin-bottom: 100px;
     background: white;
     color:orange;
   }
+
+  .search-container {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
+    margin-left: auto; /* Align to the right of the screen */
+    margin-bottom: 10px;
+}
+
+/* Adjust the styling of the search input */
+.searching {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+}
+
+/* Style the search button */
+.icon {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.icon:hover {
+    background: #0056b3;
+}
+
+.matched-text {
+    background-color: yellow;
+}

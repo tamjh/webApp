@@ -105,7 +105,7 @@
 
         <div class="input-container">
             <input type="password" class="form-control" name="upassword" placeholder="Enter password">
-            <img src="/project/biw_project/image/icon/eye_closed.png" id="eye-icon" alt="Toggle Password Visibility" title="Toggle Password Visibility">
+            <img src="/project/biw_project/image/icon/eye_closed.png" id="eye-icon" class="eye-icon2" alt="Toggle Password Visibility" title="Toggle Password Visibility">
         </div>
 
           

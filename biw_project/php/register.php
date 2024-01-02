@@ -113,13 +113,14 @@
                 <div class="input-container">
                     <input type="password" class="form-control" name="upassword" placeholder="Enter password">
                     <img src="/project/biw_project/image/icon/eye_closed.png" id="eye-icon" alt="Toggle Password Visibility">
+                    <p style="color:black;">Password requirement: > 8 digit</p>
                 </div>
             </div>
             <div class="form-group">
                 <label>Re-enter password:</label>
                 <div class="input-container">
                     <input type="password" class="form-control" name="repeat_password" placeholder="Please enter password again">
-                    <img src="/project/biw_project/image/icon/eye_closed.png" id="eye-icon" alt="Toggle Password Visibility">
+                    <img src="/project/biw_project/image/icon/eye_closed.png" id="eye-icon1" class="eye-icon1" alt="Toggle Password Visibility">
                 </div>
             </div>
             <input type="submit" class="btn1" name="submit" value="Next">
@@ -148,6 +149,19 @@
             } else {
                 passwordField.setAttribute('type', 'password');
                 eyeIcon.src = '/project/biw_project/image/icon/eye_closed.png'; // Change to your closed-eye image
+            }
+        });
+
+        const passwordField1 = document.querySelector('input[name="repeat_password"]');
+        const eyeIcon1 = document.getElementById('eye-icon1');
+
+        eyeIcon1.addEventListener('click', function () {
+            if (passwordField1.getAttribute('type') === 'password') {
+                passwordField1.setAttribute('type', 'text');
+                eyeIcon1.src = '/project/biw_project/image/icon/eye_open.png'; // Change to your open-eye image
+            } else {
+                passwordField1.setAttribute('type', 'password');
+                eyeIcon1.src = '/project/biw_project/image/icon/eye_closed.png'; // Change to your closed-eye image
             }
         });
     </script>

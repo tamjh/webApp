@@ -189,11 +189,12 @@ body {
     padding: 5px 15px;
     border: none;
     cursor: pointer;
-    width: 48%; /* Adjust button width */
+    
     text-align: center; /* Center text within the button */
     box-sizing: border-box; /* Include padding in width */
     font-size: 1.5rem;
     margin-bottom: 0;
+    overflow-wrap:break-word;
 }
 
 .btn-custom:hover {
@@ -354,4 +355,68 @@ footer .container-fluid {
 .original-price {
     text-decoration: line-through;
     color: grey; /* Adjust the color of the original price */
+}
+@media screen and (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    header .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header .navbar a {
+        padding: 0.5rem;
+        margin-bottom: 5px;
+    }
+
+    .page {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .filter {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .product {
+        min-width: auto;
+        min-height: auto;
+    }
+
+    .product-card {
+        width: calc(50% - 20px);
+    }
+
+    footer .container-fluid {
+        padding: 20px;
+    }
+
+    .top {
+        bottom: 2rem;
+        right: 1rem;
+    }
+
+    .s_title {
+        font-size: 3rem;
+        margin-top: 20px;
+    }
+
+    .product-container {
+        justify-content: center;
+    }
+
+    .btn-custom {
+        text-align: center;
+        font-size:1rem; /* Adjust the font size for smaller screens */
+    }
+}
+
+@media screen and (max-width:1366px){
+    .btn-custom{
+        font-size: 2rem;
+    }
 }

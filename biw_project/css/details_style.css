@@ -431,3 +431,57 @@ footer .container-fluid {
     background: rgb(255, 136, 0);
     color:white;
 }
+
+/* Styles for screens smaller than 576px (example breakpoint) */
+@media screen and (max-width: 576px) {
+    header {
+        padding: 2rem 5%;
+    }
+
+    header .navbar a {
+        font-size: 1.5rem;
+    }
+
+    .icons a {
+        font-size: 2rem;
+    }
+
+    .menu {
+        font-size: 1.5rem;
+    }
+
+    .account_box {
+        font-size: 1rem;
+    }
+
+    .name {
+        font-size: 3rem;
+    }
+
+    .price {
+        font-size: 2rem;
+    }
+
+    .label {
+        font-size: 2rem;
+    }
+
+    input[type="number"] {
+        font-size: 1.5rem;
+    }
+
+    .purchase {
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .button {
+        flex-direction: column;
+    }
+
+    .description-box {
+        margin-top: 30px;
+        left: 0;
+        width: 100%;
+    }
+}

@@ -262,3 +262,26 @@ footer .container-fluid {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
+
+@media screen and (max-width: 768px) {
+    .page{
+        display: block;
+        
+    }
+
+    .side-bar{
+        width:35rem;
+        margin:0;
+    }
+    .side{
+        justify-content: center;
+        
+    }
+}
+
+@media screen and (max-width: 982px){
+    .side-btn{
+        width:70%;
+        text-wrap:pretty;
+    }
+}
