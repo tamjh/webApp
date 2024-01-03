@@ -111,7 +111,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.php">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about_us.php">About Us</a>
@@ -349,7 +349,7 @@ $displayedBooks = array_slice($filteredBooks, $startIndex, $productsPerPage);
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    page: 'homepage', // Add the 'page' key with the page name
+                    page: 'index', // Add the 'page' key with the page name
                     // You can include additional information if needed
                 }),
             })

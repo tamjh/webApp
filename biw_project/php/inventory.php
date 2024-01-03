@@ -90,7 +90,7 @@ $update_info = update_info($conn);
                             </form>
                         </div>
                     </div>
-                    <a href="homepage.php" class="web">
+                    <a href="index.php" class="web">
                         <p class="web">View Website</p>
                     </a>
                 </div>

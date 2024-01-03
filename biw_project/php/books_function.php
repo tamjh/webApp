@@ -127,5 +127,3 @@ function delete_inventory($conn) {
 }
 
 ?>
-
-

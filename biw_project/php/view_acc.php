@@ -98,7 +98,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                             </form>
                         </div>
                     </div>
-                    <a href="homepage.php" class="web">
+                    <a href="index.php" class="web">
                         <p class="web">View Website</p>
                     </a>
                 </div>

@@ -17,7 +17,7 @@
     session_start();
 
     if (isset($_SESSION["user"])) {
-        header("Location: homepage.php");
+        header("Location: index.php");
         exit();
     }
 
@@ -70,7 +70,7 @@
                         header("Location: admin_dashboard.php");
                     } else {
                         $_SESSION['uid'] = $user['id'];
-                        header("Location: homepage.php");
+                        header("Location: index.php");
                     }
                     exit();
                 } else {

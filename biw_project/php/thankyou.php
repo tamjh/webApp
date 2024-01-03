@@ -55,7 +55,7 @@ require_once "database.php";
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto" style="margin-right: 20px; gap: 10px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.php">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about_us.php">About Us</a>
@@ -113,7 +113,7 @@ require_once "database.php";
 
             <div class="row py-3 appear-and-enlarge2">
     <div class="col">
-        <a href="homepage.php" class="btn btn-primary">
+        <a href="index.php" class="btn btn-primary">
             <span class="bi bi-house"> Home</span>
         </a>
     </div>

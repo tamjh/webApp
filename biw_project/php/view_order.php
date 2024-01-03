@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
                             </form>
                         </div>
                     </div>
-                    <a href="homepage.php" class="web">
+                    <a href="index.php" class="web">
                         <p class="web">View Website</p>
                     </a>
                 </div>
