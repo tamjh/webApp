@@ -310,3 +310,15 @@ margin-bottom: 100px;
 .matched-text {
     background-color: yellow;
 }
+
+.pagination .page-link {
+    font-size: 15px; /* Adjust the font size */
+    padding: 10px 15px; /* Adjust the padding */
+  
+}
+
+.pagination .page-item.active .page-link {
+    background-color: orange;
+    border: 1px solid orange;
+    color: #fff; /* Set the text color for the active page */
+}

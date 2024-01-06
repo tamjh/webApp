@@ -324,16 +324,22 @@ if ($bookId !== false && $bookId !== null) {
         document.getElementById("myDropdown").classList.toggle("show");
     }
     document.addEventListener("DOMContentLoaded", function() {
-        const addToCartBtns = document.querySelectorAll('.addToCartBtn');
-        addToCartBtns.forEach(function(btn) {
-            if (btn.getAttribute('data-inventory') <= 0) {
-                btn.value = 'Out Of Stock';
-                btn.disabled = true;
-                btn.style.backgroundColor = "red";
-                btn.style.color = "white"; // Set the font color to white
-            }
-        });
-    });
+    const addToCartBtn = document.querySelector('button[name="add_to_cart"]');
+    const buyNowBtn = document.querySelector('button[name="buy_now"]');
+
+    if (addToCartBtn && buyNowBtn) {
+        const inventory = <?= $bookData['inventory'] ?>;
+
+        if (inventory <= 0) {
+            addToCartBtn.innerText = 'Out Of Stock';
+            addToCartBtn.disabled = true;
+
+            buyNowBtn.innerText = 'Out Of Stock';
+            buyNowBtn.disabled = true;
+        }
+    }
+});
+
 </script>
 
 </html>

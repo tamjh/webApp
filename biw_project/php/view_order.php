@@ -72,6 +72,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
+// Number of products per page
+$productsPerPage = 20;
+$totalOrders = count($orders);
+
+// Calculate the total number of pages based on the count of orders
+$totalPages = ceil($totalOrders / $productsPerPage);
+
+// Get the current page number from the URL
+$currentPage = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+// Calculate the starting index for displaying orders on the current page
+$startIndex = ($currentPage - 1) * $productsPerPage;
+
+// Get the subset of orders to display on the current page
+$displayedOrders = array_slice($orders, $startIndex, $productsPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -154,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
             </tr>
 
             <tbody>
-                <?php foreach ($orders as $order) : ?>
+                <?php foreach ($displayedOrders as $order) : ?>
                     <tr>
                         <td><?= $order['created'] ?></td>
                         <td><?= $order['order_number'] ?></td>
@@ -173,13 +188,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"]) && isset(
                                 </select>
                                 <button type="submit" style="display: none;"></button>
                             </form>
-
                         </td>
-
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item <?php echo $currentPage == 1 ? 'disabled' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $currentPage - 1; ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                    <li class="page-item <?php echo $currentPage == $i ? 'active' : ''; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+                <li class="page-item <?php echo $currentPage == $totalPages ? 'disabled' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $currentPage + 1; ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </section>
     <a href="#" class="top"><i class="fa-solid fa-arrow-up"></i></a>
 

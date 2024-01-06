@@ -29,6 +29,10 @@ $books = get_all_books($conn);
 if (!is_array($books)) {
     $books = array();
 }
+
+usort($books, function ($a, $b) {
+    return strcmp($a['name'], $b['name']);
+});
 $categories = get_all_categories($conn);
 $publishers = get_all_publisher($conn);
 $delete_function = delete_inventory($conn);

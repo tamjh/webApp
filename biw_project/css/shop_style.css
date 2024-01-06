@@ -288,8 +288,8 @@ body {
 }
 
 .pagination .page-item.active .page-link {
-    background-color: orange; /* Change the background color of the active page */
-    border: 1px solid orange; /* Change the border color of the active page */
+    background-color: orange; 
+    border: 1px solid orange; 
 }
 
 .s_title{
