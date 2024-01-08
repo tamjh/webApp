@@ -193,7 +193,7 @@ $displayedOrders = array_slice($orders, $startIndex, $productsPerPage);
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
             <ul class="pagination">
                 <li class="page-item <?php echo $currentPage == 1 ? 'disabled' : ''; ?>">
                     <a class="page-link" href="?page=<?php echo $currentPage - 1; ?>" aria-label="Previous">
