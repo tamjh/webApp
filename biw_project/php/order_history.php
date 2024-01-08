@@ -183,7 +183,7 @@ $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         echo "
             <div class='img1'>
                 <img class='img' src='/project/biw_project/image/coverpage/{$bookDetails['cover']}' alt='{$bookDetails['name']}'><br>
-                <p>(x{$orderItem['quantity']})</p>
+                <p class='img1p'>(x{$orderItem['quantity']})</p>
             </div>
         ";
                     }
